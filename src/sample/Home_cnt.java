@@ -12,6 +12,7 @@ import java.io.IOException;
 public class Home_cnt{
     @FXML
     AnchorPane login;
+    // Commented at 20:10. Check if changes made.
     public void Home(ActionEvent e){
         System.out.println("Home");
     }
