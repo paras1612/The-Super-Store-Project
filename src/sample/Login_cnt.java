@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Controller{
+public class Login_cnt{
     @FXML
     AnchorPane login;
     public void Home(ActionEvent e) throws IOException {

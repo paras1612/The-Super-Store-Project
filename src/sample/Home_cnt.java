@@ -25,7 +25,6 @@ public class Home_cnt{
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
     public void help(ActionEvent e){
         System.out.println("Help");

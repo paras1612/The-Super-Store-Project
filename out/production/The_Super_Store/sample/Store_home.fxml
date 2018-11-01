@@ -25,11 +25,25 @@
          <items>
          </items>
       </MenuButton>
-      <Button fx:id="cart_btn" layoutX="15.0" layoutY="394.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Cart" />
-      <Button fx:id="help_btn" layoutX="15.0" layoutY="427.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
-      <Button layoutX="15.0" layoutY="462.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
-      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="358.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Log out" />
+      <Button fx:id="cart_btn" layoutX="15.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Cart" />
+      <Button fx:id="help_btn" layoutX="15.0" layoutY="440.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
+      <Button layoutX="15.0" layoutY="475.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
+      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="372.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Log out" />
       <Button fx:id="message_btn" layoutX="16.0" layoutY="172.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Messages" />
       <Button fx:id="orders_btn" layoutX="15.0" layoutY="206.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Orders" />
+      <MenuButton layoutX="16.0" layoutY="306.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Delete a Product">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <MenuButton layoutX="16.0" layoutY="242.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Choose a Product">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <Button layoutX="16.0" layoutY="274.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Add Product" />
+      <Button layoutX="17.0" layoutY="339.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Delete Product" />
    </children>
 </AnchorPane>

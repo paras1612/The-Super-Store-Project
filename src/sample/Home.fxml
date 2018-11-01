@@ -25,5 +25,12 @@
       <Button fx:id="cart_btn" layoutX="17.0" layoutY="383.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Cart" />
       <Button fx:id="help_btn" layoutX="17.0" layoutY="416.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button layoutX="17.0" layoutY="451.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
+      <Button layoutX="16.0" layoutY="313.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Add to Cart" />
+      <MenuButton layoutX="17.0" layoutY="128.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Select Store">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>

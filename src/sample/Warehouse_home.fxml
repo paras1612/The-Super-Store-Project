@@ -40,5 +40,6 @@
          </items>
       </MenuButton>
       <Button layoutX="16.0" layoutY="340.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Delete Product" />
+      <Button layoutX="16.0" layoutY="239.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Add Category" />
    </children>
 </AnchorPane>
