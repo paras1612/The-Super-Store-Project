@@ -28,7 +28,7 @@ public class Sign_up_cnt {
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Login.fxml"));
+        AnchorPane root = loader.load(getClass().getResource("sample.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
