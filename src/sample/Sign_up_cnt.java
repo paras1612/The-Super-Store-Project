@@ -35,6 +35,9 @@ public class Sign_up_cnt {
         primaryStage.show();
 
     }
+    public void SignUp(ActionEvent e){
+        System.out.println("SignUp");
+    }
 
     public void help(ActionEvent e) throws IOException {
         System.out.println("Help");
