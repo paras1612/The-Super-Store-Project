@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" style="-fx-background-color: #e7e7e7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Home_cnt">
+   <children>
+      <TextField layoutX="234.0" layoutY="63.0" prefHeight="26.0" prefWidth="469.0" promptText="Search Product or Categories" />
+      <Button layoutX="704.0" layoutY="63.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Search" />
+      <Button fx:id="home_btn" layoutX="16.0" layoutY="15.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
+      <ComboBox layoutX="17.0" layoutY="95.0" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
+      <Button fx:id="login_btn" layoutX="17.0" layoutY="349.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="194.0" text="Login" />
+      <MenuButton layoutX="17.0" layoutY="63.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="217.0" text="Products/Categories">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Products" />
+            <MenuItem mnemonicParsing="false" text="Categories" />
+         </items>
+      </MenuButton>
+      <Button fx:id="cart_btn" layoutX="17.0" layoutY="383.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Cart" />
+      <Button fx:id="help_btn" layoutX="17.0" layoutY="416.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
+      <Button layoutX="17.0" layoutY="451.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
+      <Button layoutX="16.0" layoutY="313.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Add to Cart" />
+      <MenuButton layoutX="17.0" layoutY="128.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Select Store">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </MenuButton>
+      <ScrollPane layoutX="234.0" layoutY="303.0" prefHeight="200.0" prefWidth="552.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+      <ScrollPane layoutX="234.0" layoutY="95.0" prefHeight="200.0" prefWidth="552.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

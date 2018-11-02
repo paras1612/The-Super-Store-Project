@@ -35,14 +35,32 @@ public class Sign_up_cnt {
         primaryStage.show();
 
     }
-    public void SignUp(ActionEvent e) throws IOException {
+    public void SignUp(ActionEvent e){
         System.out.println("SignUp");
     }
-    public void help(ActionEvent e){
+
+    public void help(ActionEvent e) throws IOException {
         System.out.println("Help");
+        ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("help.fxml"));
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-    public void about(ActionEvent e){
+
+    public void about(ActionEvent e) throws IOException {
         System.out.println("About");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("about.fxml"));
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }
 
