@@ -23,24 +23,38 @@ public class Cart_cnt {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public void Login(ActionEvent e){
+    public void Login(ActionEvent e) throws IOException {
         System.out.println("Login");
-    }
-    public void SignUp(ActionEvent e) throws IOException {
-        System.out.println("SignUp");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("sign_up.fxml"));
+        AnchorPane root = loader.load(getClass().getResource("sample.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("sign_up.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public void help(ActionEvent e){
+    public void help(ActionEvent e) throws IOException {
         System.out.println("Help");
+        ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("help.fxml"));
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-    public void about(ActionEvent e){
+
+    public void about(ActionEvent e) throws IOException {
         System.out.println("About");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("about.fxml"));
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }
