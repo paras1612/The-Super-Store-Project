@@ -60,4 +60,15 @@ public class Store_home_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    public void Cart_btn(ActionEvent e) throws IOException {
+        System.out.println("Cart");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("Cart.fxml"));
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 }
