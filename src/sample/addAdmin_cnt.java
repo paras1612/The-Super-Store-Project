@@ -54,4 +54,15 @@ public class addAdmin_cnt {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    public void selectStore(ActionEvent e)
+    {
+        System.out.println("Store/warehouse chosen");
+    }
+
+
+    public void adminRemove(ActionEvent e)
+    {
+        System.out.println("Admin removed");
+    }
 }
