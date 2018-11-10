@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Client implements Serializable {
+    private static final long serialVersionUID=7L;
     private String name;
     private String password;
     private final String uid;

@@ -4,16 +4,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import mainClasses.Database;
 
 import java.io.IOException;
 
+import static sample.Main.deserialize;
+
 public class Login_cnt{
-    private Database database = new Database();
+    private Database database = deserialize();
     @FXML
-    AnchorPane login;
+    AnchorPane loginPane;
+    @FXML
+    TextField user_fld;
+    @FXML
+    TextField pass_fld;
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -25,9 +33,30 @@ public class Login_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public void Login(ActionEvent e){
+    public void Login(ActionEvent e) throws IOException {
         System.out.println("Login");
-
+        if(database.login(user_fld.getText(), pass_fld.getText())){
+            ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        else {
+            //((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            Label warn = new Label("     Wrong Username or Password    ");
+            AnchorPane root = new AnchorPane();
+            root.getChildren().add(warn);
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
     }
     public void SignUp(ActionEvent e) throws IOException {
         System.out.println("SignUp");

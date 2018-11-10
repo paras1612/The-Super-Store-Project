@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Store implements Serializable {
+    private static final long serialVersionUID=7L;
     private Warehouse linkedWarehouse;
     private HashMap<Product, Integer> ProductSold;
     private double sale;

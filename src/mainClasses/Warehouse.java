@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Warehouse implements Serializable {
+    private static final long serialVersionUID=7L;
     private final String uid;
     private Cart cart;
     private HashMap<Product,Integer> Inventory;

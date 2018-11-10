@@ -14,6 +14,7 @@ public class Database implements Serializable {
     private ArrayList<Store> StoreList = new ArrayList<>();
     private HashMap<Store, HashMap<Product, Integer>> Store_Product = new HashMap<>();
     private HashMap<Warehouse, HashMap<Product, Integer>> Warehouse_Product = new HashMap<>();
+    private static final long serialVersionUID=7L;
     private Auth auth = new Auth();
     
     public void createClient(String name, String password, String email){
@@ -28,7 +29,7 @@ public class Database implements Serializable {
             auth.getCredentials().put(email, password);
         }
     }
-    boolean login(String uid, String password){
+    public boolean login(String uid, String password){
         if(auth.login(uid, password)){
             return true;
         }

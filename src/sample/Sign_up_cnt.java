@@ -12,8 +12,11 @@ import mainClasses.Database;
 
 import java.io.IOException;
 
+import static sample.Main.deserialize;
+import static sample.Main.serialize;
+
 public class Sign_up_cnt {
-    private Database database = new Database();
+    private Database database = deserialize();
     @FXML
     Button Sign_up_btn;
     @FXML
@@ -52,7 +55,8 @@ public class Sign_up_cnt {
         String pass  = pass_fld.getText();
         System.out.println(name+email+pass);
         database.createClient(name , pass, email);
-        System.out.println("User Created");
+        System.out.println("User Created"+email+pass);
+        serialize(database);
     }
 
     public void help(ActionEvent e) throws IOException {
