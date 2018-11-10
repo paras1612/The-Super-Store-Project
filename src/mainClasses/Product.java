@@ -1,5 +1,8 @@
 package mainClasses;
-public class Product {
+
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String Name;
     private double Price;
     private int Quantity;

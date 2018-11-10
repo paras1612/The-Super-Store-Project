@@ -1,4 +1,6 @@
 package mainClasses;
 
-public class Super_usr {
+import java.io.Serializable;
+
+public class Super_usr implements Serializable {
 }

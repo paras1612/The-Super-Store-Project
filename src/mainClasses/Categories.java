@@ -1,8 +1,9 @@
 package mainClasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Categories {
+public class Categories implements Serializable {
     private String Name;
     private ArrayList<Product> Product_list;
     private ArrayList<Categories> subCategories;

@@ -1,6 +1,8 @@
 package mainClasses;
 
-abstract public class Admin {
+import java.io.Serializable;
+
+abstract public class Admin implements Serializable {
     protected String Name;
     protected String Password;
     protected final String uid;

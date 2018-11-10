@@ -6,10 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Database;
 
 import java.io.IOException;
 
 public class Login_cnt{
+    private Database database = new Database();
     @FXML
     AnchorPane login;
     public void Home(ActionEvent e) throws IOException {
@@ -25,6 +27,7 @@ public class Login_cnt{
     }
     public void Login(ActionEvent e){
         System.out.println("Login");
+
     }
     public void SignUp(ActionEvent e) throws IOException {
         System.out.println("SignUp");

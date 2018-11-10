@@ -1,16 +1,22 @@
 package mainClasses;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Warehouse {
+public class Warehouse implements Serializable {
     private final String uid;
     private Cart cart;
+    private HashMap<Product,Integer> Inventory;
     private String Message;
     private HashMap<Product, Integer> ProductSold;
     private double sale;
 
     public Warehouse(String uid) {
         this.uid = uid;
+    }
+
+    public HashMap<Product, Integer> getInventory() {
+        return Inventory;
     }
 
     void GenerateAlert(){
@@ -22,7 +28,6 @@ public class Warehouse {
     void send_confirm(){
 
     }
-
     public String getMessage() {
         return Message;
     }

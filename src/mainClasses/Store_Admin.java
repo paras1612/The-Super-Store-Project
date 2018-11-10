@@ -1,6 +1,8 @@
 package mainClasses;
 
-public class Store_Admin extends Admin {
+import java.io.Serializable;
+
+public class Store_Admin extends Admin implements Serializable {
     private Store assignedStore;
 
     protected Store_Admin(String uid) {

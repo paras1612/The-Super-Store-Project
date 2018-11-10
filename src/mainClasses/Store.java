@@ -1,8 +1,9 @@
 package mainClasses;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Store {
+public class Store implements Serializable {
     private Warehouse linkedWarehouse;
     private HashMap<Product, Integer> ProductSold;
     private double sale;
