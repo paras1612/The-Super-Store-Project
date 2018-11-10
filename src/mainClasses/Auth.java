@@ -19,3 +19,4 @@ public class Auth implements Serializable {
         return credentials;
     }
 }
+//
