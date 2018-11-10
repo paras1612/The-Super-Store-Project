@@ -52,7 +52,7 @@ public class Login_cnt{
             Label warn = new Label("     Wrong Username or Password    ");
             AnchorPane root = new AnchorPane();
             root.getChildren().add(warn);
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 200, 50);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();

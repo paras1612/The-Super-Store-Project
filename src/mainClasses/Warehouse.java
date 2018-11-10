@@ -1,6 +1,7 @@
 package mainClasses;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Warehouse implements Serializable {
@@ -8,6 +9,7 @@ public class Warehouse implements Serializable {
     private final String uid;
     private Cart cart;
     private HashMap<Product,Integer> Inventory;
+    private ArrayList<Categories> categoriesList;
     private String Message;
     private HashMap<Product, Integer> ProductSold;
     private double sale;
@@ -29,6 +31,11 @@ public class Warehouse implements Serializable {
     void send_confirm(){
 
     }
+
+    public ArrayList<Categories> getCategoriesList() {
+        return categoriesList;
+    }
+
     public String getMessage() {
         return Message;
     }

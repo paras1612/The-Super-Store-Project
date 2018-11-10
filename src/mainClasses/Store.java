@@ -1,14 +1,17 @@
 package mainClasses;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Store implements Serializable {
     private static final long serialVersionUID=7L;
     private Warehouse linkedWarehouse;
     private HashMap<Product, Integer> ProductSold;
+    private ArrayList<Categories> categoriesList;
     private double sale;
     private String Message;
+    private HashMap<Product, Integer> Inventory;
     private final String uid;
     private Cart cart;
 
@@ -18,6 +21,14 @@ public class Store implements Serializable {
 
     void Generate_Alert(){
 
+    }
+
+    public HashMap<Product, Integer> getInventory() {
+        return Inventory;
+    }
+
+    public ArrayList<Categories> getCategoriesList() {
+        return categoriesList;
     }
 
     public HashMap<Product, Integer> getProductSold() {

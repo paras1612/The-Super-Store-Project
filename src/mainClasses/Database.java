@@ -42,17 +42,44 @@ public class Database implements Serializable {
             Warehouse_Product.put(admin.getAssigned_ware(), admin.getAssigned_ware().getInventory());
         }
     }
-    void deleteProduct(){
-
+    void deleteProduct(Warehouse_Admin admin, Product prod){
+        admin.getAssigned_ware().getInventory().remove(prod);
     }
-    void updateProduct(){
-
+    void deleteProduct(Store_Admin admin, Product prod){
+        admin.getAssignedStore().getInventory().remove(prod);
+    }
+    void updateProduct(Warehouse_Admin admin, Product product, double price, int quant, double fcost, double ccost, double idem){
+        admin.getAssigned_ware().getInventory().remove(product);
+        Product product1= new Product(product.getUid());
+        product1.setPrice(price);
+        product1.setQuantity(quant);
+        product1.setfCostQuater(fcost);
+        product1.setcCostQuater(ccost);
+        product1.setItemDemand(idem);
+        admin.getAssigned_ware().getInventory().put(product1, quant);
+    }
+    void updateProduct(Store_Admin admin, Product product, double price, int quant, double fcost, double ccost, double idem){
+        admin.getAssignedStore().getInventory().remove(product);
+        Product product1= new Product(product.getUid());
+        product1.setPrice(price);
+        product1.setQuantity(quant);
+        product1.setfCostQuater(fcost);
+        product1.setcCostQuater(ccost);
+        product1.setItemDemand(idem);
+        admin.getAssignedStore().getInventory().put(product1, quant);
     }
     void addCategory(){
 
     }
-    void delCategory(){
-
+    void delCategory(Warehouse_Admin admin, Categories category){
+        if(admin.getAssigned_ware().getCategoriesList().contains(category)){
+            admin.getAssigned_ware().getCategoriesList().remove(category);
+        }
+    }
+    void delCategory(Store_Admin admin, Categories category){
+        if(admin.getAssignedStore().getCategoriesList().contains(category)){
+            admin.getAssignedStore().getCategoriesList().remove(category);
+        }
     }
     void updateCategory(){
 
