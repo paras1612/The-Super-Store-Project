@@ -1,9 +1,11 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -40,6 +42,29 @@ public class Login_cnt{
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+            Button profile = new Button(user_fld.getText());
+            profile.setLayoutX(17.0);
+            profile.setLayoutY(349.0);
+            profile.setPrefHeight(26.0);
+            profile.setPrefWidth(194.0);
+            profile.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader();
+                    try {
+                        AnchorPane root = loader.load(getClass().getResource("Profile.fxml"));
+                        Scene scene = new Scene(root);
+                        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            root.getChildren().set(4, profile);
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
