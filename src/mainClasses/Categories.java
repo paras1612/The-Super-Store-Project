@@ -1,8 +1,10 @@
 package mainClasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Categories {
+public class Categories implements Serializable {
+    private static final long serialVersionUID=7L;
     private String Name;
     private ArrayList<Product> Product_list;
     private ArrayList<Categories> subCategories;

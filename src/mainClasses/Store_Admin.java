@@ -1,6 +1,9 @@
 package mainClasses;
 
-public class Store_Admin extends Admin {
+import java.io.Serializable;
+
+public class Store_Admin extends Admin implements Serializable {
+    private static final long serialVersionUID=7L;
     private Store assignedStore;
 
     protected Store_Admin(String uid) {
@@ -10,6 +13,7 @@ public class Store_Admin extends Admin {
     void Check_Data(){
 
     }
+
     public Store getAssignedStore() {
         return assignedStore;
     }

@@ -1,9 +1,10 @@
 package mainClasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Client
-{
+public class Client implements Serializable {
+    private static final long serialVersionUID=7L;
     private String name;
     private String password;
     private final String uid;
@@ -14,16 +15,11 @@ public class Client
     public String getName() {
         return name;
     }
-    public Client(String name, String password, String uid, Cart cart, double wallet, ArrayList<Product> prevOrder,
-                  Categories favCategory)
+    public Client(String name, String password, String uid)
     {
         this.name = name;
         this.password = password;
         this.uid = uid;
-        this.cart = cart;
-        this.wallet = wallet;
-        this.prevOrder = prevOrder;
-        this.favCategory = favCategory;
     }
 
     public Client()

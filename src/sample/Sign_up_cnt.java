@@ -4,14 +4,27 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Database;
 
 import java.io.IOException;
 
+import static sample.Main.deserialize;
+import static sample.Main.serialize;
+
 public class Sign_up_cnt {
+    private Database database = deserialize();
     @FXML
-    AnchorPane login;
+    Button Sign_up_btn;
+    @FXML
+    TextField sign_up_name;
+    @FXML
+    TextField user_fld;
+    @FXML
+    TextField pass_fld;
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -37,6 +50,13 @@ public class Sign_up_cnt {
     }
     public void SignUp(ActionEvent e){
         System.out.println("SignUp");
+        String name = sign_up_name.getText();
+        String email = user_fld.getText();
+        String pass  = pass_fld.getText();
+        System.out.println(name+email+pass);
+        database.createClient(name , pass, email);
+        System.out.println("User Created"+email+pass);
+        serialize(database);
     }
 
     public void help(ActionEvent e) throws IOException {

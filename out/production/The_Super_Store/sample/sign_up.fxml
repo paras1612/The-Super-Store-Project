@@ -11,7 +11,8 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Sign_up_cnt">
 
    <children>
-      <TextField fx:id="user_fld" layoutX="374.0" layoutY="160.0" prefHeight="26.0" prefWidth="185.0" promptText="Email" />
+      <TextField fx:id="sign_up_name" layoutX="374.0" layoutY="120.0" prefHeight="26.0" prefWidth="186.0" promptText="Name" />
+      <TextField fx:id="user_fld" layoutX="374.0" layoutY="160.0" prefHeight="26.0" prefWidth="186.0" promptText="Email" />
       <PasswordField fx:id="pass_fld" layoutX="374.0" layoutY="198.0" prefHeight="26.0" prefWidth="186.0" promptText="Password" />
       <Button fx:id="Sign_up_btn" layoutX="375.0" layoutY="237.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="26.0" prefWidth="186.0" text="Sign Up" textFill="WHITE">
          <font>
@@ -25,7 +26,6 @@
       </ImageView>
       <Button fx:id="help_btn" layoutX="39.0" layoutY="318.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="49.0" text="Help" />
       <Button fx:id="about_btn" layoutX="102.0" layoutY="318.0" mnemonicParsing="false" onAction="#about" text="About" />
-      <TextField layoutX="374.0" layoutY="120.0" prefHeight="26.0" prefWidth="186.0" promptText="Name" />
       <Button fx:id="login_btn" layoutX="375.0" layoutY="274.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="186.0" text="Login" />
    </children>
 </AnchorPane>

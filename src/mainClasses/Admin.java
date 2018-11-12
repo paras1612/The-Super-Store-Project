@@ -1,6 +1,9 @@
 package mainClasses;
 
-abstract public class Admin {
+import java.io.Serializable;
+
+abstract public class Admin implements Serializable {
+    private static final long serialVersionUID=7L;
     protected String Name;
     protected String Password;
     protected final String uid;

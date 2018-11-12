@@ -1,5 +1,4 @@
 package sample;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +25,11 @@ public class Profile_cnt{
     public void Login(ActionEvent e){
         System.out.println("Login");
     }
+
+    public void logOut(ActionEvent e){
+        System.out.println("Log out");
+    }
+
     public void SignUp(ActionEvent e) throws IOException {
         System.out.println("SignUp");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
