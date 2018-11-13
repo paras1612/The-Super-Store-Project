@@ -44,8 +44,8 @@ public class Login_cnt{
             System.out.println(curr);
             ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
             Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
-            AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            AnchorPane root = loader.load();
             Button profile = new Button(curr.getName());
             profile.setLayoutX(17.0);
             profile.setLayoutY(349.0);
@@ -75,6 +75,8 @@ public class Login_cnt{
             });
             root.getChildren().set(4, profile);
             Scene scene = new Scene(root);
+            Home_cnt cnt = loader.getController();
+            cnt.setClient(curr);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();

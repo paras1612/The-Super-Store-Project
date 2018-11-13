@@ -19,8 +19,8 @@ public class Profile_cnt{
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+        AnchorPane root = loader.load();
         if(client!=null) {
             javafx.scene.control.Button profile = new Button(client.getName());
             profile.setLayoutX(17.0);
@@ -52,6 +52,8 @@ public class Profile_cnt{
             root.getChildren().set(4, profile);
         }
         Scene scene = new Scene(root);
+        Home_cnt cnt = loader.getController();
+        cnt.setClient(client);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -113,6 +115,8 @@ public class Profile_cnt{
         FXMLLoader loader = new FXMLLoader();
         AnchorPane root = loader.load(getClass().getResource("Cart.fxml"));
         Scene scene = new Scene(root);
+        Cart_cnt cnt =loader.getController();
+        cnt.setClient(client);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

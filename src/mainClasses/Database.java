@@ -18,7 +18,7 @@ public class Database implements Serializable {
     private static final long serialVersionUID=7L;
     private Auth auth = new Auth();
     
-    public void createClient(String name, String password, String email){
+    public boolean createClient(String name, String password, String email){
     //    System.out.println("Entered");
         if(auth.getCredentials().containsKey(email)){
             System.out.println("Email already registered");
@@ -30,7 +30,9 @@ public class Database implements Serializable {
             getClientHashMap().put(email,init);
             System.out.println(getClientHashMap().toString());
             auth.getCredentials().put(email, password);
+            return true;
         }
+        return false;
     }
     public boolean login(String uid, String password){
         if(auth.login(uid, password)){
