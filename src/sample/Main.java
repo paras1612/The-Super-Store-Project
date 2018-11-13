@@ -10,6 +10,7 @@ import mainClasses.Database;
 import java.io.*;
 
 public class Main extends Application {
+
     private Database database = deserialize();
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -21,6 +22,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("The Super Store");
         Scene one = new Scene(root);//, 600, 400);
+        System.out.println(database.getStore_AdminHashMap().toString());
         one.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(one);
         primaryStage.show();

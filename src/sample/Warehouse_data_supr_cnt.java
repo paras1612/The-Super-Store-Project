@@ -71,6 +71,8 @@ public class Warehouse_data_supr_cnt {
         FXMLLoader loader = new FXMLLoader();
         AnchorPane root = loader.load(getClass().getResource("about.fxml"));
         Scene scene = new Scene(root);
+        Super_user_cnt cnt = loader.getController();
+        cnt.setUser(user);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

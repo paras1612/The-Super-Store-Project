@@ -30,6 +30,36 @@ public class Database implements Serializable {
         }
         return false;
     }
+
+    public boolean createStoreAdmin(String name, String password, String store){
+        if(auth.getstoreAdminAuth().containsKey(name)){
+            System.out.println("Email already registered");
+        }
+        else {
+            //      System.out.println("here");
+            Store_Admin init = new Store_Admin(name, password);
+            getStore_AdminHashMap().put(name,init);
+            System.out.println(getStore_AdminHashMap().toString());
+            auth.getstoreAdminAuth().put(name, password);
+            return true;
+        }
+        return false;
+    }
+    public boolean createWarehouseAdmin(String name, String password, String warehouse){
+        if(auth.getwarehouseAdmintAuth().containsKey(name)){
+            System.out.println("Email already registered");
+        }
+        else {
+            //      System.out.println("here");
+            Warehouse_Admin init = new Warehouse_Admin(name, password);
+            getWarehouse_AdminHashMap().put(name,init);
+            System.out.println(getWarehouse_AdminHashMap().toString());
+            auth.getwarehouseAdmintAuth().put(name, password);
+            return true;
+        }
+        return false;
+    }
+
     public boolean createClient(String name, String password, String email){
     //    System.out.println("Entered");
         if(auth.getclientAuth().containsKey(email)){

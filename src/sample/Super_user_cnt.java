@@ -33,6 +33,8 @@ public class Super_user_cnt{
             root.getChildren().add(name);
         }
         Scene scene = new Scene(root);
+        Super_user_cnt cnt = loader.getController();
+        cnt.setUser(user);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -132,9 +134,14 @@ public class Super_user_cnt{
         System.out.println("Login");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("addAdmin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("addAdmin.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
+        addAdmin_cnt cnt = loader.getController();
+        System.out.println("User");
+        System.out.println(user);
+        cnt.setUser(user);
+        cnt.setRole(cnt.getRole());
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

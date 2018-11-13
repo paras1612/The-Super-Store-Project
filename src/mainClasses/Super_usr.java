@@ -3,6 +3,7 @@ package mainClasses;
 import java.io.Serializable;
 
 import static sample.Main.deserialize;
+import static sample.Main.serialize;
 
 public class Super_usr implements Serializable {
     private static final long serialVersionUID=7L;
@@ -19,6 +20,7 @@ public class Super_usr implements Serializable {
     public void createWarehouse(String warehouseName){
         Warehouse init = new Warehouse(warehouseName);
         database.getWarehouseHashMap().put(warehouseName,init);
+        serialize(database);
     }
     public void createStore(String StoreName){
         Store init = new Store(StoreName);
@@ -27,6 +29,10 @@ public class Super_usr implements Serializable {
 
     public String getName() {
         return Name;
+    }
+
+    public Database getDatabase() {
+        return database;
     }
 
     public void setMessage(String message) {

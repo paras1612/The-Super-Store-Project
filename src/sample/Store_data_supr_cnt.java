@@ -37,6 +37,8 @@ public class Store_data_supr_cnt {
             root.getChildren().add(name);
         }
         Scene scene = new Scene(root);
+        Super_user_cnt cnt = loader.getController();
+        cnt.setUser(user);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -81,6 +83,7 @@ public class Store_data_supr_cnt {
     }
 
     public void addStore(ActionEvent e){
+        System.out.println(user);
         user.createStore(StoreName.getText());
         System.out.println("Store added");
     }
