@@ -39,7 +39,7 @@ public class Login_cnt{
     public void Login(ActionEvent e) throws IOException {
         System.out.println(database.getClientHashMap().toString());
         System.out.println("Login");
-        if(database.login(user_fld.getText(), pass_fld.getText())){
+        if(database.login(user_fld.getText(),pass_fld.getText())==1){
             Client curr = database.getClientHashMap().get(user_fld.getText());
             System.out.println(database.getClientHashMap().toString());
             System.out.println(curr);
@@ -75,6 +75,51 @@ public class Login_cnt{
                 }
             });
             root.getChildren().set(4, profile);
+            Scene scene = new Scene(root);
+            Home_cnt cnt = loader.getController();
+            cnt.setClient(curr);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        else if(database.login(user_fld.getText(),pass_fld.getText())==2){
+            Client curr = database.getClientHashMap().get(user_fld.getText());
+            System.out.println(database.getClientHashMap().toString());
+            System.out.println(curr);
+            ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Warehouse_home.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            Home_cnt cnt = loader.getController();
+            cnt.setClient(curr);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        else if(database.login(user_fld.getText(),pass_fld.getText())==3){
+            Client curr = database.getClientHashMap().get(user_fld.getText());
+            System.out.println(database.getClientHashMap().toString());
+            System.out.println(curr);
+            ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Store_home.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            Home_cnt cnt = loader.getController();
+            cnt.setClient(curr);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        else if(database.login(user_fld.getText(),pass_fld.getText())==4){
+            Client curr = database.getClientHashMap().get(user_fld.getText());
+            System.out.println(database.getClientHashMap().toString());
+            System.out.println(curr);
+            ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Super_user.fxml"));
+            AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             Home_cnt cnt = loader.getController();
             cnt.setClient(curr);
@@ -130,4 +175,5 @@ public class Login_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 }

@@ -10,10 +10,12 @@ public class Auth implements Serializable {
     private HashMap<String, String> clientAuth;
     private HashMap<String, String> storeAdminAuth;
     private HashMap<String, String> warehouseAdminAuth;
+    private HashMap<String, String> superUserAdminAuth;
     Auth(){
         clientAuth = new HashMap<String, String>();
         storeAdminAuth = new HashMap<String, String>();
         warehouseAdminAuth = new HashMap<String, String>();
+        superUserAdminAuth = new HashMap<String, String>();
     }
 
     int login(String uid, String password){
@@ -34,6 +36,12 @@ public class Auth implements Serializable {
             System.out.println("e");
             if(storeAdminAuth.get(uid).equals(password)){
                 return 3;
+            }
+        }
+        if(superUserAdminAuth.containsKey(uid)){
+            System.out.println("e");
+            if(storeAdminAuth.get(uid).equals(password)){
+                return 4;
             }
         }
         return -1;

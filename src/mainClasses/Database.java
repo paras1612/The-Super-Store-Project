@@ -20,7 +20,7 @@ public class Database implements Serializable {
     
     public boolean createClient(String name, String password, String email){
     //    System.out.println("Entered");
-        if(auth.getCredentials().containsKey(email)){
+        if(auth.getclientAuth().containsKey(email)){
             System.out.println("Email already registered");
         }
         else {
@@ -29,16 +29,25 @@ public class Database implements Serializable {
             ClientList.add(init);
             getClientHashMap().put(email,init);
             System.out.println(getClientHashMap().toString());
-            auth.getCredentials().put(email, password);
+            auth.getclientAuth().put(email, password);
             return true;
         }
         return false;
     }
-    public boolean login(String uid, String password){
-        if(auth.login(uid, password)){
-            return true;
+    public int login(String uid, String password){
+        if(auth.login(uid, password)==1){
+            return 1;
         }
-        return false;
+        if(auth.login(uid, password)==2){
+            return 2;
+        }
+        if(auth.login(uid, password)==3){
+            return 3;
+        }
+        if(auth.login(uid, password)==4){
+            return 4;
+        }
+        return -1;
     }
     void addProduct(Warehouse_Admin admin, Product product, int quant){
         if(admin.getClass().equals("Warehouse")){
