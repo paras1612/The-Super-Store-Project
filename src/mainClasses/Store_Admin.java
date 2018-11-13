@@ -14,6 +14,9 @@ public class Store_Admin extends Admin implements Serializable {
 
     }
 
+    public void setAssignedStore(Store assignedStore) {
+        this.assignedStore = assignedStore;
+    }
 
     public Store getAssignedStore() {
         return assignedStore;

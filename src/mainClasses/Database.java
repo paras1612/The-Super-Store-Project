@@ -1,13 +1,11 @@
 package mainClasses;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Database implements Serializable {
-    private ArrayList<Product> ProductList=new ArrayList<>();
-    private ArrayList<Categories> CategoriesList = new ArrayList<>();
-    private ArrayList<Client> ClientList = new ArrayList<>();
+    private HashMap<String, Product> ProductList=new HashMap<>();
+    private HashMap<String, Categories> CategoriesList = new HashMap<>();
     private HashMap<String, Client> ClientHashMap = new HashMap<>();
     private HashMap<String, Super_usr> Super_userHashMap = new HashMap<>();
     private HashMap<String, Store_Admin> Store_AdminHashMap = new HashMap<>();
@@ -40,7 +38,6 @@ public class Database implements Serializable {
         else {
       //      System.out.println("here");
             Client init = new Client(name, password, email);
-            ClientList.add(init);
             getClientHashMap().put(email,init);
             System.out.println(getClientHashMap().toString());
             auth.getclientAuth().put(email, password);
@@ -63,10 +60,11 @@ public class Database implements Serializable {
         }
         return -1;
     }
-    void addProduct(Warehouse_Admin admin, Product product, int quant){
+    void addProduct(Warehouse_Admin admin, String product, int quant){
         if(admin.getClass().equals("Warehouse")){
-            ProductList.add(product);
-            admin.getAssigned_ware().getInventory().put(product, quant);
+            Product currProd = new Product(product);
+            ProductList.put(product, currProd);
+            admin.getAssigned_ware().getInventory().put(currProd, quant);
             Warehouse_Product.put(admin.getAssigned_ware(), admin.getAssigned_ware().getInventory());
         }
     }
@@ -123,11 +121,11 @@ public class Database implements Serializable {
         return ClientHashMap;
     }
 
-    public ArrayList<Product> getProductList() {
+    public HashMap<String, Product> getProductList() {
         return ProductList;
     }
 
-    public ArrayList<Categories> getCategoriesList() {
+    public HashMap<String, Categories> getCategoriesList() {
         return CategoriesList;
     }
 

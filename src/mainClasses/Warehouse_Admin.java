@@ -14,4 +14,8 @@ public class Warehouse_Admin extends Admin implements Serializable {
     public Warehouse getAssigned_ware() {
         return assigned_ware;
     }
+
+    public void setAssigned_ware(Warehouse assigned_ware) {
+        this.assigned_ware = assigned_ware;
+    }
 }
