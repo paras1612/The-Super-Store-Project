@@ -96,14 +96,21 @@ public class Super_user_cnt{
     public void message(ActionEvent e){
         System.out.println("message pressed");
     }
-    public void createWarehouseAdmin(ActionEvent e){
-        System.out.println("Warehouse admin Created");
-    }
+
     public void warehouseLink(ActionEvent e){
         System.out.println("Warehouse Linked");
     }
-    public void createStoreadmin(ActionEvent e) {
-        System.out.println("Storeadmin Created");
+
+    public void addAdmin(ActionEvent e) throws IOException {
+        System.out.println("Login");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("addAdmin.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
 }
