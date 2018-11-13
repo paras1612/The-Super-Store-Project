@@ -5,10 +5,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Client;
 
 import java.io.IOException;
 
 public class productView_cnt {
+    private Client client;
+
+    void setClient(Client client1){
+        client=client1;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();

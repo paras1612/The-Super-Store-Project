@@ -6,10 +6,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Store_Admin;
 
 import java.io.IOException;
 
 public class Store_home_cnt{
+    private Store_Admin store_admin;
+
+    public void setStore_admin(Store_Admin store_admin) {
+        this.store_admin = store_admin;
+    }
+
+    public Store_Admin getStore_admin() {
+        return store_admin;
+    }
+
     @FXML
     AnchorPane login;
     public void Home(ActionEvent e) throws IOException {

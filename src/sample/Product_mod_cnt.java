@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Product_mod_cnt{
+
         public void Home(ActionEvent e) throws IOException {
             System.out.println("Home");
             ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();

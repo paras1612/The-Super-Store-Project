@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -48,14 +49,35 @@ public class Sign_up_cnt {
         primaryStage.show();
 
     }
-    public void SignUp(ActionEvent e){
+    public void SignUp(ActionEvent e) throws IOException {
         System.out.println("SignUp");
         String name = sign_up_name.getText();
         String email = user_fld.getText();
         String pass  = pass_fld.getText();
         System.out.println(name+email+pass);
-        database.createClient(name , pass, email);
-        System.out.println("User Created"+email+pass);
+        if (database.createClient(name , pass, email)){
+            System.out.println("User Created"+email+pass);
+//            System.out.println("Login");
+            ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            AnchorPane root = loader.load(getClass().getResource("sample.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        else{
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            Label warn = new Label("    EMAIL ALREADY EXISTS    ");
+            AnchorPane root = new AnchorPane();
+            root.getChildren().add(warn);
+            Scene scene = new Scene(root, 200, 50);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
         serialize(database);
     }
 

@@ -34,7 +34,15 @@ public class Client implements Serializable {
         this.favCategory = null;
 
     }
+    void check_out(){
 
+    }
+    void add_product(String name, int quant){
+
+    }
+    void add_funds(int fund){
+
+    }
     public void setName(String name) {
         this.name = name;
     }

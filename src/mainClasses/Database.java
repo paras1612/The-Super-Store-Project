@@ -10,6 +10,7 @@ public class Database implements Serializable {
     private HashMap<Warehouse, ArrayList<Categories>> Warehouse_categ = new HashMap<>();
     private HashMap<Store, ArrayList<Categories>> Store_categ = new HashMap<>();
     private ArrayList<Client> ClientList = new ArrayList<>();
+    private HashMap<String, Client> ClientHashMap = new HashMap<>();
     private ArrayList<Warehouse> WarehouseList = new ArrayList<>();
     private ArrayList<Store> StoreList = new ArrayList<>();
     private HashMap<Store, HashMap<Product, Integer>> Store_Product = new HashMap<>();
@@ -17,7 +18,7 @@ public class Database implements Serializable {
     private static final long serialVersionUID=7L;
     private Auth auth = new Auth();
     
-    public void createClient(String name, String password, String email){
+    public boolean createClient(String name, String password, String email){
     //    System.out.println("Entered");
         if(auth.getCredentials().containsKey(email)){
             System.out.println("Email already registered");
@@ -26,8 +27,12 @@ public class Database implements Serializable {
       //      System.out.println("here");
             Client init = new Client(name, password, email);
             ClientList.add(init);
+            getClientHashMap().put(email,init);
+            System.out.println(getClientHashMap().toString());
             auth.getCredentials().put(email, password);
+            return true;
         }
+        return false;
     }
     public boolean login(String uid, String password){
         if(auth.login(uid, password)){
@@ -68,7 +73,7 @@ public class Database implements Serializable {
         product1.setItemDemand(idem);
         admin.getAssignedStore().getInventory().put(product1, quant);
     }
-    void addCategory(){
+    void addCategory(Warehouse_Admin current, String s){
 
     }
     void delCategory(Warehouse_Admin admin, Categories category){
@@ -84,12 +89,17 @@ public class Database implements Serializable {
     void updateCategory(){
 
     }
-    void search(){
-        
+    void search(String name){
+
     }
     void sort(){
 
     }
+
+    public HashMap<String, Client> getClientHashMap() {
+        return ClientHashMap;
+    }
+
     public ArrayList<Product> getProductList() {
         return ProductList;
     }

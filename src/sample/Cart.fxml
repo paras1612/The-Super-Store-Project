@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" style="-fx-background-color: #e7e7e7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Home_cnt">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" style="-fx-background-color: #e7e7e7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Cart_cnt">
    <children>
       <Button fx:id="home_btn" layoutX="16.0" layoutY="15.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <Button fx:id="login_btn" layoutX="17.0" layoutY="379.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="194.0" text="Login" />
