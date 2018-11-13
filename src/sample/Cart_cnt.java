@@ -6,10 +6,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Client;
 
 import java.io.IOException;
 
 public class Cart_cnt {
+    private Client client;
+
+    void setClient(Client client1){
+        client=client1;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
     @FXML
     AnchorPane login;
     public void Home(ActionEvent e) throws IOException {
