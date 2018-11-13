@@ -37,6 +37,7 @@ public class Login_cnt{
         primaryStage.show();
     }
     public void Login(ActionEvent e) throws IOException {
+        System.out.println(database.getClientHashMap().toString());
         System.out.println("Login");
         if(database.login(user_fld.getText(), pass_fld.getText())){
             Client curr = database.getClientHashMap().get(user_fld.getText());
