@@ -37,6 +37,8 @@ public class Warehouse_data_supr_cnt {
             root.getChildren().add(name);
         }
         Scene scene = new Scene(root);
+        Super_user_cnt cnt = loader.getController();
+        cnt.setUser(user);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -68,8 +70,8 @@ public class Warehouse_data_supr_cnt {
         System.out.println("About");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("about.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("about.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
         Super_user_cnt cnt = loader.getController();
         cnt.setUser(user);

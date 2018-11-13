@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -21,8 +20,6 @@ public class Warehouse_home_cnt{
         return warehouse_admin;
     }
 
-    @FXML
-    AnchorPane login;
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -30,6 +27,8 @@ public class Warehouse_home_cnt{
         FXMLLoader loader = new FXMLLoader();
         AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
         Scene scene = new Scene(root);
+        Warehouse_home_cnt cnt= loader.getController();
+        cnt.setWarehouse_admin(warehouse_admin);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -99,7 +98,19 @@ public class Warehouse_home_cnt{
     public void orders(ActionEvent e){
         System.out.println("Orders pressed");
     }
-    public void addProduct(ActionEvent e){
+    public void addProduct(ActionEvent e) throws IOException {
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Product_mod.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Product_mod_cnt cnt= loader.getController();
+        cnt.setWarehouse_admin(warehouse_admin);
+        cnt.setProdCat(cnt.getProdCat());
+        cnt.setCategory(cnt.getCategory());
+        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
         System.out.println("Product added");
     }
     public void deleteProduct(ActionEvent e){
@@ -110,7 +121,24 @@ public class Warehouse_home_cnt{
         System.out.println("Search pressed");
     }
 
-    public void addCategory(ActionEvent e){
+    public void addCategory(ActionEvent e) throws IOException {((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Product_mod.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Product_mod_cnt cnt= loader.getController();
+        cnt.setWarehouse_admin(warehouse_admin);
+        cnt.setProdCat(cnt.getProdCat());
+        cnt.getPriceTxt().setDisable(true);
+        cnt.getQtyTxt().setDisable(true);
+        cnt.getdTxt().setDisable(true);
+        cnt.gethTxt().setDisable(true);
+        cnt.getkTxt().setDisable(true);
+        cnt.setCategory(cnt.getCategory());
+        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        System.out.println("Product added");
         System.out.println("Add category pressed");
     }
 }

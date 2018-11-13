@@ -1,14 +1,16 @@
 package mainClasses;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
+
+import static sample.Main.deserialize;
 
 public class Store implements Serializable {
     private static final long serialVersionUID=7L;
+    private Database database = deserialize();
     private Warehouse linkedWarehouse;
     private HashMap<Product, Integer> ProductSold;
-    private ArrayList<Categories> categoriesList;
+    private HashMap<String, Categories> categoriesList = new HashMap<>();
     private double sale;
     private String Message;
     private HashMap<Product, Integer> Inventory;
@@ -27,7 +29,7 @@ public class Store implements Serializable {
         return Inventory;
     }
 
-    public ArrayList<Categories> getCategoriesList() {
+    public HashMap<String, Categories> getCategoriesList() {
         return categoriesList;
     }
 
@@ -45,6 +47,10 @@ public class Store implements Serializable {
 
     public String getMessage() {
         return Message;
+    }
+
+    public Database getDatabase() {
+        return database;
     }
 
     void Order(Cart cart){

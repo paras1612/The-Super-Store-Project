@@ -13,10 +13,15 @@ public class Categories implements Serializable {
 
     public Categories(String uid) {
         this.uid = uid;
+        Name =uid;
     }
 
     public Categories getParent() {
         return Parent;
+    }
+
+    public void setParent(Categories parent) {
+        Parent = parent;
     }
 
     public String getUid() {

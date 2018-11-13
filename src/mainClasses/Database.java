@@ -37,7 +37,7 @@ public class Database implements Serializable {
         }
         else {
             //      System.out.println("here");
-            Store_Admin init = new Store_Admin(name, password);
+            Store_Admin init = new Store_Admin(name, password,getStoreHashMap().get(store));
             getStore_AdminHashMap().put(name,init);
             System.out.println(getStore_AdminHashMap().toString());
             auth.getstoreAdminAuth().put(name, password);
@@ -51,7 +51,7 @@ public class Database implements Serializable {
         }
         else {
             //      System.out.println("here");
-            Warehouse_Admin init = new Warehouse_Admin(name, password);
+            Warehouse_Admin init = new Warehouse_Admin(name, password, getWarehouseHashMap().get(warehouse));
             getWarehouse_AdminHashMap().put(name,init);
             System.out.println(getWarehouse_AdminHashMap().toString());
             auth.getwarehouseAdmintAuth().put(name, password);
@@ -90,12 +90,22 @@ public class Database implements Serializable {
         }
         return -1;
     }
-    void addProduct(Warehouse_Admin admin, String product, int quant){
+    public void addProduct(Warehouse_Admin admin, String product, double price, int quant, double dtxt, double ktxt, double htxt, String cat){
         if(admin.getClass().equals("Warehouse")){
-            Product currProd = new Product(product);
+            Product currProd = new Product(product, price, quant, dtxt, htxt, ktxt);
+            currProd.setParent(CategoriesList.get(cat));
             ProductList.put(product, currProd);
             admin.getAssigned_ware().getInventory().put(currProd, quant);
             Warehouse_Product.put(admin.getAssigned_ware(), admin.getAssigned_ware().getInventory());
+        }
+    }
+    public void addProduct(Store_Admin admin, String product){
+        Product curr= admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().get(product);
+        if(admin.getAssignedStore().getLinkedWarehouse().getInventory().get(product)>(int)curr.getEOQ()) {
+            admin.getAssignedStore().getInventory().put(curr,(int)curr.getEOQ());
+        }
+        else{
+            System.out.println("Product Not Available");
         }
     }
     void deleteProduct(Warehouse_Admin admin, Product prod){
@@ -104,36 +114,37 @@ public class Database implements Serializable {
     void deleteProduct(Store_Admin admin, Product prod){
         admin.getAssignedStore().getInventory().remove(prod);
     }
-    void updateProduct(Warehouse_Admin admin, Product product, double price, int quant, double fcost, double ccost, double idem){
-        admin.getAssigned_ware().getInventory().remove(product);
-        Product product1= new Product(product.getUid());
-        product1.setPrice(price);
-        product1.setQuantity(quant);
-        product1.setfCostQuater(fcost);
-        product1.setcCostQuater(ccost);
-        product1.setItemDemand(idem);
-        admin.getAssigned_ware().getInventory().put(product1, quant);
+    void updateProduct(Warehouse_Admin admin, String product, double price, int quant, double fcost, double ccost, double idem){
+        Product curr = ProductList.get(product);
+        curr.setPrice(price);
+        curr.setQuantity(quant);
+        curr.setfCostQuater(fcost);
+        curr.setcCostQuater(ccost);
+        curr.setItemDemand(idem);
     }
     void updateProduct(Store_Admin admin, Product product, double price, int quant, double fcost, double ccost, double idem){
         admin.getAssignedStore().getInventory().remove(product);
-        Product product1= new Product(product.getUid());
-        product1.setPrice(price);
-        product1.setQuantity(quant);
-        product1.setfCostQuater(fcost);
-        product1.setcCostQuater(ccost);
-        product1.setItemDemand(idem);
+        Product product1= new Product(product.getUid(), price, quant, fcost, ccost, idem);
         admin.getAssignedStore().getInventory().put(product1, quant);
     }
-    void addCategory(Warehouse_Admin current, String s){
-
+    public void addCategory(Warehouse_Admin admin, String name, String parentcat){
+        Categories curr= new Categories(name);
+        curr.setParent(admin.getAssigned_ware().getCategoryHashMap().get(parentcat));
+        admin.getAssigned_ware().getCategoryHashMap().put(name,curr);
     }
+    public void addCategory(Store_Admin admin, String name, String parentcat){
+        Categories curr= new Categories(name);
+        curr.setParent(admin.getAssignedStore().getCategoriesList().get(parentcat));
+        admin.getAssignedStore().getCategoriesList().put(name,curr);
+    }
+
     void delCategory(Warehouse_Admin admin, Categories category){
-        if(admin.getAssigned_ware().getCategoriesList().contains(category)){
-            admin.getAssigned_ware().getCategoriesList().remove(category);
+        if(admin.getAssigned_ware().getCategoryHashMap().containsKey(category)){
+            admin.getAssigned_ware().getCategoryHashMap().remove(category);
         }
     }
     void delCategory(Store_Admin admin, Categories category){
-        if(admin.getAssignedStore().getCategoriesList().contains(category)){
+        if(admin.getAssignedStore().getCategoriesList().containsKey(category)){
             admin.getAssignedStore().getCategoriesList().remove(category);
         }
     }

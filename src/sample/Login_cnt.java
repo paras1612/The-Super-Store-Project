@@ -83,7 +83,7 @@ public class Login_cnt{
         }
         else if(database.login(user_fld.getText(),pass_fld.getText())==2){
             Warehouse_Admin curr = database.getWarehouse_AdminHashMap().get(user_fld.getText());
-            System.out.println(database.getClientHashMap().toString());
+            System.out.println(database.getWarehouse_AdminHashMap().toString());
             System.out.println(curr);
             ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
             Stage primaryStage = new Stage();

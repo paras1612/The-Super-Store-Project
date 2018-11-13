@@ -6,9 +6,10 @@ public class Warehouse_Admin extends Admin implements Serializable {
     private static final long serialVersionUID=7L;
     private Warehouse assigned_ware;
 
-    protected Warehouse_Admin(String uid, String pass) {
+    protected Warehouse_Admin(String uid, String pass, Warehouse warehouse) {
         super(uid);
         Password=pass;
+        assigned_ware= warehouse;
     }
     void Check_Data_allWare(){
     }

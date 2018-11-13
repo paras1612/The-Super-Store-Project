@@ -14,8 +14,15 @@ public class Product implements Serializable {
     private double itemDemand;
     private double EOQ;
 
-    public Product(String uid) {
+    public Product(String uid, double price, int quantity, double fcost, double ccost, double idemand) {
         this.uid = uid;
+        Name= uid;
+        Price= price;
+        Quantity= quantity;
+        fCostQuater= fcost;
+        cCostQuater= ccost;
+        itemDemand= idemand;
+        calcEOQ(fcost,ccost,idemand);
     }
 
     double calcEOQ(double fCostQuater, double cCostQuater, double itemDemand){

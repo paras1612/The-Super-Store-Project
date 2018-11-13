@@ -19,11 +19,13 @@ public class Super_usr implements Serializable {
     }
     public void createWarehouse(String warehouseName){
         Warehouse init = new Warehouse(warehouseName);
+        //init.getCategoryHashMap().put("Main",new Categories("SuperStore"));
         database.getWarehouseHashMap().put(warehouseName,init);
         serialize(database);
     }
     public void createStore(String StoreName){
         Store init = new Store(StoreName);
+        init.getCategoriesList().put("Main",new Categories("SuperStore"));
         database.getStoreHashMap().put(StoreName,init);
     }
 

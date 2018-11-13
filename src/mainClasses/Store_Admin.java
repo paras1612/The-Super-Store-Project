@@ -6,10 +6,11 @@ public class Store_Admin extends Admin implements Serializable {
     private static final long serialVersionUID=7L;
     private Store assignedStore;
 
-    protected Store_Admin(String uid, String pass)
+    protected Store_Admin(String uid, String pass, Store store)
     {
         super(uid);
         Password =pass;
+        assignedStore=store;
     }
 
     void Check_Data(){
