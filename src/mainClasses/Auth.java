@@ -11,10 +11,13 @@ public class Auth implements Serializable {
     }
 
     boolean login(String uid, String password){
+        System.out.println(uid+password);
         if(credentials.containsKey(uid)){
-        if(credentials.get(uid).equals(password)){
-            return true;
-        }}
+            System.out.println("e");
+            if(credentials.get(uid).equals(password)){
+                return true;
+            }
+        }
         return false;
     }
 
