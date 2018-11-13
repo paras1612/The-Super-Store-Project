@@ -1,20 +1,41 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Super_usr;
 
 import java.io.IOException;
 
 public class Store_data_supr_cnt {
+    private Super_usr user;
+    @FXML
+    private TextField StoreName;
+    public void setUser(Super_usr user) {
+        this.user = user;
+    }
+
+    public Super_usr getUser() {
+        return user;
+    }
+
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Super_user.fxml"));
+        AnchorPane root = loader.load();
+        if(user!=null){
+            Label name= new Label(user.getName());
+            name.setLayoutX(15.0);
+            name.setLayoutY(60.0);
+            root.getChildren().add(name);
+        }
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
@@ -60,6 +81,7 @@ public class Store_data_supr_cnt {
     }
 
     public void addStore(ActionEvent e){
+        user.createStore(StoreName.getText());
         System.out.println("Store added");
     }
 

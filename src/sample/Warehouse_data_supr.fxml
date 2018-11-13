@@ -21,7 +21,7 @@
       <ScrollPane layoutX="234.0" layoutY="101.0" prefHeight="406.0" prefWidth="552.0" />
       <Button fx:id="addWarehouse_btn" layoutX="14.0" layoutY="325.0" mnemonicParsing="false" onAction="#addWarehouse" prefHeight="26.0" prefWidth="210.0" text="Add a Warehouse" />
       <Button fx:id="linkStore_btn" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#linkStore" prefHeight="26.0" prefWidth="210.0" text="Link the Store" />
-      <TextField layoutX="14.0" layoutY="291.0" prefHeight="26.0" prefWidth="210.0" promptText="Name" />
+      <TextField fx:id="warehouseName" layoutX="14.0" layoutY="291.0" prefHeight="26.0" prefWidth="210.0" promptText="Name" />
       <Label layoutX="234.0" layoutY="78.0" prefHeight="18.0" prefWidth="91.0" text="Details">
          <font>
             <Font name="System Bold" size="12.0" />

@@ -10,8 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import mainClasses.Client;
-import mainClasses.Database;
+import mainClasses.*;
 
 import java.io.IOException;
 
@@ -83,7 +82,7 @@ public class Login_cnt{
             primaryStage.show();
         }
         else if(database.login(user_fld.getText(),pass_fld.getText())==2){
-            Client curr = database.getClientHashMap().get(user_fld.getText());
+            Warehouse_Admin curr = database.getWarehouse_AdminHashMap().get(user_fld.getText());
             System.out.println(database.getClientHashMap().toString());
             System.out.println(curr);
             ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -91,14 +90,14 @@ public class Login_cnt{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Warehouse_home.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
-            Home_cnt cnt = loader.getController();
-            cnt.setClient(curr);
+            Warehouse_home_cnt cnt = loader.getController();
+            cnt.setWarehouse_admin(curr);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
         }
         else if(database.login(user_fld.getText(),pass_fld.getText())==3){
-            Client curr = database.getClientHashMap().get(user_fld.getText());
+            Store_Admin curr = database.getStore_AdminHashMap().get(user_fld.getText());
             System.out.println(database.getClientHashMap().toString());
             System.out.println(curr);
             ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -106,14 +105,14 @@ public class Login_cnt{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Store_home.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
-            Home_cnt cnt = loader.getController();
-            cnt.setClient(curr);
+            Store_home_cnt cnt = loader.getController();
+            cnt.setStore_admin(curr);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
         }
         else if(database.login(user_fld.getText(),pass_fld.getText())==4){
-            Client curr = database.getClientHashMap().get(user_fld.getText());
+            Super_usr curr = database.getSuper_userHashMap().get(user_fld.getText());
             System.out.println(database.getClientHashMap().toString());
             System.out.println(curr);
             ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -121,8 +120,8 @@ public class Login_cnt{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Super_user.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
-            Home_cnt cnt = loader.getController();
-            cnt.setClient(curr);
+            Super_user_cnt cnt = loader.getController();
+            cnt.setUser(curr);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -175,5 +174,6 @@ public class Login_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
 }

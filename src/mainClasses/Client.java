@@ -15,10 +15,10 @@ public class Client implements Serializable {
     public String getName() {
         return name;
     }
-    public Client(String name, String password, String uid)
+    public Client(String name, String pass, String uid)
     {
         this.name = name;
-        this.password = password;
+        this.password = pass;
         this.uid = uid;
     }
 

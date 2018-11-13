@@ -7,17 +7,31 @@ import java.util.HashMap;
 public class Database implements Serializable {
     private ArrayList<Product> ProductList=new ArrayList<>();
     private ArrayList<Categories> CategoriesList = new ArrayList<>();
-    private HashMap<Warehouse, ArrayList<Categories>> Warehouse_categ = new HashMap<>();
-    private HashMap<Store, ArrayList<Categories>> Store_categ = new HashMap<>();
     private ArrayList<Client> ClientList = new ArrayList<>();
     private HashMap<String, Client> ClientHashMap = new HashMap<>();
-    private ArrayList<Warehouse> WarehouseList = new ArrayList<>();
-    private ArrayList<Store> StoreList = new ArrayList<>();
+    private HashMap<String, Super_usr> Super_userHashMap = new HashMap<>();
+    private HashMap<String, Store_Admin> Store_AdminHashMap = new HashMap<>();
+    private HashMap<String, Warehouse_Admin> Warehouse_AdminHashMap = new HashMap<>();
+    private HashMap<String, Warehouse> WarehouseHashMap = new HashMap<>();
+    private HashMap<String, Store> StoreHashMap = new HashMap<>();
     private HashMap<Store, HashMap<Product, Integer>> Store_Product = new HashMap<>();
     private HashMap<Warehouse, HashMap<Product, Integer>> Warehouse_Product = new HashMap<>();
     private static final long serialVersionUID=7L;
     private Auth auth = new Auth();
-    
+    public boolean createSuperuser(String name, String password, String email){
+        if(auth.getSuperUserAdminAuth().containsKey(email)){
+            System.out.println("Email already registered");
+        }
+        else {
+            //      System.out.println("here");
+            Super_usr init = new Super_usr(name, password, email);
+            getSuper_userHashMap().put(email,init);
+            System.out.println(getSuper_userHashMap().toString());
+            auth.getSuperUserAdminAuth().put(email, password);
+            return true;
+        }
+        return false;
+    }
     public boolean createClient(String name, String password, String email){
     //    System.out.println("Entered");
         if(auth.getclientAuth().containsKey(email)){
@@ -117,4 +131,23 @@ public class Database implements Serializable {
         return CategoriesList;
     }
 
+    public HashMap<String, Warehouse_Admin> getWarehouse_AdminHashMap() {
+        return Warehouse_AdminHashMap;
+    }
+
+    public HashMap<String, Super_usr> getSuper_userHashMap() {
+        return Super_userHashMap;
+    }
+
+    public HashMap<String, Store_Admin> getStore_AdminHashMap() {
+        return Store_AdminHashMap;
+    }
+
+    public HashMap<String, Store> getStoreHashMap() {
+        return StoreHashMap;
+    }
+
+    public HashMap<String, Warehouse> getWarehouseHashMap() {
+        return WarehouseHashMap;
+    }
 }

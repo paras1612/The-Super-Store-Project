@@ -1,6 +1,6 @@
 package mainClasses;
 
-import com.sun.jdi.StringReference;
+
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -26,21 +26,21 @@ public class Auth implements Serializable {
                 return 1;
             }
         }
-        if(warehouseAdminAuth.containsKey(uid)){
+        else if(warehouseAdminAuth.containsKey(uid)){
             System.out.println("e");
             if(warehouseAdminAuth.get(uid).equals(password)){
                 return 2;
             }
         }
-        if(storeAdminAuth.containsKey(uid)){
+        else if(storeAdminAuth.containsKey(uid)){
             System.out.println("e");
             if(storeAdminAuth.get(uid).equals(password)){
                 return 3;
             }
         }
-        if(superUserAdminAuth.containsKey(uid)){
+        else if(superUserAdminAuth.containsKey(uid)){
             System.out.println("e");
-            if(storeAdminAuth.get(uid).equals(password)){
+            if(superUserAdminAuth.get(uid).equals(password)){
                 return 4;
             }
         }
@@ -50,5 +50,18 @@ public class Auth implements Serializable {
 
     public HashMap<String, String> getclientAuth() {
         return clientAuth;
+    }
+
+    public HashMap<String, String> getstoreAdminAuth() {
+        return this.storeAdminAuth;
+    }
+
+
+    public HashMap<String, String> getwarehouseAdmintAuth() {
+        return this.warehouseAdminAuth;
+    }
+
+    public HashMap<String, String> getSuperUserAdminAuth() {
+        return superUserAdminAuth;
     }
 }

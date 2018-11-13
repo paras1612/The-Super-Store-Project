@@ -13,9 +13,14 @@ public class Main extends Application {
     private Database database = deserialize();
     @Override
     public void start(Stage primaryStage) throws Exception{
+        if(database.getSuper_userHashMap().get("me")==null){
+            database.createSuperuser("paras","hello", "paras");
+            serialize(database);
+            System.out.println(database.getSuper_userHashMap().toString());
+        }
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("The Super Store");
-        Scene one = new Scene(root, 600, 400);
+        Scene one = new Scene(root);//, 600, 400);
         one.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(one);
         primaryStage.show();
@@ -59,6 +64,7 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
+
         }
         return Main_Database;
     }

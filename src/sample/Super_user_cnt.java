@@ -1,23 +1,37 @@
 package sample;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Super_usr;
 
 import java.io.IOException;
 
 public class Super_user_cnt{
-    @FXML
-    AnchorPane login;
+    private Super_usr user;
+    public void setUser(Super_usr user) {
+        this.user = user;
+    }
+
+    public Super_usr getUser() {
+        return user;
+    }
+
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Super_user.fxml"));
+        AnchorPane root = loader.load();
+        if(user!=null){
+            Label name= new Label(user.getName());
+            name.setLayoutX(15.0);
+            name.setLayoutY(60.0);
+            root.getChildren().add(name);
+        }
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
@@ -66,9 +80,11 @@ public class Super_user_cnt{
         System.out.println("Warehouse button pressed from Super User");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Warehouse_data_supr.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Warehouse_data_supr.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
+        Warehouse_data_supr_cnt cnt = loader.getController();
+        cnt.setUser(user);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -79,9 +95,11 @@ public class Super_user_cnt{
         System.out.println("Store button pressed from Super User");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Store_data_supr.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Store_data_supr.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
+        Store_data_supr_cnt cnt = loader.getController();
+        cnt.setUser(user);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -93,8 +111,17 @@ public class Super_user_cnt{
     public void product(ActionEvent e){
         System.out.println("Product Pressed");
     }
-    public void message(ActionEvent e){
+    public void message(ActionEvent e) throws IOException {
         System.out.println("message pressed");
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Message_cnt cnt = loader.getController();
+        cnt.text.setText("kjsdbkjfbjksb");
+        scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public void warehouseLink(ActionEvent e){
@@ -112,5 +139,4 @@ public class Super_user_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 }

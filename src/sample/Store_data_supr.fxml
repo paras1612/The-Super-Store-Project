@@ -19,7 +19,7 @@
       <ScrollPane layoutX="234.0" layoutY="101.0" prefHeight="406.0" prefWidth="552.0" />
       <Button fx:id="addStore_Btn" layoutX="14.0" layoutY="324.0" mnemonicParsing="false" onAction="#addStore" prefHeight="26.0" prefWidth="210.0" text="Add a Store" />
       <Button fx:id="warehouseLink_btn" layoutX="14.0" layoutY="233.0" mnemonicParsing="false" onAction="#warehouseLink" prefHeight="26.0" prefWidth="210.0" text="Link to a Warehouse" />
-      <TextField layoutX="14.0" layoutY="291.0" prefHeight="26.0" prefWidth="210.0" promptText="Name" />
+      <TextField fx:id="StoreName" layoutX="14.0" layoutY="291.0" prefHeight="26.0" prefWidth="210.0" promptText="Name" />
       <MenuButton layoutX="14.0" layoutY="197.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Choose Warehouse">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
