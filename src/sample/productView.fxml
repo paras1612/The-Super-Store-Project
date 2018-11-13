@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" style="-fx-background-color: #e7e7e7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Home_cnt">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" style="-fx-background-color: #e7e7e7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.productView_cnt">
    <children>
       <TextField layoutX="234.0" layoutY="63.0" prefHeight="26.0" prefWidth="469.0" promptText="Search Product or Categories" />
-      <Button layoutX="704.0" layoutY="63.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Search" />
+      <Button fx:id="searchBtn" layoutX="704.0" layoutY="63.0" mnemonicParsing="false" onAction="#searchBtn" prefHeight="26.0" prefWidth="81.0" text="Search" />
       <Button fx:id="home_btn" layoutX="16.0" layoutY="15.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <Button fx:id="login_btn" layoutX="17.0" layoutY="349.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="194.0" text="Login" />
       <MenuButton layoutX="17.0" layoutY="63.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="217.0" text="Products/Categories">
@@ -22,7 +22,7 @@
             <MenuItem mnemonicParsing="false" text="Categories" />
          </items>
       </MenuButton>
-      <Button fx:id="cart_btn" layoutX="17.0" layoutY="383.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Cart" />
+      <Button fx:id="cart_btn" layoutX="17.0" layoutY="383.0" mnemonicParsing="false" onAction="#Cart_btn" prefHeight="26.0" prefWidth="194.0" text="Cart" />
       <Button fx:id="help_btn" layoutX="17.0" layoutY="416.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button layoutX="17.0" layoutY="451.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
       <AnchorPane layoutX="235.0" layoutY="96.0" prefHeight="414.0" prefWidth="555.0">

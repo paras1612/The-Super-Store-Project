@@ -54,4 +54,17 @@ public class Store_data_supr_cnt {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    public void warehouseLink(ActionEvent e){
+        System.out.println("Warehouse Linked");
+    }
+
+    public void addStore(ActionEvent e){
+        System.out.println("Store added");
+    }
+
+    public void removeStore(ActionEvent e){
+        System.out.println("Store removed");
+    }
+
 }

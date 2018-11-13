@@ -82,4 +82,22 @@ public class Store_home_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    public void message(ActionEvent e){
+        System.out.println("Message Button pressed");
+    }
+
+    public void orders(ActionEvent e){
+        System.out.println("Orders pressed");
+    }
+    public void addProduct(ActionEvent e){
+        System.out.println("Product added");
+    }
+    public void deleteProduct(ActionEvent e){
+        System.out.println("Product Deleted");
+    }
+
+    public void search(ActionEvent e){
+        System.out.println("Search pressed");
+    }
+
 }

@@ -8,11 +8,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="Super_usr_pane" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Warehouse_home_cnt">
+<AnchorPane fx:id="Super_usr_pane" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Super_user_cnt">
    <children>
       <Button fx:id="home_btn" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <TextField fx:id="search_fld" layoutX="233.0" layoutY="73.0" prefHeight="26.0" prefWidth="469.0" promptText="Search anything" />
-      <Button fx:id="search_btn" layoutX="703.0" layoutY="73.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Search" />
+      <Button fx:id="search_btn" layoutX="703.0" layoutY="73.0" mnemonicParsing="false" onAction="#search" prefHeight="26.0" prefWidth="81.0" text="Search" />
       <ComboBox fx:id="sort_menu" layoutX="15.0" layoutY="105.0" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
       <ScrollPane layoutX="233.0" layoutY="105.0" prefHeight="406.0" prefWidth="552.0" />
       <MenuButton fx:id="cat_menu" layoutX="15.0" layoutY="73.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="217.0" text="Products/Categories">
@@ -22,14 +22,14 @@
          </items>
       </MenuButton>
       <Button fx:id="help_btn" layoutX="15.0" layoutY="419.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
+      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="194.0" text="Log out" />
+      <Button fx:id="message_btn" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#message" prefHeight="26.0" prefWidth="194.0" text="Messages" />
+      <Button fx:id="warehouse_supr_btn" layoutX="16.0" layoutY="173.0" mnemonicParsing="false" onAction="#warehouse_data_supr_btn" prefHeight="26.0" prefWidth="194.0" text="Warehouses" />
+      <Button fx:id="store_supr_btn" layoutX="16.0" layoutY="206.0" mnemonicParsing="false" onAction="#store_data_supr_btn" prefHeight="26.0" prefWidth="194.0" text="Stores" />
+      <Button fx:id="product_btn" layoutX="15.0" layoutY="240.0" mnemonicParsing="false" onAction="#product" prefHeight="26.0" prefWidth="194.0" text="Products" />
+      <Button fx:id="createWarehouseAdmin_btn" layoutX="16.0" layoutY="308.0" mnemonicParsing="false" onAction="#createWarehouseAdmin" prefHeight="26.0" prefWidth="194.0" text="Create Warehouse Admin" />
+      <Button fx:id="warehouseLink_btn" layoutX="16.0" layoutY="273.0" mnemonicParsing="false" onAction="#warehouseLink" prefHeight="26.0" prefWidth="194.0" text="Link Store to Warehouse" />
+      <Button fx:id="createStoreadmin_btn" layoutX="16.0" layoutY="347.0" mnemonicParsing="false" onAction="#createStoreadmin" prefHeight="26.0" prefWidth="194.0" text="Create Store Admin" />
       <Button layoutX="15.0" layoutY="456.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
-      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Log out" />
-      <Button fx:id="message_btn" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Messages" />
-      <Button layoutX="16.0" layoutY="173.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Warehouses" />
-      <Button layoutX="16.0" layoutY="206.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Stores" />
-      <Button layoutX="15.0" layoutY="240.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Products" />
-      <Button layoutX="16.0" layoutY="308.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Create Warehouse Admin" />
-      <Button layoutX="16.0" layoutY="273.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Link Store to Warehouse" />
-      <Button layoutX="16.0" layoutY="347.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Create Store Admin" />
    </children>
 </AnchorPane>

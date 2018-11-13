@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Warehouse_data_supr_cnt">
    <children>
       <Button fx:id="home_btn" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
@@ -20,8 +19,8 @@
         </items>
       </MenuButton>
       <ScrollPane layoutX="234.0" layoutY="101.0" prefHeight="406.0" prefWidth="552.0" />
-      <Button layoutX="14.0" layoutY="325.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Add a Warehouse" />
-      <Button layoutX="14.0" layoutY="239.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Link the Store" />
+      <Button fx:id="addWarehouse_btn" layoutX="14.0" layoutY="325.0" mnemonicParsing="false" onAction="#addWarehouse" prefHeight="26.0" prefWidth="210.0" text="Add a Warehouse" />
+      <Button fx:id="linkStore_btn" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#linkStore" prefHeight="26.0" prefWidth="210.0" text="Link the Store" />
       <TextField layoutX="14.0" layoutY="291.0" prefHeight="26.0" prefWidth="210.0" promptText="Name" />
       <Label layoutX="234.0" layoutY="78.0" prefHeight="18.0" prefWidth="91.0" text="Details">
          <font>
@@ -34,7 +33,7 @@
             <MenuItem mnemonicParsing="false" text="Action 2" />
          </items>
       </MenuButton>
-      <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Remove Warehouse" />
+      <Button fx:id="removeWarehouse_btn" layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#removeWarehouse" prefHeight="26.0" prefWidth="210.0" text="Remove Warehouse" />
       <MenuButton layoutX="14.0" layoutY="386.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Choose Warehouse">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />

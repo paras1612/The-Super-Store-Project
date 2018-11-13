@@ -55,4 +55,8 @@ public class Product_mod_cnt{
             primaryStage.setScene(scene);
             primaryStage.show();
         }
+
+        public void set(ActionEvent e){
+            System.out.println("Set pressed");
+        }
 }

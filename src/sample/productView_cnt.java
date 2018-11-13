@@ -76,4 +76,8 @@ public class productView_cnt {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    public void searchBtn(ActionEvent e){
+        System.out.println("Search button pressed");
+    }
 }

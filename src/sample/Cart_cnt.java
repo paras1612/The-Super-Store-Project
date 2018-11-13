@@ -103,5 +103,17 @@ public class Cart_cnt {
         primaryStage.show();
     }
 
+    public void addProduct(ActionEvent e) throws IOException{
+        System.out.println("Add Product");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 
 }

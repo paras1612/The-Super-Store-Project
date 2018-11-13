@@ -65,4 +65,12 @@ public class CategoryView_cnt {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    public void search(ActionEvent e){
+        System.out.println("Search Button Pressed");
+    }
+
+    public void addToCart(ActionEvent e){
+        System.out.println("Add to cart pressed");
+    }
 }

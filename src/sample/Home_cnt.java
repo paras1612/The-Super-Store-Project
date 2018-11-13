@@ -103,7 +103,7 @@ public class Home_cnt{
     }
 
     public void Cart_btn(ActionEvent e) throws IOException {
-        System.out.println("Cart");
+        System.out.println("About");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
@@ -147,4 +147,10 @@ public class Home_cnt{
         primaryStage.show();
     }
 
+    public void addToCart(ActionEvent e){
+        System.out.println("Add To Cart pressed");
+    }
+    public void search(ActionEvent e){
+        System.out.println("Search pressed");
+    }
 }

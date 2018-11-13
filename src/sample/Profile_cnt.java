@@ -121,4 +121,12 @@ public class Profile_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    public void previousOrders(ActionEvent e){
+        System.out.println("Previous Orders");
+    }
+
+    public void addToWallet(ActionEvent e){
+        System.out.println("Added to Wallet");
+    }
 }

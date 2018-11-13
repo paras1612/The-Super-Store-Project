@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Warehouse_data_supr_cnt">
+<AnchorPane prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Store_data_supr_cnt">
    <children>
       <Button fx:id="home_btn" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <MenuButton layoutX="14.0" layoutY="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Choose a Store">
@@ -17,8 +17,8 @@
          </items>
       </MenuButton>
       <ScrollPane layoutX="234.0" layoutY="101.0" prefHeight="406.0" prefWidth="552.0" />
-      <Button layoutX="14.0" layoutY="324.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Add a Store" />
-      <Button layoutX="14.0" layoutY="233.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Link to a Warehouse" />
+      <Button fx:id="addStore_Btn" layoutX="14.0" layoutY="324.0" mnemonicParsing="false" onAction="#addStore" prefHeight="26.0" prefWidth="210.0" text="Add a Store" />
+      <Button fx:id="warehouseLink_btn" layoutX="14.0" layoutY="233.0" mnemonicParsing="false" onAction="#warehouseLink" prefHeight="26.0" prefWidth="210.0" text="Link to a Warehouse" />
       <TextField layoutX="14.0" layoutY="291.0" prefHeight="26.0" prefWidth="210.0" promptText="Name" />
       <MenuButton layoutX="14.0" layoutY="197.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Choose Warehouse">
         <items>
@@ -26,7 +26,7 @@
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Button layoutX="14.0" layoutY="428.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Remove Store" />
+      <Button fx:id="removeStore_btn" layoutX="14.0" layoutY="428.0" mnemonicParsing="false" onAction="#removeStore" prefHeight="26.0" prefWidth="210.0" text="Remove Store" />
       <MenuButton layoutX="14.0" layoutY="394.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Choose Store">
          <items>
             <MenuItem mnemonicParsing="false" text="Action 1" />

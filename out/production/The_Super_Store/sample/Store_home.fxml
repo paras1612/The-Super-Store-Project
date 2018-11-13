@@ -8,11 +8,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Warehouse_home_cnt">
+<AnchorPane prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Store_home_cnt">
    <children>
       <Button fx:id="home_btn" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <TextField fx:id="search_fld" layoutX="233.0" layoutY="73.0" prefHeight="26.0" prefWidth="469.0" promptText="Search Product or Categories" />
-      <Button fx:id="search_btn" layoutX="703.0" layoutY="73.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Search" />
+      <Button fx:id="search_btn" layoutX="703.0" layoutY="73.0" mnemonicParsing="false" onAction="#search" prefHeight="26.0" prefWidth="81.0" text="Search" />
       <ComboBox fx:id="sort_menu" layoutX="15.0" layoutY="105.0" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
       <ScrollPane layoutX="233.0" layoutY="105.0" prefHeight="406.0" prefWidth="552.0" />
       <MenuButton fx:id="cat_menu" layoutX="15.0" layoutY="73.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="217.0" text="Products/Categories">
@@ -25,12 +25,12 @@
          <items>
          </items>
       </MenuButton>
-      <Button fx:id="cart_btn" layoutX="15.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Cart" />
+      <Button fx:id="cart_btn" layoutX="15.0" layoutY="407.0" mnemonicParsing="false" onAction="#Cart_btn" prefHeight="26.0" prefWidth="194.0" text="Cart" />
       <Button fx:id="help_btn" layoutX="15.0" layoutY="440.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button layoutX="15.0" layoutY="475.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
-      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="372.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Log out" />
-      <Button fx:id="message_btn" layoutX="16.0" layoutY="172.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Messages" />
-      <Button fx:id="orders_btn" layoutX="15.0" layoutY="206.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Orders" />
+      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="372.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="194.0" text="Log out" />
+      <Button fx:id="message_btn" layoutX="16.0" layoutY="172.0" mnemonicParsing="false" onAction="#message" prefHeight="26.0" prefWidth="194.0" text="Messages" />
+      <Button fx:id="orders_btn" layoutX="15.0" layoutY="206.0" mnemonicParsing="false" onAction="#orders" prefHeight="26.0" prefWidth="194.0" text="Orders" />
       <MenuButton layoutX="16.0" layoutY="306.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Delete a Product">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -43,7 +43,7 @@
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Button layoutX="16.0" layoutY="274.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Add Product" />
-      <Button layoutX="17.0" layoutY="339.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Delete Product" />
+      <Button fx:id="addProduct_btn" layoutX="16.0" layoutY="274.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="26.0" prefWidth="194.0" text="Add Product" />
+      <Button fx:id="deleteProduct_btn" layoutX="17.0" layoutY="339.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="26.0" prefWidth="194.0" text="Delete Product" />
    </children>
 </AnchorPane>

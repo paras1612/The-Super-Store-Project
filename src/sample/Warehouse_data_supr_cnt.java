@@ -54,4 +54,16 @@ public class Warehouse_data_supr_cnt {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    public void removeWarehouse(ActionEvent e){
+        System.out.println("Remove warehouse pressed");
+    }
+
+    public void addWarehouse(ActionEvent e){
+        System.out.println("Add warehouse pressed");
+    }
+
+    public void linkStore(ActionEvent e){
+        System.out.println("Link Store pressed");
+    }
 }

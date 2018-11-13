@@ -9,24 +9,24 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Product_mod_cnt">
    <children>
       <Button fx:id="home" layoutX="13.0" layoutY="23.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="569.0" text="The Super Store" />
-      <TextField layoutX="223.0" layoutY="110.0" promptText="Name" />
-      <TextField layoutX="223.0" layoutY="145.0" promptText="Price" />
-      <TextField layoutX="223.0" layoutY="181.0" promptText="Quantity" />
-      <Button layoutX="223.0" layoutY="285.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="Set" />
-      <MenuButton layoutX="223.0" layoutY="218.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="Category">
+      <TextField fx:id="nameTxt" layoutX="223.0" layoutY="110.0" promptText="Name" />
+      <TextField fx:id="priceTxt" layoutX="223.0" layoutY="145.0" promptText="Price" />
+      <TextField fx:id="qtyTxt" layoutX="223.0" layoutY="181.0" promptText="Quantity" />
+      <Button fx:id="setBtn" layoutX="223.0" layoutY="285.0" mnemonicParsing="false" onAction="#set" prefHeight="26.0" prefWidth="149.0" text="Set" />
+      <MenuButton fx:id="categoryDrp" layoutX="223.0" layoutY="218.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="Category">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <MenuButton layoutX="37.0" layoutY="110.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" text="Choose Type">
+      <MenuButton fx:id="typeDrp" layoutX="37.0" layoutY="110.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" text="Choose Type">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <TextField layoutX="223.0" layoutY="251.0" prefHeight="26.0" prefWidth="45.0" promptText="D" />
-      <TextField layoutX="275.0" layoutY="251.0" prefHeight="26.0" prefWidth="46.0" promptText="K" />
-      <TextField layoutX="326.0" layoutY="251.0" prefHeight="26.0" prefWidth="46.0" promptText="H" />
+      <TextField fx:id="dTxt" layoutX="223.0" layoutY="251.0" prefHeight="26.0" prefWidth="45.0" promptText="D" />
+      <TextField fx:id="kTxt" layoutX="275.0" layoutY="251.0" prefHeight="26.0" prefWidth="46.0" promptText="K" />
+      <TextField fx:id="hTxt" layoutX="326.0" layoutY="251.0" prefHeight="26.0" prefWidth="46.0" promptText="H" />
    </children>
 </AnchorPane>

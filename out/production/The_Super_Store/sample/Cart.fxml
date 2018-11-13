@@ -22,7 +22,7 @@
          </content></ScrollPane>
       <Button fx:id="help_btn" layoutX="17.0" layoutY="416.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button fx:id="about_btn" layoutX="17.0" layoutY="451.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
-      <Button fx:id="addToCart_btn" layoutX="17.0" layoutY="95.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Add Products" />
+      <Button fx:id="addToCart_btn" layoutX="17.0" layoutY="95.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="26.0" prefWidth="194.0" text="Add Products" />
       <Button fx:id="DeletefromCart_btn" layoutX="16.0" layoutY="130.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Delete Products" />
       <Button fx:id="checkout_btn" layoutX="612.0" layoutY="481.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="Checkout" />
       <Button layoutX="17.0" layoutY="163.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Delete all Products" />

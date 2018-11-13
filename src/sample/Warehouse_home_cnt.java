@@ -82,4 +82,35 @@ public class Warehouse_home_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    public void Message_btn(ActionEvent e) throws IOException {
+        System.out.println("Message");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("Message.fxml"));
+        Scene scene = new Scene(root);
+//        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+
+    public void orders(ActionEvent e){
+        System.out.println("Orders pressed");
+    }
+    public void addProduct(ActionEvent e){
+        System.out.println("Product added");
+    }
+    public void deleteProduct(ActionEvent e){
+        System.out.println("Product Deleted");
+    }
+
+    public void search(ActionEvent e){
+        System.out.println("Search pressed");
+    }
+
+    public void addCategory(ActionEvent e){
+        System.out.println("Add category pressed");
+    }
 }
