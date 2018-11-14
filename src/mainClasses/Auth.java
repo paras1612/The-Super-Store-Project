@@ -56,7 +56,6 @@ public class Auth implements Serializable {
         return this.storeAdminAuth;
     }
 
-
     public HashMap<String, String> getwarehouseAdmintAuth() {
         return this.warehouseAdminAuth;
     }

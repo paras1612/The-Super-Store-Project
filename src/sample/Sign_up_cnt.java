@@ -13,11 +13,13 @@ import mainClasses.Database;
 
 import java.io.IOException;
 
-import static sample.Main.deserialize;
-import static sample.Main.serialize;
+public class Sign_up_cnt extends Main {
+    private Database database;
 
-public class Sign_up_cnt {
-    private Database database = deserialize();
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+
     @FXML
     Button Sign_up_btn;
     @FXML

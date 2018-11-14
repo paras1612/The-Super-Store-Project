@@ -12,13 +12,18 @@ import java.io.*;
 public class Main extends Application {
 
     private Database database = deserialize();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        if(database.getSuper_userHashMap().get("me")==null){
+        if(database.getSuper_userHashMap().get("paras")==null){
+            System.out.println("Made a new one haha");
             database.createSuperuser("paras","hello", "paras");
-            serialize(database);
+                serialize(database);
+                System.out.println(database);
             System.out.println(database.getSuper_userHashMap().toString());
         }
+        System.out.println(database);
+        System.out.println(database.getWarehouseHashMap());
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("The Super Store");
         Scene one = new Scene(root);//, 600, 400);
@@ -28,7 +33,9 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public Database getDatabase() {
+    public Database getDatabase()
+    {
+        System.out.println("kjsdbkjbdssjeb"+database);
         return database;
     }
 

@@ -25,6 +25,10 @@ public class Store implements Serializable {
 
     }
 
+    public void setLinkedWarehouse(Warehouse linkedWarehouse) {
+        this.linkedWarehouse = linkedWarehouse;
+    }
+
     public HashMap<Product, Integer> getInventory() {
         return Inventory;
     }

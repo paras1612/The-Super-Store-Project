@@ -24,8 +24,8 @@ public class Warehouse_home_cnt{
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Warehouse_home.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
         Warehouse_home_cnt cnt= loader.getController();
         cnt.setWarehouse_admin(warehouse_admin);

@@ -8,16 +8,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import mainClasses.Database;
 import mainClasses.Warehouse_Admin;
 
 import java.io.IOException;
 
-import static sample.Main.deserialize;
-import static sample.Main.serialize;
-
 public class Product_mod_cnt{
-    private Database database = deserialize();
+    //private Database database = deserialize();
     private Warehouse_Admin warehouse_admin;
     @FXML
     private ComboBox ProdCat;
@@ -134,15 +130,18 @@ public class Product_mod_cnt{
     }
     public void set(ActionEvent e)
     {
-        System.out.println(warehouse_admin);
+        System.out.println(warehouse_admin.getAssigned_ware());
         if(priceTxt.isDisable()){
-            warehouse_admin.getAssigned_ware().getDatabase().addCategory(warehouse_admin,nameTxt.getText(),category.getValue().toString());
-            serialize(database);
+          //  serialize(warehouse_admin.getAssigned_ware().getDatabase());
+            warehouse_admin.getAssigned_ware().addCategory(nameTxt.getText());
+//            serialize(warehouse_admin.getAssigned_ware().getDatabase());
+            System.out.println("serialized");
             //Add Category
         }
         else if(!priceTxt.isDisable()){
             warehouse_admin.getAssigned_ware().getDatabase().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString());
-            serialize(database);
+            //serialize(warehouse_admin.getAssigned_ware().getDatabase());
+            System.out.println("serialized");
             //Add Product
         }
         System.out.println("Set pressed");

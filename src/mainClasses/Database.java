@@ -79,25 +79,26 @@ public class Database implements Serializable {
         if(auth.login(uid, password)==1){
             return 1;
         }
-        if(auth.login(uid, password)==2){
+        else if(auth.login(uid, password)==2){
             return 2;
         }
-        if(auth.login(uid, password)==3){
+        else if(auth.login(uid, password)==3){
             return 3;
         }
-        if(auth.login(uid, password)==4){
+        else if(auth.login(uid, password)==4){
             return 4;
         }
         return -1;
     }
     public void addProduct(Warehouse_Admin admin, String product, double price, int quant, double dtxt, double ktxt, double htxt, String cat){
-        if(admin.getClass().equals("Warehouse")){
-            Product currProd = new Product(product, price, quant, dtxt, htxt, ktxt);
-            currProd.setParent(CategoriesList.get(cat));
-            ProductList.put(product, currProd);
-            admin.getAssigned_ware().getInventory().put(currProd, quant);
-            Warehouse_Product.put(admin.getAssigned_ware(), admin.getAssigned_ware().getInventory());
-        }
+        Product currProd = new Product(product, price, quant, dtxt, htxt, ktxt);
+        currProd.setParent(CategoriesList.get(cat));
+        ProductList.put(product, currProd);
+        System.out.println(admin.getAssigned_ware().getInventory());
+        admin.getAssigned_ware().getInventory().put(currProd, quant);
+        admin.getAssigned_ware().getProductHashMap().put(product,currProd);
+        Warehouse_Product.put(admin.getAssigned_ware(), admin.getAssigned_ware().getInventory());
+
     }
     public void addProduct(Store_Admin admin, String product){
         Product curr= admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().get(product);
@@ -131,6 +132,7 @@ public class Database implements Serializable {
         Categories curr= new Categories(name);
         curr.setParent(admin.getAssigned_ware().getCategoryHashMap().get(parentcat));
         admin.getAssigned_ware().getCategoryHashMap().put(name,curr);
+        //serialize(this);
     }
     public void addCategory(Store_Admin admin, String name, String parentcat){
         Categories curr= new Categories(name);

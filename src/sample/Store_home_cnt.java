@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import mainClasses.Store_Admin;
@@ -21,15 +22,42 @@ public class Store_home_cnt{
         return store_admin;
     }
 
-    @FXML
-    AnchorPane login;
+    @FXML private ComboBox addchoose;
+    @FXML private ComboBox delchoose;
+
+    public void setAddchoose(ComboBox addchoose) {
+        if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null){
+            for(String name: store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()){
+                this.addchoose.getItems().add(name);
+            }
+        }
+    }
+
+    public void setDelchoose(ComboBox delChoose) {
+        if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null) {
+            for (String name : store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()) {
+                this.delchoose = delchoose;
+            }
+        }
+    }
+
+    public ComboBox getAddchoose() {
+        return addchoose;
+    }
+
+    public ComboBox getDelchoose() {
+        return delchoose;
+    }
+
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Store_home.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
+        Store_home_cnt cnt = loader.getController();
+        cnt.setStore_admin(store_admin);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -90,6 +118,7 @@ public class Store_home_cnt{
         System.out.println("Orders pressed");
     }
     public void addProduct(ActionEvent e){
+
         System.out.println("Product added");
     }
     public void deleteProduct(ActionEvent e){

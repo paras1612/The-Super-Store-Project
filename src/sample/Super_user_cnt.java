@@ -126,12 +126,26 @@ public class Super_user_cnt{
         primaryStage.show();
     }
 
-    public void warehouseLink(ActionEvent e){
-        System.out.println("Warehouse Linked");
+    public void warehouseLink(ActionEvent e) throws IOException {
+        System.out.println("Link");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Store_data_supr.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Store_data_supr_cnt cnt = loader.getController();
+        System.out.println("User");
+        System.out.println(user);
+        cnt.setUser(user);
+        cnt.setStoreList(cnt.getStoreList());
+        cnt.setWarehouseList(cnt.getWarehouseList());
+        scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public void addAdmin(ActionEvent e) throws IOException {
-        System.out.println("Login");
+        System.out.println("addAdmin");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("addAdmin.fxml"));
