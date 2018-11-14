@@ -25,6 +25,28 @@ public class Product implements Serializable {
         calcEOQ(fcost,ccost,idemand);
     }
 
+    public Product() {
+        Name = "a";
+        Price = 420;
+        Quantity = 10;
+        this.uid = "a101";
+        this.fCostQuater = 3;
+        this.cCostQuater = 3;
+        this.itemDemand = 3;
+        this.EOQ = calcEOQ(fCostQuater,cCostQuater,itemDemand);
+    }
+
+    public Product(String name, double price, int quantity, String uid, double fCostQuater, double cCostQuater, double itemDemand) {
+        Name = name;
+        Price = price;
+        Quantity = quantity;
+        this.uid = uid;
+        this.fCostQuater = fCostQuater;
+        this.cCostQuater = cCostQuater;
+        this.itemDemand = itemDemand;
+        this.EOQ = calcEOQ(fCostQuater,cCostQuater,itemDemand);
+    }
+
     double calcEOQ(double fCostQuater, double cCostQuater, double itemDemand){
         return Math.sqrt((2*fCostQuater*itemDemand)/cCostQuater);
     }
