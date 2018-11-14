@@ -7,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Product;
 import mainClasses.Store_Admin;
+import mainClasses.Warehouse;
 
 import java.io.IOException;
 
@@ -26,6 +28,7 @@ public class Store_home_cnt{
     @FXML private ComboBox delchoose;
 
     public void setAddchoose(ComboBox addchoose) {
+        System.out.println(store_admin);
         if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null){
             for(String name: store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()){
                 this.addchoose.getItems().add(name);
@@ -118,7 +121,17 @@ public class Store_home_cnt{
         System.out.println("Orders pressed");
     }
     public void addProduct(ActionEvent e){
-
+        Warehouse linkware= store_admin.getAssignedStore().getLinkedWarehouse();
+        Product curr=linkware.getProductHashMap().get(addchoose.getValue().toString());
+        Product one = new Product(curr.getName(),curr.getPrice(),curr.getQuantity(),curr.getfCostQuater(),curr.getcCostQuater(),curr.getItemDemand());
+        one.setParent(curr.getParent());
+        if(linkware.getProductHashMap().get(addchoose.getValue().toString()).getQuantity()>curr.getEOQ()){
+            store_admin.getAssignedStore().getInventory().put(one,(int)curr.getEOQ());
+            curr.setQuantity(curr.getQuantity()-(int)curr.getEOQ());
+        }
+        else {
+            System.out.println("Product quantity not available");
+        }
         System.out.println("Product added");
     }
     public void deleteProduct(ActionEvent e){

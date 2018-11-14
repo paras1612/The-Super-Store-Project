@@ -9,13 +9,13 @@ public class Store implements Serializable {
     private static final long serialVersionUID=7L;
     private Database database = deserialize();
     private Warehouse linkedWarehouse;
-    private HashMap<Product, Integer> ProductSold;
+    private HashMap<Product, Integer> ProductSold = new HashMap<>();
     private HashMap<String, Categories> categoriesList = new HashMap<>();
     private double sale;
     private String Message;
-    private HashMap<Product, Integer> Inventory;
+    private HashMap<Product, Integer> Inventory= new HashMap<>();
     private final String uid;
-    private Cart cart;
+    private Cart cart = new Cart();
 
     public Store(String uid) {
         this.uid = uid;

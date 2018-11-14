@@ -88,7 +88,9 @@ public class Warehouse implements Serializable {
         System.out.println(uid);
         database=deserialize();
         System.out.println(database.getWarehouseHashMap().get(uid));
-        database.getWarehouseHashMap().get(uid).ProductHashMap.put(name, new Product(name,price,quant,fcost,ccost,idem));
+        Product init = new Product(name,price,quant,fcost,ccost,idem);
+        init.setParent(CategoryHashMap.get(parent));
+        database.getWarehouseHashMap().get(uid).ProductHashMap.put(name, init);
         serialize(database);
     }
 }
