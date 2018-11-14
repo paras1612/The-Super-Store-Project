@@ -30,7 +30,7 @@ public class Warehouse implements Serializable {
         System.out.println(database.getWarehouseHashMap().get(uid));
         Categories init=new Categories(name);
         init.setParent(CategoryHashMap.get(parent));
-        database.getWarehouseHashMap().get(uid).CategoryHashMap.put(name, );
+        database.getWarehouseHashMap().get(uid).CategoryHashMap.put(name, init);
         serialize(database);
     }
 
