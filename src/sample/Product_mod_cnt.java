@@ -1,14 +1,32 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
+import mainClasses.Database;
+import mainClasses.Product;
 import java.io.IOException;
 
+import static sample.Main.deserialize;
+
 public class Product_mod_cnt{
+    private Database database= deserialize();
+    @FXML
+    private TextField nameTxt;
+    @FXML
+    private TextField priceTxt;
+    @FXML
+    private TextField qtyTxt;
+    @FXML
+    private TextField dTxt;
+    @FXML
+    private TextField kTxt;
+    @FXML
+    private TextField hTxt;
 
         public void Home(ActionEvent e) throws IOException {
             System.out.println("Home");
@@ -58,5 +76,8 @@ public class Product_mod_cnt{
 
         public void set(ActionEvent e){
             System.out.println("Set pressed");
+            Product p = new Product(this.nameTxt.getText(),Double.parseDouble(this.priceTxt.getText()),Integer.parseInt(this.qtyTxt.getText()),"product_"+this.nameTxt.getText(),Double.parseDouble(this.dTxt.getText()),Double.parseDouble(this.hTxt.getText()),Double.parseDouble(this.kTxt.getText()));
+            database.getProductList().put(p.getUid(),p);
+            System.out.println("Success");
         }
 }

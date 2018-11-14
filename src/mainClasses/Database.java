@@ -79,7 +79,7 @@ public class Database implements Serializable {
         if(auth.login(uid, password)==1){
             return 1;
         }
-        if(auth.login(uid, password)==2){
+        if(auth.login(uid, password)==3){
             return 2;
         }
         if(auth.login(uid, password)==3){

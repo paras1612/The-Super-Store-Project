@@ -19,7 +19,7 @@ public class Main extends Application {
             serialize(database);
             System.out.println(database.getSuper_userHashMap().toString());
         }
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Super_user.fxml"));
         primaryStage.setTitle("The Super Store");
         Scene one = new Scene(root);//, 600, 400);
         System.out.println(database.getStore_AdminHashMap().toString());

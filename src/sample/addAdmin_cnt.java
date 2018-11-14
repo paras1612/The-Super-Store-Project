@@ -101,11 +101,11 @@ public class addAdmin_cnt{
     public void addAdmin(ActionEvent e)
     {
         if(user.getDatabase().getStoreHashMap().containsKey(role.getValue().toString())){
-            user.createStoreAdmin(name.getText(),pass.getText(),role.getValue().toString());
+            user.getDatabase().createStoreAdmin(name.getText(),pass.getText(),role.getValue().toString());
 
         }
         else if(user.getDatabase().getWarehouseHashMap().containsKey(role.getValue().toString())){
-            user.createWarehouseAdmin(name.getText(), pass.getText(),role.getValue().toString());
+            user.getDatabase().createStoreAdmin(name.getText(), pass.getText(),role.getValue().toString());
         }
         System.out.println("Store/warehouse chosen");
     }
