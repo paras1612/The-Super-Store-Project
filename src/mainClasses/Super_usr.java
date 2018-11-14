@@ -18,9 +18,12 @@ public class Super_usr implements Serializable {
         password=pass;
     }
     public void createWarehouse(String warehouseName){
+        database=deserialize();
         Warehouse init = new Warehouse(warehouseName);
         //init.getCategoryHashMap().put("Main",new Categories("SuperStore"));
         System.out.println(database);
+
+
         database.getWarehouseHashMap().put(warehouseName,init);
         serialize(database);
     }
@@ -36,6 +39,13 @@ public class Super_usr implements Serializable {
 
     public Database getDatabase() {
         return database;
+    }
+
+    public void updateDatabase() {
+        this.database = deserialize();
+    }
+    public void updateDatabase(Database database) {
+        this.database = database;
     }
 
     public void setMessage(String message) {

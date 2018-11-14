@@ -133,13 +133,13 @@ public class Product_mod_cnt{
         System.out.println(warehouse_admin.getAssigned_ware());
         if(priceTxt.isDisable()){
           //  serialize(warehouse_admin.getAssigned_ware().getDatabase());
-            warehouse_admin.getAssigned_ware().addCategory(nameTxt.getText());
+            warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString());
 //            serialize(warehouse_admin.getAssigned_ware().getDatabase());
             System.out.println("serialized");
             //Add Category
         }
         else if(!priceTxt.isDisable()){
-            warehouse_admin.getAssigned_ware().getDatabase().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString());
+            warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString());
             //serialize(warehouse_admin.getAssigned_ware().getDatabase());
             System.out.println("serialized");
             //Add Product

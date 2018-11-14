@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class Super_user_cnt{
     private Super_usr user;
-    public void setUser(Super_usr user) {
-        this.user = user;
+    public void setUser(Super_usr use) {
+        this.user = use;
     }
 
     public Super_usr getUser() {

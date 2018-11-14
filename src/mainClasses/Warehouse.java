@@ -19,16 +19,21 @@ public class Warehouse implements Serializable {
     private double sale;
 
     public Warehouse(String uid) {
+        serialize(database);
         CategoryHashMap.put("Main", new Categories("SuperStore"));
         this.uid = uid;
+        serialize(database);
     }
-    public void addCategory(String name){
+    public void addCategory(Warehouse_Admin admin, String name, String parent){
         System.out.println(uid);
         database=deserialize();
         System.out.println(database.getWarehouseHashMap().get(uid));
-        database.getWarehouseHashMap().get(uid).CategoryHashMap.put(name, new Categories(name));
+        Categories init=new Categories(name);
+        init.setParent(CategoryHashMap.get(parent));
+        database.getWarehouseHashMap().get(uid).CategoryHashMap.put(name, );
         serialize(database);
     }
+
     public HashMap<String, Product> getProductHashMap() {
         return ProductHashMap;
     }
@@ -77,5 +82,13 @@ public class Warehouse implements Serializable {
 
     public void setMessage(String message) {
         Message = message;
+    }
+
+    public void addProduct(Warehouse_Admin warehouse_admin, String name, double price, int quant, double fcost, double ccost, double idem, String parent) {
+        System.out.println(uid);
+        database=deserialize();
+        System.out.println(database.getWarehouseHashMap().get(uid));
+        database.getWarehouseHashMap().get(uid).ProductHashMap.put(name, new Product(name,price,quant,fcost,ccost,idem));
+        serialize(database);
     }
 }

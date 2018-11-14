@@ -15,11 +15,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        if(database.getSuper_userHashMap().get("paras")==null){
+        if(database.getSuper_userHashMap().get("q")==null){
             System.out.println("Made a new one haha");
-            database.createSuperuser("paras","hello", "paras");
-                serialize(database);
-                System.out.println(database);
+            database.createSuperuser("q","q", "q");
+            serialize(database);
+            System.out.println(database);
             System.out.println(database.getSuper_userHashMap().toString());
         }
         System.out.println(database);

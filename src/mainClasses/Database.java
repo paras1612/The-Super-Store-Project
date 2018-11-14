@@ -25,6 +25,7 @@ public class Database implements Serializable {
             Super_usr init = new Super_usr(name, password, email);
             getSuper_userHashMap().put(email,init);
             System.out.println(getSuper_userHashMap().toString());
+            init.updateDatabase(this);
             auth.getSuperUserAdminAuth().put(email, password);
             return true;
         }
@@ -127,12 +128,6 @@ public class Database implements Serializable {
         admin.getAssignedStore().getInventory().remove(product);
         Product product1= new Product(product.getUid(), price, quant, fcost, ccost, idem);
         admin.getAssignedStore().getInventory().put(product1, quant);
-    }
-    public void addCategory(Warehouse_Admin admin, String name, String parentcat){
-        Categories curr= new Categories(name);
-        curr.setParent(admin.getAssigned_ware().getCategoryHashMap().get(parentcat));
-        admin.getAssigned_ware().getCategoryHashMap().put(name,curr);
-        //serialize(this);
     }
     public void addCategory(Store_Admin admin, String name, String parentcat){
         Categories curr= new Categories(name);

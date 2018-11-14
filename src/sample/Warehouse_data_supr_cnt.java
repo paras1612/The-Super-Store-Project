@@ -85,6 +85,7 @@ public class Warehouse_data_supr_cnt {
     }
 
     public void addWarehouse(ActionEvent e){
+        user.updateDatabase();
         user.createWarehouse(warehouseName.getText());
         System.out.println("warehouse created");
     }
