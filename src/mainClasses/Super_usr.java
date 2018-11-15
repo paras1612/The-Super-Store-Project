@@ -29,10 +29,21 @@ public class Super_usr implements Serializable {
     }
     public void createStore(String StoreName){
         Store init = new Store(StoreName);
-        //init.getCategoriesList().put("Main",new Categories("SuperStore"));
+        database=deserialize();
         database.getStoreHashMap().put(StoreName,init);
+        serialize(database);
     }
-
+    public void createWarehouseAdmin(String name, String pass,  String warehouse){
+        database=deserialize();
+        database.createWarehouseAdmin(name,pass,warehouse);
+        serialize(database);
+    }
+    public void createStoreAdmin(String name, String pass,  String store){
+        database=deserialize();
+        database.createStoreAdmin(name,pass,store);
+        System.out.println("Serialized");
+        serialize(database);
+    }
     public String getName() {
         return Name;
     }
