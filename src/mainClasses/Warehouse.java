@@ -95,4 +95,7 @@ public class Warehouse implements Serializable {
         database.getWarehouseHashMap().get(uid).ProductHashMap.put(name, init);
         serialize(database);
     }
+    public void updateData(){
+        database=deserialize();
+    }
 }

@@ -1,23 +1,43 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mainClasses.Categories;
+import mainClasses.Product;
 import mainClasses.Warehouse_Admin;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class Warehouse_home_cnt{
     private Warehouse_Admin warehouse_admin;
+    private HashMap<String, Integer> selected;
+    @FXML private ComboBox chooseWare;
+    @FXML private ScrollPane catPane;
+    @FXML private ScrollPane prodPane;
 
     public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
         this.warehouse_admin = warehouse_admin;
+        setChooseWare();
     }
 
     public Warehouse_Admin getWarehouse_admin() {
         return warehouse_admin;
+    }
+
+    public void setChooseWare() {
+        warehouse_admin.getAssigned_ware().updateData();
+        for(String warehouse :warehouse_admin.getAssigned_ware().getDatabase().getWarehouseHashMap().keySet()){
+            this.chooseWare.getItems().add(warehouse);
+        }
     }
 
     public void Home(ActionEvent e) throws IOException {
@@ -136,5 +156,52 @@ public class Warehouse_home_cnt{
         primaryStage.show();
         System.out.println("Product added");
         System.out.println("Add category pressed");
+    }
+    public void setData(ActionEvent e){
+        setDatafn(chooseWare.getValue().toString(),"Main");
+    }
+    public void setDatafn(String warehouse, String catChosen){
+        VBox vbcat = new VBox();
+        for(Categories cat: warehouse_admin.getAssigned_ware().getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getSubCategories()){
+            Button catbut = new Button(cat.getUid());
+            catbut.setPrefWidth(catPane.getPrefWidth());
+            catbut.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    setDatafn(warehouse, catbut.getText());
+                }
+            });
+            HBox hbcat= new HBox();
+            hbcat.getChildren().add(catbut);
+            vbcat.getChildren().add(hbcat);
+        }
+        catPane.setContent(vbcat);
+
+        VBox vbprod= new VBox();
+        for(Product product: warehouse_admin.getAssigned_ware().getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getProduct_list()){
+            Button prodName = new Button(product.getName());
+            prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
+            TextField qty = new TextField("1");
+            qty.setPrefWidth(prodPane.getPrefWidth()*0.20);
+            qty.setPromptText("Enter Quantity");
+            CheckBox chk = new CheckBox();
+            chk.setPrefSize(prodPane.getPrefWidth()*0.05,prodPane.getPrefWidth()*0.05);
+            //chk.setText(product.getName());
+            chk.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(chk.isSelected()){
+                        selected.put(prodName.getText(),Integer.parseInt(qty.getText()));
+                    }
+                    else {
+                        selected.remove(product.getName());
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().addAll(prodName,qty,chk);
+            vbprod.getChildren().add(hb);
+        }
+        prodPane.setContent(vbprod);
     }
 }

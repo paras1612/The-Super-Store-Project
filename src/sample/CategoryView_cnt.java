@@ -13,18 +13,27 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import mainClasses.Categories;
-import mainClasses.Client;
-import mainClasses.Product;
+import mainClasses.*;
+
 import java.io.IOException;
 import java.util.HashMap;
 
 public class CategoryView_cnt {
     private Client client;
+    private Warehouse_Admin warehouse_admin;
+    private Store_Admin store_admin;
     private String store;
     private HashMap<String, Integer> selected = new HashMap<>();
     @FXML private ScrollPane catPane;
     @FXML private ScrollPane prodPane;
+
+    public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
+        this.warehouse_admin = warehouse_admin;
+    }
+
+    public void setStore_admin(Store_Admin store_admin) {
+        this.store_admin = store_admin;
+    }
 
     public void setClient(Client clien) {
         client=clien;

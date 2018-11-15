@@ -1,21 +1,29 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mainClasses.Categories;
+import mainClasses.Product;
 import mainClasses.Store_Admin;
+import mainClasses.Warehouse;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class Store_home_cnt{
     private Store_Admin store_admin;
-
+    private HashMap<String, Integer> selected = new HashMap<>();
     public void setStore_admin(Store_Admin store_admin) {
         this.store_admin = store_admin;
+        setData("Main");
     }
 
     public Store_Admin getStore_admin() {
@@ -24,6 +32,8 @@ public class Store_home_cnt{
 
     @FXML private ComboBox addchoose;
     @FXML private ComboBox delchoose;
+    @FXML private ScrollPane catPane;
+    @FXML private ScrollPane prodPane;
 
     public void setAddchoose(ComboBox addchoose) {
         System.out.println(store_admin);
@@ -138,6 +148,52 @@ public class Store_home_cnt{
 
     public void search(ActionEvent e){
         System.out.println("Search pressed");
+    }
+
+    public void setData(String catChosen){
+        VBox vbcat = new VBox();
+        Warehouse assign = store_admin.getAssignedStore().getLinkedWarehouse();
+        for(Categories cat: assign.getCategoryHashMap().get(catChosen).getSubCategories()){
+            Button catbut = new Button(cat.getUid());
+            catbut.setPrefWidth(catPane.getPrefWidth());
+            catbut.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    setData(catbut.getText());
+                }
+            });
+            HBox hbcat= new HBox();
+            hbcat.getChildren().add(catbut);
+            vbcat.getChildren().add(hbcat);
+        }
+        catPane.setContent(vbcat);
+
+        VBox vbprod= new VBox();
+        for(Product product: store_admin.getAssignedStore().getLinkedWarehouse().getCategoryHashMap().get(catChosen).getProduct_list()){
+            Button prodName = new Button(product.getName());
+            prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
+            TextField qty = new TextField("1");
+            qty.setPrefWidth(prodPane.getPrefWidth()*0.20);
+            qty.setPromptText("Enter Quantity");
+            CheckBox chk = new CheckBox();
+            chk.setPrefSize(prodPane.getPrefWidth()*0.05,prodPane.getPrefWidth()*0.05);
+            //chk.setText(product.getName());
+            chk.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(chk.isSelected()){
+                        selected.put(prodName.getText(),Integer.parseInt(qty.getText()));
+                    }
+                    else {
+                        selected.remove(product.getName());
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().addAll(prodName,qty,chk);
+            vbprod.getChildren().add(hb);
+        }
+        prodPane.setContent(vbprod);
     }
 
 }

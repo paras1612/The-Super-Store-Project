@@ -14,7 +14,7 @@
       <TextField fx:id="search_fld" layoutX="233.0" layoutY="73.0" prefHeight="26.0" prefWidth="469.0" promptText="Search Product or Categories" />
       <Button fx:id="search_btn" layoutX="703.0" layoutY="73.0" mnemonicParsing="false" onAction="#search" prefHeight="26.0" prefWidth="81.0" text="Search" />
       <ComboBox fx:id="sort_menu" layoutX="15.0" layoutY="105.0" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
-      <ScrollPane layoutX="233.0" layoutY="105.0" prefHeight="406.0" prefWidth="552.0" />
+      <ScrollPane fx:id="catPane" layoutX="233.0" layoutY="105.0" prefHeight="192.0" prefWidth="552.0" />
       <MenuButton fx:id="cat_menu" layoutX="15.0" layoutY="73.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="217.0" text="Products/Categories">
          <items>
             <MenuItem mnemonicParsing="false" text="Products" />
@@ -35,5 +35,6 @@
       <Button fx:id="deleteProduct_btn" layoutX="17.0" layoutY="339.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="26.0" prefWidth="194.0" text="Delete Product" />
       <ComboBox fx:id="addchoose" layoutX="14.0" layoutY="241.0" prefHeight="26.0" prefWidth="194.0" promptText="Choose Product" />
       <ComboBox fx:id="delchoose" layoutX="17.0" layoutY="308.0" prefHeight="26.0" prefWidth="194.0" promptText="Choose Product" />
+      <ScrollPane fx:id="prodPane" layoutX="233.0" layoutY="301.0" prefHeight="202.0" prefWidth="552.0" />
    </children>
 </AnchorPane>
