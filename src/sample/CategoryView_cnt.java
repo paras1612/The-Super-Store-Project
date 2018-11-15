@@ -5,10 +5,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Client;
 
 import java.io.IOException;
 
 public class CategoryView_cnt {
+    private Client client;
+
+    public void setClient(Client clien) {
+        client=clien;
+    }
+
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();

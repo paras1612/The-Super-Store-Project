@@ -8,12 +8,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Store_Admin;
 import mainClasses.Warehouse_Admin;
 
 import java.io.IOException;
 
 public class Product_mod_cnt{
     //private Database database = deserialize();
+    private Store_Admin store_admin;
     private Warehouse_Admin warehouse_admin;
     @FXML
     private ComboBox ProdCat;
@@ -31,7 +33,8 @@ public class Product_mod_cnt{
     private TextField hTxt;
     @FXML
     private ComboBox category;
-
+    @FXML private AnchorPane pane;
+    @FXML private ComboBox prodList;
     public ComboBox getCategory() {
         return category;
     }
@@ -58,6 +61,21 @@ public class Product_mod_cnt{
     public Warehouse_Admin getWarehouse_admin() {
         return warehouse_admin;
     }
+
+    public void setStore_admin(Store_Admin store_admin) {
+        if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null){
+            for(String name: store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()){
+                this.prodList.getItems().add(name);
+            }
+        }
+        prodList.setLayoutX(category.getLayoutX());
+        prodList.setLayoutY(category.getLayoutY());
+        prodList.setPrefHeight(category.getPrefHeight());
+        prodList.setPrefWidth(category.getPrefWidth());
+        pane.getChildren().set(4,prodList);
+        this.store_admin = store_admin;
+    }
+
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -131,20 +149,31 @@ public class Product_mod_cnt{
     public void set(ActionEvent e)
     {
         System.out.println(warehouse_admin.getAssigned_ware());
-        if(priceTxt.isDisable()){
-          //  serialize(warehouse_admin.getAssigned_ware().getDatabase());
-            warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString());
-//            serialize(warehouse_admin.getAssigned_ware().getDatabase());
-            System.out.println("serialized");
-            //Add Category
+        if(warehouse_admin!=null) {
+            if (priceTxt.isDisable()) {
+                warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString());
+                System.out.println("serialized");
+                //Add Category
+            } else if (!priceTxt.isDisable()) {
+                warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString());
+                System.out.println("serialized");
+                //Add Product
+            }
+            System.out.println("Warehouse Set pressed");
         }
-        else if(!priceTxt.isDisable()){
-            warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString());
-            //serialize(warehouse_admin.getAssigned_ware().getDatabase());
-            System.out.println("serialized");
-            //Add Product
+        else if(store_admin!=null){
+
+            if (priceTxt.isDisable()) {
+                store_admin.getAssignedStore().addCategory(store_admin, nameTxt.getText(), category.getValue().toString());
+                System.out.println("serialized");
+                //Add Category
+            } else if (!priceTxt.isDisable()) {
+
+                System.out.println("serialized");
+                //Add Product
+            }
+            System.out.println("Store Set pressed");
         }
-        System.out.println("Set pressed");
     }
 
     public TextField getPriceTxt() {

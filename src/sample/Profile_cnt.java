@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import mainClasses.Client;
@@ -13,8 +14,7 @@ import java.io.IOException;
 
 public class Profile_cnt{
     private Client client;
-    @FXML
-    AnchorPane login;
+    @FXML private TextField fund;
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -54,6 +54,7 @@ public class Profile_cnt{
         Scene scene = new Scene(root);
         Home_cnt cnt = loader.getController();
         cnt.setClient(client);
+        cnt.setChooseStore(cnt.getChooseStore());
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -127,6 +128,7 @@ public class Profile_cnt{
     }
 
     public void addToWallet(ActionEvent e){
+        client.getDatabase().getClientHashMap().get(client.getName()).add_funds(Double.parseDouble(fund.getText()));
         System.out.println("Added to Wallet");
     }
 }

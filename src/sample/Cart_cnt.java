@@ -5,15 +5,22 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mainClasses.Client;
+import mainClasses.Product;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class Cart_cnt {
+    @FXML
+    private ScrollPane dataPane;
     private Client client;
+    private HashMap<String, Integer> selected= new HashMap<>();
 
     void setClient(Client client1){
         client=client1;
@@ -64,6 +71,7 @@ public class Cart_cnt {
         Scene scene = new Scene(root);
         Home_cnt cnt = loader.getController();
         cnt.setClient(client);
+        cnt.setChooseStore(cnt.getChooseStore());
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -83,8 +91,8 @@ public class Cart_cnt {
         System.out.println("Help");
         ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("help.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("help.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
@@ -115,5 +123,32 @@ public class Cart_cnt {
         primaryStage.show();
     }
 
-
+    public void setDisplayData(){
+        VBox vb = new VBox();
+        for(Product product : client.getCart().getCartList().keySet()){
+            Button prodName = new Button(product.getName());
+            TextField qty = new TextField(client.getCart().getCartList().get(product).toString());
+            qty.setPromptText("Enter Quantity");
+            Label price = new Label(Double.toString(product.getPrice()));
+            CheckBox chk = new CheckBox();
+            chk.setText(product.getName());
+            chk.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(chk.isSelected()){
+                        selected.put(chk.getText(),Integer.parseInt(qty.getText()));
+                    }
+                    else {
+                        selected.remove(product.getName());
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().addAll(prodName,qty,price,chk);
+            vb.getChildren().add(hb);
+        }
+            dataPane.setContent(vb);
+    }
 }
+
+

@@ -7,9 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import mainClasses.Product;
 import mainClasses.Store_Admin;
-import mainClasses.Warehouse;
 
 import java.io.IOException;
 
@@ -121,17 +119,7 @@ public class Store_home_cnt{
         System.out.println("Orders pressed");
     }
     public void addProduct(ActionEvent e){
-        Warehouse linkware= store_admin.getAssignedStore().getLinkedWarehouse();
-        Product curr=linkware.getProductHashMap().get(addchoose.getValue().toString());
-        Product one = new Product(curr.getName(),curr.getPrice(),curr.getQuantity(),curr.getfCostQuater(),curr.getcCostQuater(),curr.getItemDemand());
-        one.setParent(curr.getParent());
-        if(linkware.getProductHashMap().get(addchoose.getValue().toString()).getQuantity()>curr.getEOQ()){
-            store_admin.getAssignedStore().getInventory().put(one,(int)curr.getEOQ());
-            curr.setQuantity(curr.getQuantity()-(int)curr.getEOQ());
-        }
-        else {
-            System.out.println("Product quantity not available");
-        }
+        store_admin.getAssignedStore().addProduct(store_admin,addchoose.getValue().toString());
         System.out.println("Product added");
     }
     public void deleteProduct(ActionEvent e){

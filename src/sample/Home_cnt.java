@@ -5,25 +5,33 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mainClasses.Client;
+import mainClasses.Product;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class Home_cnt{
     private Client client;
     @FXML
     private ComboBox chooseStore;
-
+    @FXML
+    private ScrollPane dataPane;
+    private HashMap<String, Integer> selected= new HashMap<>();
     public ComboBox getChooseStore() {
         return chooseStore;
     }
 
     public void setChooseStore(ComboBox chooseStore) {
-        this.chooseStore = chooseStore;
+        client.updateDatabase();
+        for(String name:(client.getDatabase().getStoreHashMap().keySet())){
+            chooseStore.getItems().add(name);
+        }
     }
 
     void setClient(Client client1){
@@ -155,14 +163,71 @@ public class Home_cnt{
             root.getChildren().set(1, profile);
         }
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        cnt.setClient(client);
+        cnt.setDisplayData();
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public void addToCart(ActionEvent e){
-        System.out.println("Add To Cart pressed");
+        for(String name: selected.keySet()) {
+            client.add_product(chooseStore.getValue().toString(), name, selected.get(name));
+        }System.out.println("Add To Cart pressed");
     }
     public void search(ActionEvent e){
         System.out.println("Search pressed");
     }
+
+    public void dispStData(ActionEvent e){
+        VBox vb = new VBox();
+        for(String cat: client.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getCategoriesList().keySet()){
+            Button catbut= new Button(cat);
+            catbut.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Category View.fxml"));
+                    try {
+                        AnchorPane root = loader.load();
+                        Scene scene = new Scene(root);
+                        CategoryView_cnt cnt = loader.getController();
+                        System.out.println(cnt);
+                        System.out.println(client);
+                        cnt.setClient(client);
+                        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().add(catbut);
+            vb.getChildren().add(hb);
+        }
+        for(Product product: client.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getInventory().keySet()){
+            Button prodName = new Button(product.getName());
+            TextField qty = new TextField("1");
+            qty.setPromptText("Enter Quantity");
+            CheckBox chk = new CheckBox();
+            chk.setText(product.getName());
+            chk.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(chk.isSelected()){
+                        selected.put(chk.getText(),Integer.parseInt(qty.getText()));
+                    }
+                    else {
+                        selected.remove(product.getName());
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().addAll(prodName,qty,chk);
+            vb.getChildren().add(hb);
+        }
+        dataPane.setContent(vb);
+    }
+
 }
