@@ -34,7 +34,8 @@ public class Product_mod_cnt{
     @FXML
     private ComboBox category;
     @FXML private AnchorPane pane;
-    @FXML private ComboBox prodList;
+    @FXML private ComboBox prodList = new ComboBox();
+    //@FXML private ComboBox catList = new ComboBox();
     public ComboBox getCategory() {
         return category;
     }
@@ -43,19 +44,28 @@ public class Product_mod_cnt{
         return ProdCat;
     }
 
-    public void setCategory(ComboBox Category) {
-        System.out.println(warehouse_admin.getAssigned_ware().getCategoryHashMap().toString());
-        for(String name: warehouse_admin.getAssigned_ware().getCategoryHashMap().keySet()){
-            category.getItems().add(name);
+    public void setCategory() {
+        if(warehouse_admin!=null) {
+            System.out.println(warehouse_admin.getAssigned_ware().getCategoryHashMap().toString());
+            for (String name : warehouse_admin.getAssigned_ware().getCategoryHashMap().keySet()) {
+                category.getItems().add(name);
+            }
+        }
+        else if(store_admin!=null){
+            for (String name : store_admin.getAssignedStore().getCategoriesList().keySet()) {
+                category.getItems().add(name);
+            }
         }
     }
 
-    public void setProdCat(ComboBox prodCat) {
+    public void setProdCat() {
         ProdCat.getItems().addAll("Product", "Category");
+        setCategory();
     }
 
     public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
         this.warehouse_admin = warehouse_admin;
+        setProdCat();
     }
 
     public Warehouse_Admin getWarehouse_admin() {
@@ -63,32 +73,54 @@ public class Product_mod_cnt{
     }
 
     public void setStore_admin(Store_Admin store_admin) {
+        this.store_admin = store_admin;
+        prodList.setPromptText("Choose Product");
         if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null){
             for(String name: store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()){
                 this.prodList.getItems().add(name);
             }
         }
-        prodList.setLayoutX(category.getLayoutX());
-        prodList.setLayoutY(category.getLayoutY());
-        prodList.setPrefHeight(category.getPrefHeight());
-        prodList.setPrefWidth(category.getPrefWidth());
-        pane.getChildren().set(4,prodList);
-        this.store_admin = store_admin;
+        prodList.setLayoutX(priceTxt.getLayoutX());
+        prodList.setLayoutY(priceTxt.getLayoutY());
+        prodList.setPrefHeight(priceTxt.getPrefHeight());
+        prodList.setPrefWidth(priceTxt.getPrefWidth());
+        pane.getChildren().set(2,prodList);
+        pane.getChildren().get(1).setVisible(false);
+        pane.getChildren().get(3).setVisible(false);
+        pane.getChildren().get(5).setVisible(false);
+        pane.getChildren().get(6).setVisible(false);
+        pane.getChildren().get(7).setVisible(false);
+        setProdCat();
     }
 
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
-        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
-        Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Warehouse_home.fxml"));
-        AnchorPane root = loader.load();
-        Scene scene = new Scene(root);
-        Warehouse_home_cnt cnt= loader.getController();
-        System.out.println(warehouse_admin);
-        cnt.setWarehouse_admin(warehouse_admin);
-        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        if(warehouse_admin!=null) {
+            ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Warehouse_home.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            Warehouse_home_cnt cnt = loader.getController();
+            System.out.println(warehouse_admin);
+            cnt.setWarehouse_admin(warehouse_admin);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        else if(store_admin!=null){
+            ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Store_home.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            Store_home_cnt cnt = loader.getController();
+            System.out.println(store_admin);
+            cnt.setStore_admin(store_admin);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
     }
     public void Login(ActionEvent e) throws IOException {
         System.out.println("Login");
@@ -126,29 +158,50 @@ public class Product_mod_cnt{
     }
 
     public void changeType(ActionEvent e) throws IOException {
-        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
-        Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Product_mod.fxml"));
-        AnchorPane root = loader.load();
-        Scene scene = new Scene(root);
-        Product_mod_cnt cnt= loader.getController();
-        cnt.setWarehouse_admin(warehouse_admin);
-        cnt.setProdCat(ProdCat);
-        if(ProdCat.getValue().toString().equals("Category")){
-            cnt.priceTxt.setDisable(true);
-            cnt.qtyTxt.setDisable(true);
-            cnt.dTxt.setDisable(true);
-            cnt.hTxt.setDisable(true);
-            cnt.kTxt.setDisable(true);
+        if(warehouse_admin!=null) {
+            ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Product_mod.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            Product_mod_cnt cnt = loader.getController();
+            cnt.setWarehouse_admin(warehouse_admin);
+            if (ProdCat.getValue().toString().equals("Category")) {
+                cnt.priceTxt.setDisable(true);
+                cnt.qtyTxt.setDisable(true);
+                cnt.dTxt.setDisable(true);
+                cnt.hTxt.setDisable(true);
+                cnt.kTxt.setDisable(true);
+            }
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
         }
-        cnt.setCategory(category);
-        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        else if(store_admin!=null){
+            ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Product_mod.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            Product_mod_cnt cnt = loader.getController();
+            cnt.setStore_admin(store_admin);
+            if (ProdCat.getValue().toString().equals("Category")) {
+                cnt.nameTxt.setVisible(true);
+                cnt.nameTxt.setDisable(false);
+                cnt.pane.getChildren().get(2).setVisible(false);
+                cnt.priceTxt.setDisable(true);
+                cnt.qtyTxt.setDisable(true);
+                cnt.dTxt.setDisable(true);
+                cnt.hTxt.setDisable(true);
+                cnt.kTxt.setDisable(true);
+            }
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
     }
     public void set(ActionEvent e)
     {
-        System.out.println(warehouse_admin.getAssigned_ware());
         if(warehouse_admin!=null) {
             if (priceTxt.isDisable()) {
                 warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString());
@@ -163,12 +216,12 @@ public class Product_mod_cnt{
         }
         else if(store_admin!=null){
 
-            if (priceTxt.isDisable()) {
+            if (nameTxt.isVisible()) {
                 store_admin.getAssignedStore().addCategory(store_admin, nameTxt.getText(), category.getValue().toString());
                 System.out.println("serialized");
                 //Add Category
-            } else if (!priceTxt.isDisable()) {
-
+            } else if (!nameTxt.isVisible()) {
+                store_admin.getAssignedStore().addProduct(store_admin, prodList.getValue().toString(), category.getValue().toString());
                 System.out.println("serialized");
                 //Add Product
             }

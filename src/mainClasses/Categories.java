@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Categories implements Serializable {
     private static final long serialVersionUID=7L;
     private String Name;
-    private ArrayList<Product> Product_list;
-    private ArrayList<Categories> subCategories;
+    private ArrayList<Product> Product_list = new ArrayList<>();
+    private ArrayList<Categories> subCategories = new ArrayList<>();
     private Categories Parent;
     private final String uid;
 

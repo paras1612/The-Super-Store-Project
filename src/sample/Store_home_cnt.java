@@ -118,8 +118,18 @@ public class Store_home_cnt{
     public void orders(ActionEvent e){
         System.out.println("Orders pressed");
     }
-    public void addProduct(ActionEvent e){
-        store_admin.getAssignedStore().addProduct(store_admin,addchoose.getValue().toString());
+    public void addProduct(ActionEvent e) throws IOException {
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Product_mod.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Product_mod_cnt cnt = loader.getController();
+        cnt.setStore_admin(store_admin);
+        //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+ //       store_admin.getAssignedStore().addProduct(store_admin,addchoose.getValue().toString());
         System.out.println("Product added");
     }
     public void deleteProduct(ActionEvent e){

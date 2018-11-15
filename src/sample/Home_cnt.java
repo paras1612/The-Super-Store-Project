@@ -5,13 +5,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mainClasses.Categories;
 import mainClasses.Client;
-import mainClasses.Product;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -123,7 +125,7 @@ public class Home_cnt{
     }
 
     public void Cart_btn(ActionEvent e) throws IOException {
-        System.out.println("About");
+        System.out.println("CartButton");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
@@ -180,20 +182,55 @@ public class Home_cnt{
 
     public void dispStData(ActionEvent e){
         VBox vb = new VBox();
-        for(String cat: client.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getCategoriesList().keySet()){
-            Button catbut= new Button(cat);
+        for(Categories cat: client.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getCategoriesList().get("Main").getSubCategories()){
+            Button catbut= new Button(cat.getUid());
+            catbut.setPrefWidth(dataPane.getPrefWidth());
             catbut.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     Stage primaryStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Category View.fxml"));
+
                     try {
                         AnchorPane root = loader.load();
+                        if(client!=null){
+                            Button profile = new Button(client.getUid());
+                            profile.setLayoutX(17.0);
+                            profile.setLayoutY(349.0);
+                            profile.setPrefHeight(26.0);
+                            profile.setPrefWidth(194.0);
+                            profile.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+                                    Stage primaryStage = new Stage();
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
+                                    try {
+                                        AnchorPane root = loader.load();
+                                        Scene scene = new Scene(root);
+                                        Profile_cnt cnt = loader.getController();
+                                        System.out.println(cnt);
+                                        System.out.println(client);
+                                        cnt.setClient(client);
+                                        System.out.println(cnt.getClient().getName());
+                                        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+                                        primaryStage.setScene(scene);
+                                        primaryStage.show();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            });
+                            root.getChildren().set(4,profile);
+                        }
                         Scene scene = new Scene(root);
                         CategoryView_cnt cnt = loader.getController();
                         System.out.println(cnt);
                         System.out.println(client);
-                        cnt.setClient(client);
+                        if(client!=null) {
+                            cnt.setClient(client);
+                        }
+                        cnt.setData(chooseStore.getValue().toString(),catbut.getText());
                         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
                         primaryStage.setScene(scene);
                         primaryStage.show();
@@ -206,7 +243,7 @@ public class Home_cnt{
             hb.getChildren().add(catbut);
             vb.getChildren().add(hb);
         }
-        for(Product product: client.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getInventory().keySet()){
+        /*for(Product product: client.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getInventory().keySet()){
             Button prodName = new Button(product.getName());
             TextField qty = new TextField("1");
             qty.setPromptText("Enter Quantity");
@@ -226,7 +263,7 @@ public class Home_cnt{
             HBox hb = new HBox();
             hb.getChildren().addAll(prodName,qty,chk);
             vb.getChildren().add(hb);
-        }
+        }*/
         dataPane.setContent(vb);
     }
 

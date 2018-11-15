@@ -106,8 +106,6 @@ public class Warehouse_home_cnt{
         Scene scene = new Scene(root);
         Product_mod_cnt cnt= loader.getController();
         cnt.setWarehouse_admin(warehouse_admin);
-        cnt.setProdCat(cnt.getProdCat());
-        cnt.setCategory(cnt.getCategory());
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -128,13 +126,11 @@ public class Warehouse_home_cnt{
         Scene scene = new Scene(root);
         Product_mod_cnt cnt= loader.getController();
         cnt.setWarehouse_admin(warehouse_admin);
-        cnt.setProdCat(cnt.getProdCat());
         cnt.getPriceTxt().setDisable(true);
         cnt.getQtyTxt().setDisable(true);
         cnt.getdTxt().setDisable(true);
         cnt.gethTxt().setDisable(true);
         cnt.getkTxt().setDisable(true);
-        cnt.setCategory(cnt.getCategory());
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

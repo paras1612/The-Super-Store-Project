@@ -110,15 +110,47 @@ public class Profile_cnt{
         primaryStage.show();
     }
     public void Cart_btn(ActionEvent e) throws IOException {
-        System.out.println("Cart");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Cart.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
-        Cart_cnt cnt =loader.getController();
-        cnt.setClient(client);
+        System.out.println(loader.getController().toString());
+        Cart_cnt cnt = loader.getController();
+        System.out.println(client);
+        if(client!=null) {
+            javafx.scene.control.Button profile = new Button(client.getName());
+            profile.setLayoutX(17.0);
+            profile.setLayoutY(349.0);
+            profile.setPrefHeight(26.0);
+            profile.setPrefWidth(194.0);
+            profile.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
+                    try {
+                        AnchorPane root = loader.load();
+                        Scene scene = new Scene(root);
+                        Profile_cnt cnt = loader.getController();
+                        System.out.println(cnt);
+                        System.out.println(client);
+                        cnt.setClient(client);
+                        System.out.println(cnt.getClient().getName());
+                        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            root.getChildren().set(1, profile);
+        }
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        cnt.setClient(client);
+        cnt.setDisplayData();
         primaryStage.setScene(scene);
         primaryStage.show();
     }

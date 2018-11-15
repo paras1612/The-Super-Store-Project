@@ -17,12 +17,12 @@
       <Button fx:id="help_btn" layoutX="17.0" layoutY="416.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button layoutX="17.0" layoutY="451.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
       <Button fx:id="addToCart_Btn" layoutX="16.0" layoutY="313.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="26.0" prefWidth="194.0" text="Add to Cart" />
-      <ScrollPane layoutX="234.0" layoutY="303.0" prefHeight="200.0" prefWidth="552.0">
+      <ScrollPane fx:id="catPane" layoutX="234.0" layoutY="303.0" prefHeight="200.0" prefWidth="552.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
-      <ScrollPane layoutX="234.0" layoutY="95.0" prefHeight="200.0" prefWidth="552.0">
+      <ScrollPane fx:id="prodPane" layoutX="234.0" layoutY="95.0" prefHeight="200.0" prefWidth="552.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>

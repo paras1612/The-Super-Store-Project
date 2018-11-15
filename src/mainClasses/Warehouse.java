@@ -30,6 +30,7 @@ public class Warehouse implements Serializable {
         System.out.println(database.getWarehouseHashMap().get(uid));
         Categories init=new Categories(name);
         init.setParent(CategoryHashMap.get(parent));
+        database.getWarehouseHashMap().get(uid).CategoryHashMap.get(parent).getSubCategories().add(init);
         database.getWarehouseHashMap().get(uid).CategoryHashMap.put(name, init);
         serialize(database);
     }
@@ -90,6 +91,7 @@ public class Warehouse implements Serializable {
         System.out.println(database.getWarehouseHashMap().get(uid));
         Product init = new Product(name,price,quant,fcost,ccost,idem);
         init.setParent(CategoryHashMap.get(parent));
+        database.getWarehouseHashMap().get(uid).CategoryHashMap.get(parent).getProduct_list().add(init);
         database.getWarehouseHashMap().get(uid).ProductHashMap.put(name, init);
         serialize(database);
     }

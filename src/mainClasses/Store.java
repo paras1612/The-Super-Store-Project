@@ -19,16 +19,17 @@ public class Store implements Serializable {
     private Cart cart = new Cart();
 
     public Store(String uid) {
+        categoriesList.put("Main", new Categories("SuperStore"));
         this.uid = uid;
     }
 
-    public void addProduct(Store_Admin store_admin, String product){
+    public void addProduct(Store_Admin store_admin, String product, String parent){
         database=deserialize();
         Warehouse linkware= linkedWarehouse;
         Product curr=linkware.getProductHashMap().get(product);
         Product one = new Product(curr.getName(),curr.getPrice(),0,curr.getfCostQuater(),curr.getcCostQuater(),curr.getItemDemand());
         one.setParent(curr.getParent());
-        database.getStoreHashMap().get(this.uid).getCategoriesList().get(curr.getParent()).getProduct_list().add(one);
+        database.getStoreHashMap().get(this.uid).getCategoriesList().get(parent).getProduct_list().add(one);
         if(linkware.getProductHashMap().get(product).getQuantity()>curr.getEOQ()){
             System.out.println(database.getStore_AdminHashMap().get(store_admin.uid));
             database.getStore_AdminHashMap().get(store_admin.uid).getAssignedStore().getInventory().put(one,(int)curr.getEOQ());
