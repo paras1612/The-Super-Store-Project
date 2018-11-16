@@ -19,10 +19,14 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class Store_home_cnt{
+    @FXML private ComboBox prod_cat;
+    @FXML private ComboBox sort_menu;
     private Store_Admin store_admin;
     private HashMap<String, Integer> selected = new HashMap<>();
     public void setStore_admin(Store_Admin store_admin) {
         this.store_admin = store_admin;
+        prod_cat.getItems().addAll("Product","Category");
+        sort_menu.getItems().addAll("Name");
         setData("Main");
     }
 
