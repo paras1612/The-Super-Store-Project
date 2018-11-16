@@ -16,12 +16,7 @@
       <Button fx:id="warehouseLink_btn" layoutX="14.0" layoutY="233.0" mnemonicParsing="false" onAction="#warehouseLink" prefHeight="26.0" prefWidth="210.0" text="Link to a Warehouse" />
       <TextField fx:id="StoreName" layoutX="14.0" layoutY="291.0" prefHeight="26.0" prefWidth="210.0" promptText="Name" />
       <Button fx:id="removeStore_btn" layoutX="14.0" layoutY="428.0" mnemonicParsing="false" onAction="#removeStore" prefHeight="26.0" prefWidth="210.0" text="Remove Store" />
-      <MenuButton fx:id="delWarehouseList" layoutX="14.0" layoutY="394.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" text="Choose Store">
-         <items>
-            <MenuItem mnemonicParsing="false" text="Action 1" />
-            <MenuItem mnemonicParsing="false" text="Action 2" />
-         </items>
-      </MenuButton>
+      <ComboBox fx:id="delStoreList" layoutX="14.0" layoutY="394.0" prefHeight="26.0" prefWidth="210.0" promptText="Choose Store" />
       <ComboBox fx:id="storeList" layoutX="14.0" layoutY="101.0" prefHeight="26.0" prefWidth="210.0" promptText="Choose Store" />
       <ComboBox fx:id="warehouseList" layoutX="14.0" layoutY="194.0" prefHeight="26.0" prefWidth="210.0" promptText="Choose Warehouse" />
    </children>

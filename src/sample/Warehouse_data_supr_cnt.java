@@ -35,7 +35,6 @@ public class Warehouse_data_supr_cnt {
     public void setStoreList() {
         System.out.println(user);
         for(String name :user.getDatabase().getStoreHashMap().keySet()){
-            delwarehouseList.getItems().add(name);
             storeList.getItems().add(name);
         }
     }
@@ -43,6 +42,7 @@ public class Warehouse_data_supr_cnt {
     public void setWarehouseList() {
         for(String name: user.getDatabase().getWarehouseHashMap().keySet()){
             this.warehouseList.getItems().add(name);
+            delwarehouseList.getItems().add(name);
         }
     }
 

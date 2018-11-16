@@ -1,8 +1,10 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -11,9 +13,13 @@ import mainClasses.Super_usr;
 import java.io.IOException;
 
 public class Super_user_cnt{
+    @FXML private ComboBox prod_cat = new ComboBox();
+    @FXML private ComboBox sort_menu;
     private Super_usr user;
     public void setUser(Super_usr use) {
         this.user = use;
+        prod_cat.getItems().addAll("Product","Category");
+        sort_menu.getItems().addAll("Name");
     }
 
     public Super_usr getUser() {

@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class Warehouse_home_cnt{
     private Warehouse_Admin warehouse_admin;
-    private HashMap<String, Integer> selected;
+    private HashMap<String, Integer> selected = new HashMap<>();
     @FXML private ComboBox chooseWare;
     @FXML private ScrollPane catPane;
     @FXML private ScrollPane prodPane;

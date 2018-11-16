@@ -21,11 +21,11 @@ public class Store_data_supr_cnt {
     private TextField StoreName;
     @FXML private ComboBox storeList;
     @FXML private ComboBox warehouseList;
-    @FXML private ComboBox delWarehouseList;
+    @FXML private ComboBox delStoreList;
     public void setStoreList() {
         System.out.println(user);
         for(String name :user.getDatabase().getStoreHashMap().keySet()){
-            delWarehouseList.getItems().add(name);
+            delStoreList.getItems().add(name);
             storeList.getItems().add(name);
         }
     }

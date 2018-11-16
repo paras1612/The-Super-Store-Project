@@ -22,6 +22,6 @@
       <Button fx:id="createAdmin_btn" layoutX="16.0" layoutY="308.0" mnemonicParsing="false" onAction="#addAdmin" prefHeight="26.0" prefWidth="194.0" text="Create Admin" />
       <Button fx:id="warehouseLink_btn" layoutX="16.0" layoutY="273.0" mnemonicParsing="false" onAction="#warehouseLink" prefHeight="26.0" prefWidth="194.0" text="Link Store to Warehouse" />
       <Button layoutX="15.0" layoutY="456.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
-      <ComboBox layoutX="16.0" layoutY="74.0" prefHeight="25.0" prefWidth="216.0" promptText="Products/Categories" />
+      <ComboBox fx:id="prod_cat" layoutX="16.0" layoutY="74.0" prefHeight="25.0" prefWidth="216.0" promptText="Products/Categories" />
    </children>
 </AnchorPane>
