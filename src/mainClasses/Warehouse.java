@@ -109,4 +109,15 @@ public class Warehouse implements Serializable {
     public void updateData(){
         database=deserialize();
     }
+
+    public void add_product(String warehouse, String name, int quantity) {
+        updateData();
+        Product temp = database.getWarehouseHashMap().get(warehouse).getProductHashMap().get(name);
+        Product init = new Product(temp.getName(), temp.getPrice(), quantity, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
+        cart.getCartList().put(init, quantity);
+        database.getWarehouseHashMap().get(uid).cart.getCartList().put(init, quantity);
+        serialize(database);
+        Database hello = deserialize();
+        System.out.println(hello);
+    }
 }

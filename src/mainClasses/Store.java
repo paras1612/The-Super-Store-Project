@@ -68,7 +68,13 @@ public class Store implements Serializable {
         serialize(database);
         return true;
     }
-
+    public void add_product(String warehouse, String name, Integer quantity) {
+        Product temp =database.getWarehouseHashMap().get(warehouse).getProductHashMap().get(name);
+        Product init = new Product(temp.getName(), temp.getPrice(), quantity, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
+        database.getStoreHashMap().get(uid).cart.getCartList().put(init, quantity);
+        cart.getCartList().put(init, quantity);
+        serialize(database);
+    }
     void Generate_Alert(){
 
     }

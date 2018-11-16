@@ -207,7 +207,7 @@ public class Warehouse_home_cnt{
 
     public void addtoCart(ActionEvent e){
         for(String name: selected.keySet()) {
-            warehouse_admin.add_product(chooseWare.getValue().toString(), name, selected.get(name));
+            warehouse_admin.getAssigned_ware().add_product(chooseWare.getValue().toString(), name, selected.get(name));
         }
         System.out.println("Add To Cart pressed");
     }

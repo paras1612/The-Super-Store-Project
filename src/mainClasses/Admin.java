@@ -11,5 +11,4 @@ abstract public class Admin implements Serializable {
         this.uid = uid;
     }
 
-    public abstract void add_product(String toString, String name, Integer integer);
 }

@@ -24,14 +24,4 @@ public class Warehouse_Admin extends Admin implements Serializable {
         this.assigned_ware = assigned_ware;
     }
 
-    @Override
-    public void add_product(String warehouse, String name, Integer quantity) {
-        assigned_ware.updateData();
-        Product temp = assigned_ware.getDatabase().getWarehouseHashMap().get(warehouse).getProductHashMap().get(name);
-        Product init = new Product(temp.getName(), temp.getPrice(), quantity, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
-        assigned_ware.getCart().getCartList().put(init, quantity);
-        serialize(assigned_ware.getDatabase());
-        Database hello = deserialize();
-        System.out.println(hello);
-    }
 }

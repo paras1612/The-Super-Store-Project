@@ -101,7 +101,6 @@ public class Store_home_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
     public void about(ActionEvent e) throws IOException {
         System.out.println("About");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -203,9 +202,8 @@ public class Store_home_cnt{
     }
     public void addtoCart(ActionEvent e){
         for(String name: selected.keySet()) {
-            store_admin.add_product(store_admin.getAssignedStore().getLinkedWarehouse().getUid(), name, selected.get(name));
+            store_admin.getAssignedStore().add_product(store_admin.getAssignedStore().getLinkedWarehouse().getUid(), name, selected.get(name));
         }
         System.out.println("Add To Cart pressed");
     }
-
 }
