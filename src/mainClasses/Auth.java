@@ -19,27 +19,27 @@ public class Auth implements Serializable {
     }
 
     int login(String uid, String password){
-        System.out.println(uid+password);
+      //  System.out.println(uid+password);
         if(clientAuth.containsKey(uid)){
-            System.out.println("e");
+       //     System.out.println("e");
             if(clientAuth.get(uid).equals(password)){
                 return 1;
             }
         }
         else if(warehouseAdminAuth.containsKey(uid)){
-            System.out.println("e");
+      //      System.out.println("e");
             if(warehouseAdminAuth.get(uid).equals(password)){
                 return 2;
             }
         }
         else if(storeAdminAuth.containsKey(uid)){
-            System.out.println("e");
+       //     System.out.println("e");
             if(storeAdminAuth.get(uid).equals(password)){
                 return 3;
             }
         }
         else if(superUserAdminAuth.containsKey(uid)){
-            System.out.println("e");
+       //     System.out.println("e");
             if(superUserAdminAuth.get(uid).equals(password)){
                 return 4;
             }

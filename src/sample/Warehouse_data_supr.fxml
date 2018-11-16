@@ -21,8 +21,8 @@
          </font>
       </Label>
       <Button fx:id="removeWarehouse_btn" layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#removeWarehouse" prefHeight="26.0" prefWidth="210.0" text="Remove Warehouse" />
-      <ComboBox layoutX="14.0" layoutY="96.0" prefHeight="25.0" prefWidth="210.0" promptText="Choose a Warehouse" />
-      <ComboBox layoutX="14.0" layoutY="207.0" prefHeight="25.0" prefWidth="210.0" promptText="Choose a Store" />
-      <ComboBox layoutX="14.0" layoutY="386.0" prefHeight="25.0" prefWidth="210.0" promptText="Choose a Warehouse" />
+      <ComboBox fx:id="warehouseList" layoutX="14.0" layoutY="96.0" prefHeight="25.0" prefWidth="210.0" promptText="Choose a Warehouse" />
+      <ComboBox fx:id="storeList" layoutX="14.0" layoutY="207.0" prefHeight="25.0" prefWidth="210.0" promptText="Choose a Store" />
+      <ComboBox fx:id="delwarehouseList" layoutX="14.0" layoutY="386.0" prefHeight="25.0" prefWidth="210.0" promptText="Choose a Warehouse" />
    </children>
 </AnchorPane>

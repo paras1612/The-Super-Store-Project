@@ -67,11 +67,29 @@ public class Profile_cnt{
         return client;
     }
 
-    public void Login(ActionEvent e){
+    public void Login(ActionEvent e) throws IOException {
+        System.out.println("Login");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("sample.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
         System.out.println("Login");
     }
 
-    public void logOut(ActionEvent e){
+    public void logOut(ActionEvent e) throws IOException {
+        System.out.println("Login");
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane root = loader.load(getClass().getResource("sample.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
         System.out.println("Log out");
     }
 

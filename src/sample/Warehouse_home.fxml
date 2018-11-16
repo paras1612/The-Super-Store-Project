@@ -16,7 +16,7 @@
       <Button fx:id="cart_btn" layoutX="15.0" layoutY="412.0" mnemonicParsing="false" onAction="#Cart_btn" prefHeight="26.0" prefWidth="194.0" text="Cart" />
       <Button fx:id="help_btn" layoutX="15.0" layoutY="445.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button fx:id="about_btn" layoutX="15.0" layoutY="480.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
-      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="376.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="194.0" text="Log out" />
+      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="376.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="194.0" text="Log out" />
       <Button fx:id="message_btn" layoutX="16.0" layoutY="172.0" mnemonicParsing="false" onAction="#Message_btn" prefHeight="26.0" prefWidth="194.0" text="Messages" />
       <Button fx:id="orders_btn" layoutX="15.0" layoutY="206.0" mnemonicParsing="false" onAction="#orders" prefHeight="26.0" prefWidth="194.0" text="Orders" />
       <Button fx:id="addProduct_btn" layoutX="16.0" layoutY="271.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="26.0" prefWidth="194.0" text="Add Product" />
