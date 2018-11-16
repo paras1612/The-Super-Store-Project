@@ -141,6 +141,7 @@ public class Warehouse_home_cnt{
         System.out.println("Product added");
     }
     public void deleteProduct(ActionEvent e){
+
         System.out.println("Product Deleted");
     }
 

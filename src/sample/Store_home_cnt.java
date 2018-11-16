@@ -21,12 +21,17 @@ import java.util.HashMap;
 public class Store_home_cnt{
     @FXML private ComboBox prod_cat;
     @FXML private ComboBox sort_menu;
+    @FXML private ComboBox delchoose;
+    @FXML private ScrollPane catPane;
+    @FXML private ScrollPane prodPane;
+
     private Store_Admin store_admin;
     private HashMap<String, Integer> selected = new HashMap<>();
     public void setStore_admin(Store_Admin store_admin) {
         this.store_admin = store_admin;
         prod_cat.getItems().addAll("Product","Category");
         sort_menu.getItems().addAll("Name");
+        setDelchoose(delchoose);
         setData("Main");
     }
 
@@ -34,31 +39,16 @@ public class Store_home_cnt{
         return store_admin;
     }
 
-    @FXML private ComboBox addchoose;
-    @FXML private ComboBox delchoose;
-    @FXML private ScrollPane catPane;
-    @FXML private ScrollPane prodPane;
 
-    public void setAddchoose(ComboBox addchoose) {
-        System.out.println(store_admin);
-        if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null){
-            for(String name: store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()){
-                this.addchoose.getItems().add(name);
-            }
-        }
-    }
 
     public void setDelchoose(ComboBox delChoose) {
         if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null) {
             for (String name : store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()) {
-                this.delchoose = delchoose;
+                this.delchoose.getItems().add(name);
             }
         }
     }
 
-    public ComboBox getAddchoose() {
-        return addchoose;
-    }
 
     public ComboBox getDelchoose() {
         return delchoose;
@@ -156,6 +146,7 @@ public class Store_home_cnt{
         System.out.println("Product added");
     }
     public void deleteProduct(ActionEvent e){
+
         System.out.println("Product Deleted");
     }
 
