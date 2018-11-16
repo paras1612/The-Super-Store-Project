@@ -17,7 +17,7 @@ public class Database implements Serializable {
     private static final long serialVersionUID=7L;
     private Auth auth = new Auth();
     public boolean createSuperuser(String name, String password, String email){
-        if(auth.getSuperUserAdminAuth().containsKey(email)){
+        if(auth.getSuperUserAdminAuth().containsKey(email) || auth.getstoreAdminAuth().containsKey(name) || auth.getwarehouseAdmintAuth().containsKey(name) || auth.getclientAuth().containsKey(email)){
             System.out.println("Email already registered");
         }
         else {
@@ -33,7 +33,7 @@ public class Database implements Serializable {
     }
 
     public boolean createStoreAdmin(String name, String password, String store){
-        if(auth.getstoreAdminAuth().containsKey(name) && getStore_AdminHashMap().get(name).getAssignedStore()!=null){
+        if((auth.getSuperUserAdminAuth().containsKey(name) || auth.getstoreAdminAuth().containsKey(name) || auth.getwarehouseAdmintAuth().containsKey(name) || auth.getclientAuth().containsKey(name)) && getStore_AdminHashMap().get(name).getAssignedStore()!=null){
             System.out.println("Email already registered");
         }
         else {
@@ -47,7 +47,7 @@ public class Database implements Serializable {
         return false;
     }
     public boolean createWarehouseAdmin(String name, String password, String warehouse){
-        if(auth.getwarehouseAdmintAuth().containsKey(name)){
+        if((auth.getSuperUserAdminAuth().containsKey(name) || auth.getstoreAdminAuth().containsKey(name) || auth.getwarehouseAdmintAuth().containsKey(name) || auth.getclientAuth().containsKey(name)) && getWarehouse_AdminHashMap().get(name).getAssigned_ware()!=null){
             System.out.println("Email already registered");
         }
         else {
