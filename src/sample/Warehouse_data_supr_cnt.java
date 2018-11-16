@@ -103,10 +103,9 @@ public class Warehouse_data_supr_cnt {
     }
 
     public void removeWarehouse(ActionEvent e){
-        user.getDatabase().getWarehouseHashMap().remove(delwarehouseList.getValue().toString());
-        serialize(user.getDatabase());
-        System.out.println("Remove warehouse pressed");
+        user.removeWarehouse(delwarehouseList.getValue().toString());
     }
+
 
     public void addWarehouse(ActionEvent e){
         user.updateDatabase();

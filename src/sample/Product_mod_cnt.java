@@ -46,6 +46,7 @@ public class Product_mod_cnt{
 
     public void setCategory() {
         if(warehouse_admin!=null) {
+            warehouse_admin.getAssigned_ware().updateData();
             System.out.println(warehouse_admin.getAssigned_ware().getCategoryHashMap().toString());
             for (String name : warehouse_admin.getAssigned_ware().getCategoryHashMap().keySet()) {
                 category.getItems().add(name);
@@ -204,11 +205,17 @@ public class Product_mod_cnt{
     {
         if(warehouse_admin!=null) {
             if (priceTxt.isDisable()) {
-                warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString());
+                if(warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString())){
+                    warehouse_admin.getAssigned_ware().updateData();
+                    category.getItems().add(nameTxt.getText());
+                }
+
                 System.out.println("serialized");
                 //Add Category
             } else if (!priceTxt.isDisable()) {
-                warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString());
+                if(warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString())){
+                    category.getItems().add(nameTxt.getText());
+                }
                 System.out.println("serialized");
                 //Add Product
             }
@@ -217,11 +224,15 @@ public class Product_mod_cnt{
         else if(store_admin!=null){
 
             if (nameTxt.isVisible()) {
-                store_admin.getAssignedStore().addCategory(store_admin, nameTxt.getText(), category.getValue().toString());
+                if(store_admin.getAssignedStore().addCategory(store_admin, nameTxt.getText(), category.getValue().toString())) {
+                    category.getItems().add(nameTxt.getText());
+                }
                 System.out.println("serialized");
                 //Add Category
             } else if (!nameTxt.isVisible()) {
-                store_admin.getAssignedStore().addProduct(store_admin, prodList.getValue().toString(), category.getValue().toString());
+                if(store_admin.getAssignedStore().addProduct(store_admin, prodList.getValue().toString(), category.getValue().toString())){
+                    category.getItems().add(nameTxt.getText());
+                }
                 System.out.println("serialized");
                 //Add Product
             }

@@ -24,15 +24,21 @@ public class Warehouse implements Serializable {
         this.uid = uid;
         serialize(database);
     }
-    public void addCategory(Warehouse_Admin admin, String name, String parent){
+    public boolean addCategory(Warehouse_Admin admin, String name, String parent){
         System.out.println(uid);
         database=deserialize();
         System.out.println(database.getWarehouseHashMap().get(uid));
         Categories init=new Categories(name);
         init.setParent(CategoryHashMap.get(parent));
+        if(CategoryHashMap.containsKey(name)){
+            return false;
+        }
         database.getWarehouseHashMap().get(uid).CategoryHashMap.get(parent).getSubCategories().add(init);
         database.getWarehouseHashMap().get(uid).CategoryHashMap.put(name, init);
+        CategoryHashMap.put(name, init);
         serialize(database);
+        this.updateData();
+        return true;
     }
 
     public HashMap<String, Product> getProductHashMap() {
@@ -85,15 +91,20 @@ public class Warehouse implements Serializable {
         Message = message;
     }
 
-    public void addProduct(Warehouse_Admin warehouse_admin, String name, double price, int quant, double fcost, double ccost, double idem, String parent) {
+    public boolean addProduct(Warehouse_Admin warehouse_admin, String name, double price, int quant, double fcost, double ccost, double idem, String parent) {
         System.out.println(uid);
-        database=deserialize();
+        database = deserialize();
         System.out.println(database.getWarehouseHashMap().get(uid));
-        Product init = new Product(name,price,quant,fcost,ccost,idem);
+        Product init = new Product(name, price, quant, fcost, ccost, idem);
         init.setParent(CategoryHashMap.get(parent));
+        if (getProductHashMap().containsKey(name)) {
+            return false;
+        }
         database.getWarehouseHashMap().get(uid).CategoryHashMap.get(parent).getProduct_list().add(init);
         database.getWarehouseHashMap().get(uid).ProductHashMap.put(name, init);
         serialize(database);
+        updateData();
+        return true;
     }
     public void updateData(){
         database=deserialize();

@@ -33,7 +33,7 @@ public class Database implements Serializable {
     }
 
     public boolean createStoreAdmin(String name, String password, String store){
-        if(auth.getstoreAdminAuth().containsKey(name)){
+        if(auth.getstoreAdminAuth().containsKey(name) && getStore_AdminHashMap().get(name).getAssignedStore()!=null){
             System.out.println("Email already registered");
         }
         else {

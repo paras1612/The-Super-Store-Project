@@ -23,12 +23,21 @@ public class Store implements Serializable {
         this.uid = uid;
     }
 
-    public void addProduct(Store_Admin store_admin, String product, String parent){
+    public String getUid() {
+        return uid;
+    }
+
+    public boolean addProduct(Store_Admin store_admin, String product, String parent){
         database=deserialize();
         Warehouse linkware= linkedWarehouse;
         Product curr=linkware.getProductHashMap().get(product);
         Product one = new Product(curr.getName(),curr.getPrice(),0,curr.getfCostQuater(),curr.getcCostQuater(),curr.getItemDemand());
         one.setParent(curr.getParent());
+        for(Product prod: Inventory.keySet()){
+            if(prod.getUid().equals(product)){
+                return false;
+            }
+        }
         database.getStoreHashMap().get(this.uid).getCategoriesList().get(parent).getProduct_list().add(one);
         if(linkware.getProductHashMap().get(product).getQuantity()>curr.getEOQ()){
             System.out.println(database.getStore_AdminHashMap().get(store_admin.uid));
@@ -40,14 +49,20 @@ public class Store implements Serializable {
             System.out.println("Product quantity not available");
         }
         serialize(database);
+        return true;
     }
-    public void addCategory(Store_Admin admin, String name, String parent){
+    public boolean addCategory(Store_Admin admin, String name, String parent){
         database=deserialize();
         Categories init= new Categories(name);
         init.setParent(database.getStoreHashMap().get(this.uid).getCategoriesList().get(parent));
         database.getStoreHashMap().get(this.uid).getCategoriesList().get(parent).getSubCategories().add(init);
         database.getStoreHashMap().get(this.uid).getCategoriesList().put(name,init);
+        if(categoriesList.containsKey(name)){
+            return false;
+        }
+        categoriesList.put(name, init);
         serialize(database);
+        return true;
     }
 
     void Generate_Alert(){

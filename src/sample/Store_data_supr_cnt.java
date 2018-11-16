@@ -122,7 +122,7 @@ public class Store_data_supr_cnt {
 
     public void removeStore(ActionEvent e){
         System.out.println("Store removed");
-        user.getDatabase().getStoreHashMap().remove(storeList.getValue().toString());
+        user.removeStore(delStoreList.getValue().toString());
     }
 
 }

@@ -66,4 +66,33 @@ public class Super_usr implements Serializable {
     public String getMessage() {
         return message;
     }
+
+    public void removeWarehouse(String warehouse) {
+        updateDatabase();
+        for(String admin : getDatabase().getWarehouse_AdminHashMap().keySet()){
+            if(getDatabase().getWarehouse_AdminHashMap().get(admin).getAssigned_ware()!=null) {
+                if (getDatabase().getWarehouse_AdminHashMap().get(admin).getAssigned_ware().getUid().equals(warehouse)) {
+                    getDatabase().getWarehouse_AdminHashMap().get(admin).setAssigned_ware(null);
+                }
+            }
+        }
+        getDatabase().getWarehouseHashMap().remove(warehouse);
+        serialize(getDatabase());
+        //Database temp =deserialize();
+        //System.out.println(temp);
+    }
+    public void removeStore(String store) {
+        updateDatabase();
+        for(String admin : getDatabase().getStore_AdminHashMap().keySet()){
+            if(getDatabase().getStore_AdminHashMap().get(admin).getAssignedStore()!=null) {
+                if (getDatabase().getStore_AdminHashMap().get(admin).getAssignedStore().getUid().equals(store)) {
+                    getDatabase().getStore_AdminHashMap().get(admin).setAssignedStore(null);
+                }
+            }
+        }
+        getDatabase().getStoreHashMap().remove(store);
+        serialize(getDatabase());
+        Database temp =deserialize();
+        System.out.println(temp);
+    }
 }
