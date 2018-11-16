@@ -14,7 +14,7 @@
       <ComboBox fx:id="sort_menu" layoutX="15.0" layoutY="105.0" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
       <ScrollPane layoutX="233.0" layoutY="105.0" prefHeight="406.0" prefWidth="552.0" />
       <Button fx:id="help_btn" layoutX="15.0" layoutY="419.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
-      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="194.0" text="Log out" />
+      <Button fx:id="logOut_btn" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="194.0" text="Log out" />
       <Button fx:id="message_btn" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#message" prefHeight="26.0" prefWidth="194.0" text="Messages" />
       <Button fx:id="warehouse_supr_btn" layoutX="16.0" layoutY="173.0" mnemonicParsing="false" onAction="#warehouse_data_supr_btn" prefHeight="26.0" prefWidth="194.0" text="Warehouses" />
       <Button fx:id="store_supr_btn" layoutX="16.0" layoutY="206.0" mnemonicParsing="false" onAction="#store_data_supr_btn" prefHeight="26.0" prefWidth="194.0" text="Stores" />

@@ -24,10 +24,26 @@ public class Warehouse_data_supr_cnt {
 
     public void setUser(Super_usr user) {
         this.user = user;
+        setStoreList();
+        setWarehouseList();
     }
 
     public Super_usr getUser() {
         return user;
+    }
+
+    public void setStoreList() {
+        System.out.println(user);
+        for(String name :user.getDatabase().getStoreHashMap().keySet()){
+            delwarehouseList.getItems().add(name);
+            storeList.getItems().add(name);
+        }
+    }
+
+    public void setWarehouseList() {
+        for(String name: user.getDatabase().getWarehouseHashMap().keySet()){
+            this.warehouseList.getItems().add(name);
+        }
     }
 
     public void Home(ActionEvent e) throws IOException {

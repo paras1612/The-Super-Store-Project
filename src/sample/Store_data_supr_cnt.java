@@ -21,15 +21,16 @@ public class Store_data_supr_cnt {
     private TextField StoreName;
     @FXML private ComboBox storeList;
     @FXML private ComboBox warehouseList;
-
-    public void setStoreList(ComboBox storelist) {
+    @FXML private ComboBox delWarehouseList;
+    public void setStoreList() {
         System.out.println(user);
         for(String name :user.getDatabase().getStoreHashMap().keySet()){
+            delWarehouseList.getItems().add(name);
             storeList.getItems().add(name);
         }
     }
 
-    public void setWarehouseList(ComboBox warehouselist) {
+    public void setWarehouseList() {
         for(String name: user.getDatabase().getWarehouseHashMap().keySet()){
             this.warehouseList.getItems().add(name);
         }
@@ -45,6 +46,8 @@ public class Store_data_supr_cnt {
 
     public void setUser(Super_usr user) {
         this.user = user;
+        setWarehouseList();
+        setStoreList();
     }
 
     public Super_usr getUser() {
@@ -119,6 +122,7 @@ public class Store_data_supr_cnt {
 
     public void removeStore(ActionEvent e){
         System.out.println("Store removed");
+        user.getDatabase().getStoreHashMap().remove(storeList.getValue().toString());
     }
 
 }

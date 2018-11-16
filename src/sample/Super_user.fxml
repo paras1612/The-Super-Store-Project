@@ -19,9 +19,8 @@
       <Button fx:id="warehouse_supr_btn" layoutX="16.0" layoutY="173.0" mnemonicParsing="false" onAction="#warehouse_data_supr_btn" prefHeight="26.0" prefWidth="194.0" text="Warehouses" />
       <Button fx:id="store_supr_btn" layoutX="16.0" layoutY="206.0" mnemonicParsing="false" onAction="#store_data_supr_btn" prefHeight="26.0" prefWidth="194.0" text="Stores" />
       <Button fx:id="product_btn" layoutX="15.0" layoutY="240.0" mnemonicParsing="false" onAction="#product" prefHeight="26.0" prefWidth="194.0" text="Products" />
-      <Button fx:id="createWarehouseAdmin_btn" layoutX="16.0" layoutY="308.0" mnemonicParsing="false" onAction="#addAdmin" prefHeight="26.0" prefWidth="194.0" text="Create Warehouse Admin" />
+      <Button fx:id="createAdmin_btn" layoutX="16.0" layoutY="308.0" mnemonicParsing="false" onAction="#addAdmin" prefHeight="26.0" prefWidth="194.0" text="Create Admin" />
       <Button fx:id="warehouseLink_btn" layoutX="16.0" layoutY="273.0" mnemonicParsing="false" onAction="#warehouseLink" prefHeight="26.0" prefWidth="194.0" text="Link Store to Warehouse" />
-      <Button fx:id="createStoreadmin_btn" layoutX="16.0" layoutY="347.0" mnemonicParsing="false" onAction="#addAdmin" prefHeight="26.0" prefWidth="194.0" text="Create Store Admin" />
       <Button layoutX="15.0" layoutY="456.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
       <ComboBox layoutX="16.0" layoutY="74.0" prefHeight="25.0" prefWidth="216.0" promptText="Products/Categories" />
    </children>

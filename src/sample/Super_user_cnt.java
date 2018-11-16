@@ -146,8 +146,6 @@ public class Super_user_cnt{
         System.out.println("User");
         System.out.println(user);
         cnt.setUser(user);
-        cnt.setStoreList(cnt.getStoreList());
-        cnt.setWarehouseList(cnt.getWarehouseList());
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
