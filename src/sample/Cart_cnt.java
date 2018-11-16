@@ -10,8 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import mainClasses.Client;
-import mainClasses.Product;
+import mainClasses.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,6 +19,8 @@ public class Cart_cnt {
     @FXML
     private ScrollPane dataPane;
     private Client client;
+    private Warehouse_Admin warehouse_admin;
+    private Store_Admin store_admin;
     private HashMap<String, Integer> selected= new HashMap<>();
 
     void setClient(Client client1){
@@ -30,51 +31,89 @@ public class Cart_cnt {
         return client;
     }
 
+    public void setStore_admin(Store_Admin store_admin) {
+        this.store_admin = store_admin;
+        setDisplayData();
+    }
+
+    public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
+        this.warehouse_admin = warehouse_admin;
+        setDisplayData();
+    }
+
     @FXML
     AnchorPane login;
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
-        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
-        Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
-        AnchorPane root = loader.load();
-        if(client!=null) {
-            javafx.scene.control.Button profile = new Button(client.getName());
-            profile.setLayoutX(17.0);
-            profile.setLayoutY(349.0);
-            profile.setPrefHeight(26.0);
-            profile.setPrefWidth(194.0);
-            profile.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
-                    Stage primaryStage = new Stage();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
-                    try {
-                        AnchorPane root = loader.load();
-                        Scene scene = new Scene(root);
-                        Profile_cnt cnt = loader.getController();
-                        System.out.println(cnt);
-                        System.out.println(client);
-                        cnt.setClient(client);
-                        System.out.println(cnt.getClient().getName());
-                        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
-                        primaryStage.setScene(scene);
-                        primaryStage.show();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            root.getChildren().set(4, profile);
+        if(warehouse_admin!=null) {
+            ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Warehouse_home.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            Warehouse_home_cnt cnt = loader.getController();
+            System.out.println(warehouse_admin);
+            cnt.setWarehouse_admin(warehouse_admin);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
         }
-        Scene scene = new Scene(root);
-        Home_cnt cnt = loader.getController();
-        cnt.setClient(client);
-        cnt.setChooseStore(cnt.getChooseStore());
-        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        else if(store_admin!=null){
+            ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Store_home.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            Store_home_cnt cnt = loader.getController();
+            System.out.println(store_admin);
+            cnt.setStore_admin(store_admin);
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        else if(client!=null) {
+            ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            AnchorPane root = loader.load();
+            if (client != null) {
+                javafx.scene.control.Button profile = new Button(client.getName());
+                profile.setLayoutX(17.0);
+                profile.setLayoutY(349.0);
+                profile.setPrefHeight(26.0);
+                profile.setPrefWidth(194.0);
+                profile.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+                        Stage primaryStage = new Stage();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
+                        try {
+                            AnchorPane root = loader.load();
+                            Scene scene = new Scene(root);
+                            Profile_cnt cnt = loader.getController();
+                            System.out.println(cnt);
+                            System.out.println(client);
+                            cnt.setClient(client);
+                            System.out.println(cnt.getClient().getName());
+                            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+                            primaryStage.setScene(scene);
+                            primaryStage.show();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                });
+                root.getChildren().set(4, profile);
+            }
+            Scene scene = new Scene(root);
+            Home_cnt cnt = loader.getController();
+            cnt.setClient(client);
+            cnt.setChooseStore(cnt.getChooseStore());
+            scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
     }
     public void Login(ActionEvent e) throws IOException {
         System.out.println("Login");
@@ -113,21 +152,24 @@ public class Cart_cnt {
 
     public void addProduct(ActionEvent e) throws IOException{
         System.out.println("Add Product");
-        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
-        Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
-        Scene scene = new Scene(root);
-        //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Home(e);
     }
 
     public void setDisplayData(){
+        Cart cart= new Cart();
+        if(warehouse_admin!=null){
+            cart=warehouse_admin.getAssigned_ware().getCart();
+        }
+        else if(store_admin!=null){
+            cart=store_admin.getAssignedStore().getCart();
+        }
+        else if(client!=null){
+            cart=client.getCart();
+        }
         VBox vb = new VBox();
-        for(Product product : client.getCart().getCartList().keySet()){
+        for(Product product : cart.getCartList().keySet()){
             Button prodName = new Button(product.getName());
-            TextField qty = new TextField(client.getCart().getCartList().get(product).toString());
+            TextField qty = new TextField(cart.getCartList().get(product).toString());
             qty.setPromptText("Enter Quantity");
             Label price = new Label(Double.toString(product.getPrice()));
             CheckBox chk = new CheckBox();

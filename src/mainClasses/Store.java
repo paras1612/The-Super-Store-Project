@@ -27,6 +27,10 @@ public class Store implements Serializable {
         return uid;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
     public boolean addProduct(Store_Admin store_admin, String product, String parent){
         database=deserialize();
         Warehouse linkware= linkedWarehouse;

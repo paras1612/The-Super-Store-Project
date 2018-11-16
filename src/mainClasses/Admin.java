@@ -10,4 +10,6 @@ abstract public class Admin implements Serializable {
     protected Admin(String uid) {
         this.uid = uid;
     }
+
+    public abstract void add_product(String toString, String name, Integer integer);
 }

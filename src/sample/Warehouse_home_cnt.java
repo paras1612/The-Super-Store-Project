@@ -103,9 +103,11 @@ public class Warehouse_home_cnt{
         System.out.println("Cart");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Cart.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
+        Cart_cnt cnt = loader.getController();
+        cnt.setWarehouse_admin(warehouse_admin);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -127,19 +129,7 @@ public class Warehouse_home_cnt{
     public void orders(ActionEvent e){
         System.out.println("Orders pressed");
     }
-    public void addProduct(ActionEvent e) throws IOException {
-        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
-        Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Product_mod.fxml"));
-        AnchorPane root = loader.load();
-        Scene scene = new Scene(root);
-        Product_mod_cnt cnt= loader.getController();
-        cnt.setWarehouse_admin(warehouse_admin);
-        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        System.out.println("Product added");
-    }
+
     public void deleteProduct(ActionEvent e){
 
         System.out.println("Product Deleted");
@@ -213,5 +203,12 @@ public class Warehouse_home_cnt{
             vbprod.getChildren().add(hb);
         }
         prodPane.setContent(vbprod);
+    }
+
+    public void addtoCart(ActionEvent e){
+        for(String name: selected.keySet()) {
+            warehouse_admin.add_product(chooseWare.getValue().toString(), name, selected.get(name));
+        }
+        System.out.println("Add To Cart pressed");
     }
 }

@@ -120,6 +120,8 @@ public class Store_home_cnt{
         FXMLLoader loader = new FXMLLoader();
         AnchorPane root = loader.load(getClass().getResource("Cart.fxml"));
         Scene scene = new Scene(root);
+        Cart_cnt cnt = loader.getController();
+        cnt.setStore_admin(store_admin);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -198,6 +200,12 @@ public class Store_home_cnt{
             vbprod.getChildren().add(hb);
         }
         prodPane.setContent(vbprod);
+    }
+    public void addtoCart(ActionEvent e){
+        for(String name: selected.keySet()) {
+            store_admin.add_product(store_admin.getAssignedStore().getLinkedWarehouse().getUid(), name, selected.get(name));
+        }
+        System.out.println("Add To Cart pressed");
     }
 
 }

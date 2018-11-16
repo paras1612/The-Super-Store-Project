@@ -126,7 +126,7 @@ public class Home_cnt{
 
     public void Cart_btn(ActionEvent e) throws IOException {
         System.out.println("CartButton");
-        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
         AnchorPane root = loader.load();
@@ -166,9 +166,9 @@ public class Home_cnt{
         }
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         cnt.setClient(client);
-        cnt.setDisplayData();
         primaryStage.setScene(scene);
         primaryStage.show();
+        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
     }
 
     public void addToCart(ActionEvent e){
