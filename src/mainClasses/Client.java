@@ -80,8 +80,8 @@ public class Client implements Serializable {
     }
 
 
-    public void Search() {
-
+    public void Search(String prod_name, String store, String cat) {
+        Database.getDatabase().search(prod_name, store, cat);
     }
 
     public void currentOrder() {

@@ -1,6 +1,7 @@
 package mainClasses;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static sample.Main.deserialize;
@@ -106,11 +107,36 @@ public class Database implements Serializable {
     }
 
 
-    void search(String name){
-
+    public void search(String name, String Store, String cat, ArrayList<String> product_result, ArrayList<String> cat_result){
+        for (Product product : StoreHashMap.get(Store).getCategoriesList().get(cat).getProduct_list()) {
+            if (product.getUid().contains(name)) {
+                product_result.add(product.getUid());
+            }
+        }
+        for(Categories categories: StoreHashMap.get(Store).getCategoriesList().get(cat).getSubCategories()){
+            if(categories.getUid().contains(name)){
+                cat_result.add(categories.getUid());
+            }
+        }
     }
-    void sort(){
 
+    public void searchWare(String name, String ware, String cat, ArrayList<String> product_result, ArrayList<String> cat_result){
+        for (Product product : WarehouseHashMap.get(ware).getCategoryHashMap().get(cat).getProduct_list()) {
+            if (product.getUid().contains(name)) {
+                product_result.add(product.getUid());
+            }
+        }
+        for (Categories categories : WarehouseHashMap.get(ware).getCategoryHashMap().get(cat).getSubCategories()) {
+            if (categories.getUid().contains(name)) {
+                cat_result.add(categories.getUid());
+            }
+        }
+    }
+
+
+    public ArrayList<String> sort(ArrayList<String> list){
+        list.sort(String::compareTo);
+        return list;
     }
 
     public HashMap<String, Client> getClientHashMap() {

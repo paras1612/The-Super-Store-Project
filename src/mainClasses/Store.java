@@ -1,6 +1,7 @@
 package mainClasses;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static sample.Main.deserialize;
@@ -187,5 +188,9 @@ public class Store implements Serializable {
         cart.getCartList().remove(temp);
         cart.getWareprod().remove(temp);
         serialize();
+    }
+
+    public void search(String name, String cat){
+
     }
 }
