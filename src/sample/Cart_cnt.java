@@ -158,6 +158,7 @@ public class Cart_cnt {
     public void setDisplayData(){
         Cart cart= new Cart();
         if(warehouse_admin!=null){
+            warehouse_admin.getAssigned_ware().updateData();
             cart=warehouse_admin.getAssigned_ware().getCart();
         }
         else if(store_admin!=null){
@@ -190,6 +191,28 @@ public class Cart_cnt {
             vb.getChildren().add(hb);
         }
             dataPane.setContent(vb);
+    }
+
+    public void checkout(ActionEvent e){
+        if(warehouse_admin!=null){
+            warehouse_admin.getAssigned_ware().checkout();
+        }
+        else if(store_admin!=null){
+
+        }
+        else if(client!=null){
+
+        }
+        setDisplayData();
+    }
+
+
+    public void deleteprod(ActionEvent actionEvent) {
+        for(String name: selected.keySet()) {
+            warehouse_admin.getAssigned_ware().delProdCart(warehouse_admin.getAssigned_ware().getUid(), name, selected.get(name));
+        }
+        setDisplayData();
+        System.out.println("Add To Cart pressed");
     }
 }
 

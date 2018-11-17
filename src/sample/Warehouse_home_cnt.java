@@ -27,6 +27,7 @@ public class Warehouse_home_cnt{
     public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
         this.warehouse_admin = warehouse_admin;
         setChooseWare();
+        updateAllWare();
     }
 
     public Warehouse_Admin getWarehouse_admin() {
@@ -161,6 +162,7 @@ public class Warehouse_home_cnt{
         setDatafn(chooseWare.getValue().toString(),"Main");
     }
     public void setDatafn(String warehouse, String catChosen){
+        updateAllWare();
         VBox vbcat = new VBox();
         for(Categories cat: warehouse_admin.getAssigned_ware().getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getSubCategories()){
             Button catbut = new Button(cat.getUid());
@@ -210,5 +212,9 @@ public class Warehouse_home_cnt{
             warehouse_admin.getAssigned_ware().add_product(chooseWare.getValue().toString(), name, selected.get(name));
         }
         System.out.println("Add To Cart pressed");
+    }
+
+    public void updateAllWare(){
+
     }
 }

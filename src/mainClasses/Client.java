@@ -47,6 +47,7 @@ public class Client implements Serializable {
         Product temp = database.getStoreHashMap().get(store).getLinkedWarehouse().getProductHashMap().get(name);
         Product prod = new Product(temp.getName(), temp.getPrice(), quant, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
         database.getClientHashMap().get(this.name).getCart().getCartList().put(prod, quant);
+        database.getClientHashMap().get(this.name).getCart().getStoreprod().put(prod, database.getStoreHashMap().get(store));
         serialize(database);
     }
     public void add_funds(double fund){
