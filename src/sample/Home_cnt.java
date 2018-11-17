@@ -5,9 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,6 +13,7 @@ import javafx.stage.Stage;
 import mainClasses.Categories;
 import mainClasses.Client;
 import mainClasses.Database;
+import mainClasses.Product;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -182,6 +181,7 @@ public class Home_cnt{
 
     public void dispStData(ActionEvent e){
         VBox vb = new VBox();
+        Database temp =(Database.getDatabase());
         for(Categories cat: Database.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getCategoriesList().get("Main").getSubCategories()){
             Button catbut= new Button(cat.getUid());
             catbut.setPrefWidth(dataPane.getPrefWidth());
@@ -243,7 +243,7 @@ public class Home_cnt{
             hb.getChildren().add(catbut);
             vb.getChildren().add(hb);
         }
-        /*for(Product product: Database.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getInventory().keySet()){
+        for(Product product: Database.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getInventory().keySet()){
             Button prodName = new Button(product.getName());
             TextField qty = new TextField("1");
             qty.setPromptText("Enter Quantity");
@@ -263,7 +263,7 @@ public class Home_cnt{
             HBox hb = new HBox();
             hb.getChildren().addAll(prodName,qty,chk);
             vb.getChildren().add(hb);
-        }*/
+        }
         dataPane.setContent(vb);
     }
 

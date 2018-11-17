@@ -197,18 +197,30 @@ public class Cart_cnt {
             warehouse_admin.getAssigned_ware().checkout();
         }
         else if(store_admin!=null){
-
+            store_admin.getAssignedStore().checkout();
         }
         else if(client!=null){
-
+            client.checkout();
         }
         setDisplayData();
     }
 
 
     public void deleteprod(ActionEvent actionEvent) {
-        for(String name: selected.keySet()) {
-            warehouse_admin.getAssigned_ware().delProdCart(warehouse_admin.getAssigned_ware().getUid(), name, selected.get(name));
+        if(warehouse_admin!=null) {
+            for (String name : selected.keySet()) {
+                warehouse_admin.getAssigned_ware().delProdCart(warehouse_admin.getAssigned_ware().getUid(), name, selected.get(name));
+            }
+        }
+        if(store_admin!=null){
+            for (String name : selected.keySet()){
+                store_admin.getAssignedStore().deleteProdCart(name);
+            }
+        }
+        if(client!=null){
+            for (String name: selected.keySet()){
+                System.out.println("NOT IMPLEMENTED");
+            }
         }
         setDisplayData();
         System.out.println("Add To Cart pressed");

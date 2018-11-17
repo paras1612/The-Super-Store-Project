@@ -7,8 +7,6 @@ import static sample.Main.deserialize;
 
 public class Database implements Serializable {
     private static Database database = null;
-    private HashMap<String, Product> ProductList=new HashMap<>();
-    private HashMap<String, Categories> CategoriesList = new HashMap<>();
     private HashMap<String, Client> ClientHashMap = new HashMap<>();
     private HashMap<String, Super_usr> Super_userHashMap = new HashMap<>();
     private HashMap<String, Store_Admin> Store_AdminHashMap = new HashMap<>();
@@ -106,63 +104,8 @@ public class Database implements Serializable {
         }
         return -1;
     }
-    public void addProduct(Warehouse_Admin admin, String product, double price, int quant, double dtxt, double ktxt, double htxt, String cat){
-        Product currProd = new Product(product, price, quant, dtxt, htxt, ktxt);
-        currProd.setParent(CategoriesList.get(cat));
-        ProductList.put(product, currProd);
-        System.out.println(admin.getAssigned_ware().getInventory());
-        admin.getAssigned_ware().getInventory().put(currProd, quant);
-        admin.getAssigned_ware().getProductHashMap().put(product,currProd);
-        Warehouse_Product.put(admin.getAssigned_ware(), admin.getAssigned_ware().getInventory());
 
-    }
-    public void addProduct(Store_Admin admin, String product){
-        Product curr= admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().get(product);
-        if(admin.getAssignedStore().getLinkedWarehouse().getInventory().get(product)>(int)curr.getEOQ()) {
-            admin.getAssignedStore().getInventory().put(curr,(int)curr.getEOQ());
-        }
-        else{
-            System.out.println("Product Not Available");
-        }
-    }
-    void deleteProduct(Warehouse_Admin admin, Product prod){
-        admin.getAssigned_ware().getInventory().remove(prod);
-    }
-    void deleteProduct(Store_Admin admin, Product prod){
-        admin.getAssignedStore().getInventory().remove(prod);
-    }
-    void updateProduct(Warehouse_Admin admin, String product, double price, int quant, double fcost, double ccost, double idem){
-        Product curr = ProductList.get(product);
-        curr.setPrice(price);
-        curr.setQuantity(quant);
-        curr.setfCostQuater(fcost);
-        curr.setcCostQuater(ccost);
-        curr.setItemDemand(idem);
-    }
-    void updateProduct(Store_Admin admin, Product product, double price, int quant, double fcost, double ccost, double idem){
-        admin.getAssignedStore().getInventory().remove(product);
-        Product product1= new Product(product.getUid(), price, quant, fcost, ccost, idem);
-        admin.getAssignedStore().getInventory().put(product1, quant);
-    }
-    public void addCategory(Store_Admin admin, String name, String parentcat){
-        Categories curr= new Categories(name);
-        curr.setParent(admin.getAssignedStore().getCategoriesList().get(parentcat));
-        admin.getAssignedStore().getCategoriesList().put(name,curr);
-    }
 
-    void delCategory(Warehouse_Admin admin, Categories category){
-        if(admin.getAssigned_ware().getCategoryHashMap().containsKey(category)){
-            admin.getAssigned_ware().getCategoryHashMap().remove(category);
-        }
-    }
-    void delCategory(Store_Admin admin, Categories category){
-        if(admin.getAssignedStore().getCategoriesList().containsKey(category)){
-            admin.getAssignedStore().getCategoriesList().remove(category);
-        }
-    }
-    void updateCategory(){
-
-    }
     void search(String name){
 
     }
@@ -172,14 +115,6 @@ public class Database implements Serializable {
 
     public HashMap<String, Client> getClientHashMap() {
         return ClientHashMap;
-    }
-
-    public HashMap<String, Product> getProductList() {
-        return ProductList;
-    }
-
-    public HashMap<String, Categories> getCategoriesList() {
-        return CategoriesList;
     }
 
     public HashMap<String, Warehouse_Admin> getWarehouse_AdminHashMap() {

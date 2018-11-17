@@ -22,6 +22,14 @@ public class Store implements Serializable {
         this.uid = uid;
     }
 
+    public double getSale() {
+        return sale;
+    }
+
+    public void setSale(double sale) {
+        this.sale = sale;
+    }
+
     public String getUid() {
         return uid;
     }
@@ -82,11 +90,8 @@ public class Store implements Serializable {
     public void checkout() {
         int flag=0;
         for(Product product: Database.getDatabase().getStoreHashMap().get(uid).getCart().getCartList().keySet()){
-            Warehouse prod_ware= Database.getDatabase().getWarehouseHashMap().get(linkedWarehouse.getUid()).getCart().getWareprod().get(product);
-            Product ware_prod = Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getProductHashMap().get(product.getUid());
-            System.out.println(Database.getDatabase().getStoreHashMap().get(uid).getCart().getCartList().get(product));
-            System.out.println(Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().get(ware_prod));
-            if(Database.getDatabase().getStoreHashMap().get(uid).getCart().getCartList().get(product) > Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().get(ware_prod)){
+            Product product_ware= linkedWarehouse.getProductHashMap().get(product.getUid());
+            if(cart.getCartList().get(product) > linkedWarehouse.getInventory().get(product_ware)){
                 System.out.println("Product Out of Stock: "+product.getUid());
                 flag=1;
             }
@@ -154,5 +159,33 @@ public class Store implements Serializable {
     }
 
 
+    public void deleteProduct(String product) {
+        Inventory.remove(product);
+        for(String cat :categoriesList.keySet()){
+            for(Product product1: categoriesList.get(cat).getProduct_list()){
+                if(product1.getUid().equals(product)){
+                    categoriesList.get(cat).getProduct_list().remove(product1);
+                }
+            }
+        }
+    }
 
+    public void deleteProdCart(String name) {
+        Product temp = null;
+        for(Product product : cart.getCartList().keySet()) {
+            if(product.getUid().equals(name)) {
+                temp=product;
+            }
+        }
+        cart.getCartList().remove(temp);
+        cart.getWareprod().remove(temp);
+        for(Product temp1: cart.getCartList().keySet()){
+            if(temp1.getUid().equals(temp)){
+                temp = temp1;
+            }
+        }
+        cart.getCartList().remove(temp);
+        cart.getWareprod().remove(temp);
+        serialize();
+    }
 }

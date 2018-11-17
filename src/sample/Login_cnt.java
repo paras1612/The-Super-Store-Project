@@ -109,7 +109,6 @@ public class Login_cnt extends Main{
             Scene scene = new Scene(root);
             Store_home_cnt cnt = loader.getController();
             cnt.setStore_admin(curr);
-            cnt.setDelchoose(cnt.getDelchoose());
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();

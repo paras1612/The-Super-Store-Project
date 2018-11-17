@@ -7,7 +7,7 @@ import static sample.Main.deserialize;
 import static sample.Main.serialize;
 
 public class Client implements Serializable {
-    private static final long serialVersionUID=7L;
+    private static final long serialVersionUID = 7L;
     private String name;
     private String password;
     private final String uid;
@@ -15,79 +15,111 @@ public class Client implements Serializable {
     private double wallet;
     private ArrayList<Product> prevOrder;
     private Categories favCategory;
+
     public String getName() {
         return name;
     }
 
-    public Client(String name, String pass, String uid)
-    {
+    public Client(String name, String pass, String uid) {
         this.name = name;
         this.password = pass;
         this.uid = uid;
     }
-    void check_out(){
 
-    }
-    public void add_product(String store, String name, int quant){
+    public void add_product(String store, String name, int quant) {
         Product temp = Database.getDatabase().getStoreHashMap().get(store).getLinkedWarehouse().getProductHashMap().get(name);
         Product prod = new Product(temp.getName(), temp.getPrice(), quant, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
         Database.getDatabase().getClientHashMap().get(this.name).getCart().getCartList().put(prod, quant);
         Database.getDatabase().getClientHashMap().get(this.name).getCart().getStoreprod().put(prod, Database.getDatabase().getStoreHashMap().get(store));
         serialize();
     }
-    public void add_funds(double fund){
-        Database.getDatabase().getClientHashMap().get(this.name).wallet+=fund;
+
+    public void add_funds(double fund) {
+        Database.getDatabase().getClientHashMap().get(this.name).wallet += fund;
         serialize();
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public Cart getCart() {
         return cart;
     }
+
     public void setCart(Cart cart) {
         this.cart = cart;
     }
+
     public double getWallet() {
         return wallet;
     }
+
     public void setWallet(double wallet) {
         this.wallet = wallet;
     }
+
     public ArrayList<Product> getPrevOrder() {
         return prevOrder;
     }
+
     public void setPrevOrder(ArrayList<Product> prevOrder) {
         this.prevOrder = prevOrder;
     }
+
     public Categories getFavCategory() {
         return favCategory;
     }
+
     public void setFavCategory(Categories favCategory) {
         this.favCategory = favCategory;
     }
+
     public String getUid() {
         return uid;
     }
 
 
-    public void Search()
-    {
+    public void Search() {
 
     }
 
-    public void addToCart()
-    {
+    public void currentOrder() {
 
     }
 
-    public void CheckOut()
-    {
-
+    public void checkout() {
+        int flag = 0;
+        for (Product product : cart.getCartList().keySet()) {
+            Store prod_store = cart.getStoreprod().get(product);
+            Product store_prod = new Product();
+            for (Product store_pord1 : Database.getDatabase().getStoreHashMap().get(prod_store).getInventory().keySet()) {
+                if (store_pord1.getUid().equals(product.getUid())) {
+                    store_prod = store_pord1;
+                }
+            }
+            if (cart.getCartList().get(product) > Database.getDatabase().getStoreHashMap().get(prod_store.getUid()).getInventory().get(store_prod)) {
+                System.out.println("Product Out of Stock: " + product.getUid());
+                flag = 1;
+            }
+        }
+        if (flag == 0) {
+            Double amount_req = Double.valueOf(0);
+            for(Product product: cart.getCartList().keySet()){
+                amount_req+=cart.getCartList().get(product)*product.getPrice();
+            }
+            if(amount_req<wallet){
+                System.out.println("Insufficient Funds");
+            }
+            //Orders of Client can be made here
+            else {
+                for (Product product : cart.getCartList().keySet()) {
+                    Store prod_store = cart.getStoreprod().get(product);
+                    prod_store.setSale(prod_store.getSale()+product.getPrice());
+                }
+                cart = new Cart();
+            }
+        }
+        serialize();
     }
-    public void currentOrder()
-    {
-
-    }
-
 }

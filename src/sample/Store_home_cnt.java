@@ -116,8 +116,8 @@ public class Store_home_cnt{
         System.out.println("Cart");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Cart.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
         Cart_cnt cnt = loader.getController();
         cnt.setStore_admin(store_admin);
@@ -147,7 +147,7 @@ public class Store_home_cnt{
         System.out.println("Product added");
     }
     public void deleteProduct(ActionEvent e){
-
+        store_admin.getAssignedStore().deleteProduct(delchoose.getValue().toString());
         System.out.println("Product Deleted");
     }
 
