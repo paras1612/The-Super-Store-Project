@@ -158,7 +158,6 @@ public class Cart_cnt {
     public void setDisplayData(){
         Cart cart= new Cart();
         if(warehouse_admin!=null){
-            warehouse_admin.getAssigned_ware().updateData();
             cart=warehouse_admin.getAssigned_ware().getCart();
         }
         else if(store_admin!=null){

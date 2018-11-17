@@ -14,8 +14,7 @@ public class Warehouse_Admin extends Admin implements Serializable {
         Password=pass;
         assigned_ware= warehouse;
     }
-    void Check_Data_allWare(){
-    }
+
     public Warehouse getAssigned_ware() {
         return assigned_ware;
     }

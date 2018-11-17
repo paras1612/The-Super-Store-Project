@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import mainClasses.Client;
+import mainClasses.Database;
 
 import java.io.IOException;
 
@@ -178,7 +179,7 @@ public class Profile_cnt{
     }
 
     public void addToWallet(ActionEvent e){
-        client.getDatabase().getClientHashMap().get(client.getName()).add_funds(Double.parseDouble(fund.getText()));
+        Database.getDatabase().getClientHashMap().get(client.getName()).add_funds(Double.parseDouble(fund.getText()));
         System.out.println("Added to Wallet");
     }
 }

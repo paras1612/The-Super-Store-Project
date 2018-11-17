@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mainClasses.Categories;
 import mainClasses.Client;
+import mainClasses.Database;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -30,8 +31,7 @@ public class Home_cnt{
     }
 
     public void setChooseStore(ComboBox chooseStore) {
-        client.updateDatabase();
-        for(String name:(client.getDatabase().getStoreHashMap().keySet())){
+        for(String name:(Database.getDatabase().getStoreHashMap().keySet())){
             chooseStore.getItems().add(name);
         }
     }
@@ -182,7 +182,7 @@ public class Home_cnt{
 
     public void dispStData(ActionEvent e){
         VBox vb = new VBox();
-        for(Categories cat: client.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getCategoriesList().get("Main").getSubCategories()){
+        for(Categories cat: Database.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getCategoriesList().get("Main").getSubCategories()){
             Button catbut= new Button(cat.getUid());
             catbut.setPrefWidth(dataPane.getPrefWidth());
             catbut.setOnAction(new EventHandler<ActionEvent>() {
@@ -243,7 +243,7 @@ public class Home_cnt{
             hb.getChildren().add(catbut);
             vb.getChildren().add(hb);
         }
-        /*for(Product product: client.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getInventory().keySet()){
+        /*for(Product product: Database.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getInventory().keySet()){
             Button prodName = new Button(product.getName());
             TextField qty = new TextField("1");
             qty.setPromptText("Enter Quantity");

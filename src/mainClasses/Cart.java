@@ -12,11 +12,11 @@ public class Cart implements Serializable {
         return cartList;
     }
 
-    public HashMap<Product, Warehouse> getWareprod() {
+    HashMap<Product, Warehouse> getWareprod() {
         return wareprod;
     }
 
-    public HashMap<Product, Store> getStoreprod() {
+    HashMap<Product, Store> getStoreprod() {
         return storeprod;
     }
 }

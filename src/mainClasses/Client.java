@@ -18,7 +18,6 @@ public class Client implements Serializable {
     public String getName() {
         return name;
     }
-    private Database database = deserialize();
 
     public Client(String name, String pass, String uid)
     {
@@ -26,35 +25,19 @@ public class Client implements Serializable {
         this.password = pass;
         this.uid = uid;
     }
-
-    public Client()
-    {
-        super();
-        this.name = null;
-        this.password=null;
-        this.uid = "1001";
-        this.cart =null;
-        this.wallet = 0;
-        this.prevOrder =null;
-        this.favCategory = null;
-
-    }
     void check_out(){
 
     }
     public void add_product(String store, String name, int quant){
-        database=deserialize();
-        Product temp = database.getStoreHashMap().get(store).getLinkedWarehouse().getProductHashMap().get(name);
+        Product temp = Database.getDatabase().getStoreHashMap().get(store).getLinkedWarehouse().getProductHashMap().get(name);
         Product prod = new Product(temp.getName(), temp.getPrice(), quant, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
-        database.getClientHashMap().get(this.name).getCart().getCartList().put(prod, quant);
-        database.getClientHashMap().get(this.name).getCart().getStoreprod().put(prod, database.getStoreHashMap().get(store));
-        serialize(database);
+        Database.getDatabase().getClientHashMap().get(this.name).getCart().getCartList().put(prod, quant);
+        Database.getDatabase().getClientHashMap().get(this.name).getCart().getStoreprod().put(prod, Database.getDatabase().getStoreHashMap().get(store));
+        serialize();
     }
     public void add_funds(double fund){
-        System.out.println("dasfadffaf");
-        database=deserialize();
-        database.getClientHashMap().get(this.name).wallet+=fund;
-        serialize(database);
+        Database.getDatabase().getClientHashMap().get(this.name).wallet+=fund;
+        serialize();
     }
     public void setName(String name) {
         this.name = name;
@@ -107,11 +90,4 @@ public class Client implements Serializable {
 
     }
 
-    public Database getDatabase() {
-        return database;
-    }
-
-    public void updateDatabase() {
-        this.database = deserialize();
-    }
 }

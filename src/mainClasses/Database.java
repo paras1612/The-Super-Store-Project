@@ -3,7 +3,10 @@ package mainClasses;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import static sample.Main.deserialize;
+
 public class Database implements Serializable {
+    private static Database database = null;
     private HashMap<String, Product> ProductList=new HashMap<>();
     private HashMap<String, Categories> CategoriesList = new HashMap<>();
     private HashMap<String, Client> ClientHashMap = new HashMap<>();
@@ -16,6 +19,19 @@ public class Database implements Serializable {
     private HashMap<Warehouse, HashMap<Product, Integer>> Warehouse_Product = new HashMap<>();
     private static final long serialVersionUID=7L;
     private Auth auth = new Auth();
+
+    public static Database getDatabase() {
+        if(database==null){
+            database =deserialize();
+            return database;
+        }
+        return database;
+    }
+
+    public static void setDatabase(Database database) {
+        Database.database = database;
+    }
+
     public boolean createSuperuser(String name, String password, String email){
         if(auth.getSuperUserAdminAuth().containsKey(email) || auth.getstoreAdminAuth().containsKey(name) || auth.getwarehouseAdmintAuth().containsKey(name) || auth.getclientAuth().containsKey(email)){
             System.out.println("Email already registered");
@@ -25,7 +41,6 @@ public class Database implements Serializable {
             Super_usr init = new Super_usr(name, password, email);
             getSuper_userHashMap().put(email,init);
             System.out.println(getSuper_userHashMap().toString());
-            init.updateDatabase(this);
             auth.getSuperUserAdminAuth().put(email, password);
             return true;
         }

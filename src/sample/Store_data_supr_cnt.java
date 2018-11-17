@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Database;
 import mainClasses.Super_usr;
 
 import java.io.IOException;
@@ -24,14 +25,14 @@ public class Store_data_supr_cnt {
     @FXML private ComboBox delStoreList;
     public void setStoreList() {
         System.out.println(user);
-        for(String name :user.getDatabase().getStoreHashMap().keySet()){
+        for(String name :Database.getDatabase().getStoreHashMap().keySet()){
             delStoreList.getItems().add(name);
             storeList.getItems().add(name);
         }
     }
 
     public void setWarehouseList() {
-        for(String name: user.getDatabase().getWarehouseHashMap().keySet()){
+        for(String name: Database.getDatabase().getWarehouseHashMap().keySet()){
             this.warehouseList.getItems().add(name);
         }
     }
@@ -109,8 +110,8 @@ public class Store_data_supr_cnt {
     }
 
     public void warehouseLink(ActionEvent e){
-        user.getDatabase().getStoreHashMap().get(storeList.getValue().toString()).setLinkedWarehouse(user.getDatabase().getWarehouseHashMap().get(warehouseList.getValue().toString()));
-        serialize(user.getDatabase());
+        Database.getDatabase().getStoreHashMap().get(storeList.getValue().toString()).setLinkedWarehouse(Database.getDatabase().getWarehouseHashMap().get(warehouseList.getValue().toString()));
+        serialize();
         System.out.println("Warehouse Linked");
     }
 

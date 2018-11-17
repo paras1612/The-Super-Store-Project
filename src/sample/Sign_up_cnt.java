@@ -14,12 +14,6 @@ import mainClasses.Database;
 import java.io.IOException;
 
 public class Sign_up_cnt extends Main {
-    private Database database;
-
-    public void setDatabase(Database database) {
-        this.database = database;
-    }
-
     @FXML
     Button Sign_up_btn;
     @FXML
@@ -57,8 +51,8 @@ public class Sign_up_cnt extends Main {
         String email = user_fld.getText();
         String pass  = pass_fld.getText();
         System.out.println(name+email+pass);
-        if (database.createClient(name , pass, email)){
-            serialize(database);
+        if (Database.getDatabase().createClient(name , pass, email)){
+            serialize();
             System.out.println("User Created"+email+pass);
 //            System.out.println("Login");
             ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();

@@ -42,7 +42,7 @@ public class CategoryView_cnt {
     public void setData(String store, String catChosen){
         this.store=store;
         VBox vbcat = new VBox();
-        for(Categories cat: client.getDatabase().getStoreHashMap().get(store).getCategoriesList().get(catChosen).getSubCategories()){
+        for(Categories cat: Database.getDatabase().getStoreHashMap().get(store).getCategoriesList().get(catChosen).getSubCategories()){
             Button catbut = new Button(cat.getUid());
             catbut.setPrefWidth(catPane.getPrefWidth());
             catbut.setOnAction(new EventHandler<ActionEvent>() {
@@ -74,7 +74,7 @@ public class CategoryView_cnt {
 
         VBox vbprod = new VBox();
         prodPane.setFitToWidth(true);
-        for(Product product: client.getDatabase().getStoreHashMap().get(store).getCategoriesList().get(catChosen).getProduct_list()){
+        for(Product product: Database.getDatabase().getStoreHashMap().get(store).getCategoriesList().get(catChosen).getProduct_list()){
             Button prodName = new Button(product.getName());
             prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
             TextField qty = new TextField("1");

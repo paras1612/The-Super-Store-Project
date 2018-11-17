@@ -46,7 +46,6 @@ public class Product_mod_cnt{
 
     public void setCategory() {
         if(warehouse_admin!=null) {
-            warehouse_admin.getAssigned_ware().updateData();
             System.out.println(warehouse_admin.getAssigned_ware().getCategoryHashMap().toString());
             for (String name : warehouse_admin.getAssigned_ware().getCategoryHashMap().keySet()) {
                 category.getItems().add(name);
@@ -206,7 +205,6 @@ public class Product_mod_cnt{
         if(warehouse_admin!=null) {
             if (priceTxt.isDisable()) {
                 if(warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString())){
-                    warehouse_admin.getAssigned_ware().updateData();
                     category.getItems().add(nameTxt.getText());
                 }
 

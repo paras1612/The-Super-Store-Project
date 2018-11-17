@@ -11,43 +11,38 @@ import java.io.*;
 
 public class Main extends Application {
 
-    private Database database = deserialize();
-
     @Override
     public void start(Stage primaryStage) throws Exception{
-        if(database.getSuper_userHashMap().get("q")==null){
+        Database.setDatabase(deserialize());
+        if(Database.getDatabase().getSuper_userHashMap().get("q")==null){
             System.out.println("Made a new one haha");
-            database.createSuperuser("q","q", "q");
-            serialize(database);
-            System.out.println(database);
-            System.out.println(database.getSuper_userHashMap().toString());
+            Database.getDatabase().createSuperuser("q","q", "q");
+            serialize();
+            System.out.println(Database.getDatabase());
+            System.out.println(Database.getDatabase().getSuper_userHashMap().toString());
         }
-        System.out.println(database);
-        System.out.println(database.getWarehouseHashMap());
+        System.out.println(Database.getDatabase());
+        System.out.println(Database.getDatabase().getWarehouseHashMap());
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("The Super Store");
         Scene one = new Scene(root);//, 600, 400);
-        System.out.println(database.getStore_AdminHashMap().toString());
+        System.out.println(Database.getDatabase().getStore_AdminHashMap().toString());
         one.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(one);
         primaryStage.show();
     }
 
-    public Database getDatabase()
-    {
-        System.out.println("kjsdbkjbdssjeb"+database);
-        return database;
-    }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public static void serialize(Database Main_Database) {
+    public static void serialize() {
         ObjectOutputStream out = null;
         try {
             out = new ObjectOutputStream(new FileOutputStream("Database.txt"));
-            out.writeObject(Main_Database);
+            Database curr = Database.getDatabase();
+            out.writeObject(curr);
             out.close();
         }
         catch(Exception e)

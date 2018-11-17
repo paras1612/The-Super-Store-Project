@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mainClasses.Categories;
+import mainClasses.Database;
 import mainClasses.Product;
 import mainClasses.Warehouse_Admin;
 
@@ -35,8 +36,7 @@ public class Warehouse_home_cnt{
     }
 
     public void setChooseWare() {
-        warehouse_admin.getAssigned_ware().updateData();
-        for(String warehouse :warehouse_admin.getAssigned_ware().getDatabase().getWarehouseHashMap().keySet()){
+        for(String warehouse :Database.getDatabase().getWarehouseHashMap().keySet()){
             this.chooseWare.getItems().add(warehouse);
         }
     }
@@ -164,7 +164,7 @@ public class Warehouse_home_cnt{
     public void setDatafn(String warehouse, String catChosen){
         updateAllWare();
         VBox vbcat = new VBox();
-        for(Categories cat: warehouse_admin.getAssigned_ware().getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getSubCategories()){
+        for(Categories cat: Database.getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getSubCategories()){
             Button catbut = new Button(cat.getUid());
             catbut.setPrefWidth(catPane.getPrefWidth());
             catbut.setOnAction(new EventHandler<ActionEvent>() {
@@ -180,7 +180,7 @@ public class Warehouse_home_cnt{
         catPane.setContent(vbcat);
 
         VBox vbprod= new VBox();
-        for(Product product: warehouse_admin.getAssigned_ware().getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getProduct_list()){
+        for(Product product: Database.getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getProduct_list()){
             Button prodName = new Button(product.getName());
             prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
             TextField qty = new TextField("1");

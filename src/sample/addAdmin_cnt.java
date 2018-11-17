@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Database;
 import mainClasses.Super_usr;
 
 import java.io.IOException;
@@ -31,11 +32,11 @@ public class addAdmin_cnt{
 
     public void setRole(ComboBox role) {
         System.out.println(user);
-        System.out.println(user.getDatabase().getStoreHashMap().toString());
-        for(String name: user.getDatabase().getStoreHashMap().keySet()) {
+        System.out.println(Database.getDatabase().getStoreHashMap().toString());
+        for(String name: Database.getDatabase().getStoreHashMap().keySet()) {
             this.role.getItems().add(name);
         }
-        for(String name: user.getDatabase().getWarehouseHashMap().keySet()) {
+        for(String name: Database.getDatabase().getWarehouseHashMap().keySet()) {
             this.role.getItems().add(name);
         }
     }
@@ -100,11 +101,11 @@ public class addAdmin_cnt{
 
     public void addAdmin(ActionEvent e)
     {
-        if(user.getDatabase().getStoreHashMap().containsKey(role.getValue().toString())){
+        if(Database.getDatabase().getStoreHashMap().containsKey(role.getValue().toString())){
             user.createStoreAdmin(name.getText(),pass.getText(),role.getValue().toString());
 
         }
-        else if(user.getDatabase().getWarehouseHashMap().containsKey(role.getValue().toString())){
+        else if(Database.getDatabase().getWarehouseHashMap().containsKey(role.getValue().toString())){
             user.createWarehouseAdmin(name.getText(), pass.getText(),role.getValue().toString());
         }
         System.out.println("Store/warehouse chosen");
