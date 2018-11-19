@@ -81,7 +81,7 @@ public class Client implements Serializable {
 
 
     public void Search(String prod_name, String store, String cat) {
-        Database.getDatabase().search(prod_name, store, cat);
+        //Database.getDatabase().search(prod_name, store, cat);
     }
 
     public void currentOrder() {
@@ -115,7 +115,7 @@ public class Client implements Serializable {
             else {
                 for (Product product : cart.getCartList().keySet()) {
                     Store prod_store = cart.getStoreprod().get(product);
-                    prod_store.setSale(prod_store.getSale()+product.getPrice());
+                    prod_store.getProductSold().put(product, cart.getCartList().get(product));
                 }
                 cart = new Cart();
             }

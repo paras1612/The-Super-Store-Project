@@ -116,12 +116,13 @@ public class Warehouse_home_cnt{
 
     public void Message_btn(ActionEvent e) throws IOException {
         System.out.println("Message");
-        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        //((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Message.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
-//        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+        Message_cnt cnt =loader.getController();
+        cnt.text.setText(warehouse_admin.getAssigned_ware().getMessage());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -125,8 +125,16 @@ public class Store_home_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public void message(ActionEvent e){
+    public void message(ActionEvent e) throws IOException {
         System.out.println("Message Button pressed");
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Message_cnt cnt =loader.getController();
+        cnt.text.setText(store_admin.getAssignedStore().getMessage());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public void orders(ActionEvent e){

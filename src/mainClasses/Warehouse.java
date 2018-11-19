@@ -146,7 +146,7 @@ public class Warehouse implements Serializable {
             for(Product product: Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().keySet()){
                 Warehouse prod_ware= Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getWareprod().get(product);
                 Product ware_prod = Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getProductHashMap().get(product.getUid());
-
+                prod_ware.getProductSold().put(ware_prod, cart.getCartList().get(product));
                 if(Database.getDatabase().getWarehouseHashMap().get(uid).getProductHashMap().containsKey(product.getUid())){
                     Product prod_ware1 = Database.getDatabase().getWarehouseHashMap().get(uid).getProductHashMap().get(product.getUid());
                     Database.getDatabase().getWarehouseHashMap().get(uid).CategoryHashMap.get("Main").getProduct_list().add(ware_prod);

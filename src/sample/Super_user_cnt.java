@@ -135,7 +135,7 @@ public class Super_user_cnt{
         AnchorPane root = loader.load();
         Scene scene = new Scene(root);
         Message_cnt cnt = loader.getController();
-        cnt.text.setText("kjsdbkjfbjksb");
+        cnt.text.setText(user.getMessage());
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

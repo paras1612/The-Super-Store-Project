@@ -1,10 +1,7 @@
 package mainClasses;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import static sample.Main.deserialize;
 import static sample.Main.serialize;
 
 public class Store implements Serializable {
@@ -101,7 +98,7 @@ public class Store implements Serializable {
             for(Product product: Database.getDatabase().getStoreHashMap().get(uid).getCart().getCartList().keySet()){
                 Warehouse prod_ware= Database.getDatabase().getStoreHashMap().get(uid).getCart().getWareprod().get(product);
                 Product ware_prod = Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getProductHashMap().get(product.getUid());
-
+                prod_ware.getProductSold().put(ware_prod, cart.getCartList().get(product));
                 if(Database.getDatabase().getStoreHashMap().get(uid).getInventory().containsKey(product.getUid())){
                     Product prod_ware1 = Database.getDatabase().getWarehouseHashMap().get(uid).getProductHashMap().get(product.getUid());
                     Database.getDatabase().getStoreHashMap().get(uid).categoriesList.get("Main").getProduct_list().add(ware_prod);
