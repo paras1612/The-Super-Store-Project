@@ -125,7 +125,7 @@ public class Home_cnt{
 
     public void Cart_btn(ActionEvent e) throws IOException {
         System.out.println("CartButton");
-
+        ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
         AnchorPane root = loader.load();
@@ -181,7 +181,6 @@ public class Home_cnt{
 
     public void dispStData(ActionEvent e){
         VBox vb = new VBox();
-        Database temp =(Database.getDatabase());
         for(Categories cat: Database.getDatabase().getStoreHashMap().get(chooseStore.getValue().toString()).getCategoriesList().get("Main").getSubCategories()){
             Button catbut= new Button(cat.getUid());
             catbut.setPrefWidth(dataPane.getPrefWidth());

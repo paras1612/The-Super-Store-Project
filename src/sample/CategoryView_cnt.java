@@ -20,12 +20,17 @@ import java.util.HashMap;
 
 public class CategoryView_cnt {
     private Client client;
+    private Super_usr user;
     private Warehouse_Admin warehouse_admin;
     private Store_Admin store_admin;
     private String store;
     private HashMap<String, Integer> selected = new HashMap<>();
     @FXML private ScrollPane catPane;
     @FXML private ScrollPane prodPane;
+
+    public void setUser(Super_usr user) {
+        this.user = user;
+    }
 
     public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
         this.warehouse_admin = warehouse_admin;

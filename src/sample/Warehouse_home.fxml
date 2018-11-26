@@ -24,7 +24,7 @@
       <Button fx:id="addCategory_btn" layoutX="16.0" layoutY="239.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="26.0" prefWidth="194.0" text="Add Category/Product" />
       <ComboBox fx:id="sort_menu1" layoutX="15.0" layoutY="73.0" prefHeight="26.0" prefWidth="216.0" promptText="Products/Categories" />
       <ComboBox fx:id="chooseWare" layoutX="15.0" layoutY="138.0" onAction="#setData" prefHeight="26.0" prefWidth="194.0" promptText="Inventory" />
-      <ComboBox fx:id="delProd" layoutX="15.0" layoutY="277.0" prefHeight="26.0" prefWidth="194.0" promptText="Delete a Product" />
+      <ComboBox fx:id="delchoose" layoutX="15.0" layoutY="277.0" prefHeight="26.0" prefWidth="194.0" promptText="Delete a Product" />
       <ScrollPane fx:id="prodPane" layoutX="233.0" layoutY="307.0" prefHeight="202.0" prefWidth="552.0" />
    </children>
 </AnchorPane>

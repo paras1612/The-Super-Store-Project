@@ -156,6 +156,7 @@ public class Store_home_cnt{
     }
     public void deleteProduct(ActionEvent e){
         store_admin.getAssignedStore().deleteProduct(delchoose.getValue().toString());
+        delchoose.getItems().remove(delchoose.getValue().toString());
         System.out.println("Product Deleted");
     }
 
@@ -165,49 +166,49 @@ public class Store_home_cnt{
 
     public void setData(String catChosen){
         VBox vbcat = new VBox();
-        Warehouse assign = store_admin.getAssignedStore().getLinkedWarehouse();
+    Warehouse assign = store_admin.getAssignedStore().getLinkedWarehouse();
         for(Categories cat: assign.getCategoryHashMap().get(catChosen).getSubCategories()){
-            Button catbut = new Button(cat.getUid());
-            catbut.setPrefWidth(catPane.getPrefWidth());
-            catbut.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    setData(catbut.getText());
-                }
-            });
-            HBox hbcat= new HBox();
-            hbcat.getChildren().add(catbut);
-            vbcat.getChildren().add(hbcat);
-        }
+        Button catbut = new Button(cat.getUid());
+        catbut.setPrefWidth(catPane.getPrefWidth());
+        catbut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setData(catbut.getText());
+            }
+        });
+        HBox hbcat= new HBox();
+        hbcat.getChildren().add(catbut);
+        vbcat.getChildren().add(hbcat);
+    }
         catPane.setContent(vbcat);
 
-        VBox vbprod= new VBox();
+    VBox vbprod= new VBox();
         for(Product product: store_admin.getAssignedStore().getLinkedWarehouse().getCategoryHashMap().get(catChosen).getProduct_list()){
-            Button prodName = new Button(product.getName());
-            prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
-            TextField qty = new TextField("1");
-            qty.setPrefWidth(prodPane.getPrefWidth()*0.20);
-            qty.setPromptText("Enter Quantity");
-            CheckBox chk = new CheckBox();
-            chk.setPrefSize(prodPane.getPrefWidth()*0.05,prodPane.getPrefWidth()*0.05);
-            //chk.setText(product.getName());
-            chk.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    if(chk.isSelected()){
-                        selected.put(prodName.getText(),Integer.parseInt(qty.getText()));
-                    }
-                    else {
-                        selected.remove(product.getName());
-                    }
+        Button prodName = new Button(product.getName());
+        prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
+        TextField qty = new TextField("1");
+        qty.setPrefWidth(prodPane.getPrefWidth()*0.20);
+        qty.setPromptText("Enter Quantity");
+        CheckBox chk = new CheckBox();
+        chk.setPrefSize(prodPane.getPrefWidth()*0.05,prodPane.getPrefWidth()*0.05);
+        //chk.setText(product.getName());
+        chk.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(chk.isSelected()){
+                    selected.put(prodName.getText(),Integer.parseInt(qty.getText()));
                 }
-            });
-            HBox hb = new HBox();
-            hb.getChildren().addAll(prodName,qty,chk);
-            vbprod.getChildren().add(hb);
-        }
-        prodPane.setContent(vbprod);
+                else {
+                    selected.remove(product.getName());
+                }
+            }
+        });
+        HBox hb = new HBox();
+        hb.getChildren().addAll(prodName,qty,chk);
+        vbprod.getChildren().add(hb);
     }
+        prodPane.setContent(vbprod);
+}
     public void addtoCart(ActionEvent e){
         for(String name: selected.keySet()) {
             store_admin.getAssignedStore().add_product(store_admin.getAssignedStore().getLinkedWarehouse().getUid(), name, selected.get(name));

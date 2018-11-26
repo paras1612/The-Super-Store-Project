@@ -24,11 +24,13 @@ public class Warehouse_home_cnt{
     @FXML private ComboBox chooseWare;
     @FXML private ScrollPane catPane;
     @FXML private ScrollPane prodPane;
+    @FXML private ComboBox delchoose;
 
     public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
         this.warehouse_admin = warehouse_admin;
         setChooseWare();
         updateAllWare();
+        setDelchoose();
     }
 
     public Warehouse_Admin getWarehouse_admin() {
@@ -38,6 +40,13 @@ public class Warehouse_home_cnt{
     public void setChooseWare() {
         for(String warehouse :Database.getDatabase().getWarehouseHashMap().keySet()){
             this.chooseWare.getItems().add(warehouse);
+        }
+    }
+    public void setDelchoose() {
+        if(warehouse_admin.getAssigned_ware().getProductHashMap()!=null) {
+            for (String name : warehouse_admin.getAssigned_ware().getProductHashMap().keySet()) {
+                this.delchoose.getItems().add(name);
+            }
         }
     }
 
@@ -133,7 +142,7 @@ public class Warehouse_home_cnt{
     }
 
     public void deleteProduct(ActionEvent e){
-
+        warehouse_admin.getAssigned_ware().deleteProduct(delchoose.getValue().toString());
         System.out.println("Product Deleted");
     }
 

@@ -25,6 +25,7 @@ public class Cart_cnt {
 
     void setClient(Client client1){
         client=client1;
+        setDisplayData();
     }
 
     public Client getClient() {

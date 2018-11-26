@@ -84,6 +84,17 @@ public class Warehouse implements Serializable {
         Message = message;
     }
 
+    public void deleteProduct(String product) {
+        Inventory.remove(product);
+        for(String cat :CategoryHashMap.keySet()){
+            for(Product product1: CategoryHashMap.get(cat).getProduct_list()){
+                if(product1.getUid().equals(product)){
+                    CategoryHashMap.get(cat).getProduct_list().remove(product1);
+                }
+            }
+        }
+    }
+
     public boolean addProduct(Warehouse_Admin warehouse_admin, String name, double price, int quant, double fcost, double ccost, double idem, String parent) {
         System.out.println(uid);
         System.out.println(Database.getDatabase().getWarehouseHashMap().get(uid));
