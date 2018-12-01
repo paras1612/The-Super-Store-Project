@@ -140,7 +140,6 @@ public class Warehouse_home_cnt{
         primaryStage.show();
     }
 
-
     public void orders(ActionEvent e){
         System.out.println("Orders pressed");
     }

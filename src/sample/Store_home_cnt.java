@@ -12,12 +12,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import mainClasses.Categories;
-import mainClasses.Product;
-import mainClasses.Store_Admin;
-import mainClasses.Warehouse;
+import javafx.util.Pair;
+import mainClasses.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static sample.Main.serialize;
@@ -29,6 +28,9 @@ public class Store_home_cnt{
     @FXML private ScrollPane catPane;
     @FXML private ScrollPane prodPane;
     @FXML private Label wareNameLabel;
+    @FXML private TextField search_fld;
+    private ArrayList<String> catList = new ArrayList<>();
+    private ArrayList<String> prodList = new ArrayList<>();
     private VBox vbprod;
     private HBox hb;
     private CheckBox chk;
@@ -41,7 +43,7 @@ public class Store_home_cnt{
         wareNameLabel.setText(store_admin.getAssignedStore().getLinkedWarehouse().getUid());
         prod_cat.getItems().addAll("Product","Category");
         sort_menu.getItems().addAll("Name");
-        setDelchoose(delchoose);
+        setDelchoose();
         setData("Main");
     }
 
@@ -51,14 +53,77 @@ public class Store_home_cnt{
 
 
 
-    public void setDelchoose(ComboBox delChoose) {
+    public void setDelchoose() {
         if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null) {
-            for (String name : store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()) {
-                this.delchoose.getItems().add(name);
+            for (Product name : store_admin.getAssignedStore().getInventory().keySet()) {
+                this.delchoose.getItems().add(name.getUid());
             }
         }
     }
 
+    public void sort(ActionEvent actionEvent) {
+        sort_cat(catList, prodList);
+    }
+
+    private void sort_cat(ArrayList<String> cat, ArrayList<String> prod) {
+        cat.sort(String::compareTo);
+        VBox vb = new VBox();
+        for(String category: cat){
+            Button catbut= new Button(category);
+            catbut.setPrefWidth(catPane.getPrefWidth());
+            catbut.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Category View.fxml"));
+
+                    try {
+                        AnchorPane root = loader.load();
+                        Scene scene = new Scene(root);
+                        CategoryView_cnt cnt = loader.getController();
+                        System.out.println(cnt);
+                        if(store_admin!=null) {
+                            cnt.setStore_admin(store_admin);
+                        }
+                        cnt.setData(store_admin.getAssignedStore().getUid(),catbut.getText());
+                        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().add(catbut);
+            vb.getChildren().add(hb);
+        }
+        catPane.setContent(vb);
+        vb = new VBox();
+        prod.sort(String::compareTo);
+        for( String product: prod){
+            Button prodName = new Button(product);
+            TextField qty = new TextField("1");
+            qty.setPromptText("Enter Quantity");
+            CheckBox chk = new CheckBox();
+            chk.setText(product);
+            chk.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(chk.isSelected()){
+                        selected.put(chk.getText(),Integer.parseInt(qty.getText()));
+                    }
+                    else {
+                        selected.remove(product);
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().addAll(prodName,qty,chk);
+            vb.getChildren().add(hb);
+        }
+        prodPane.setContent(vb);
+    }
 
     public ComboBox getDelchoose() {
         return delchoose;
@@ -172,6 +237,10 @@ public class Store_home_cnt{
     }
 
     public void search(ActionEvent e){
+        Pair<ArrayList<String>, ArrayList<String>> temp = Database.getDatabase().search(search_fld.getText(), store_admin.getAssignedStore().getUid(), "Main", new ArrayList<String>(), new ArrayList<String>());
+        prodList=temp.getKey();
+        catList = temp.getValue();
+        sort_cat(catList, prodList);
         System.out.println("Search pressed");
     }
 
@@ -217,6 +286,24 @@ public class Store_home_cnt{
                 }
             }
         });
+            prodName.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("productView.fxml"));
+                    AnchorPane root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Scene scene = new Scene(root);
+                    productView_cnt cnt = loader.getController();
+                    cnt.setStore_admin(store_admin,store_admin.getAssignedStore().getLinkedWarehouse().getUid(),prodName.getText());
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                }
+            });
         hb = new HBox();
         hb.getChildren().addAll(prodName,prodQty,qty,chk);
         vbprod.getChildren().add(hb);
