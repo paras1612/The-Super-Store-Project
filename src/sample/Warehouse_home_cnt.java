@@ -210,6 +210,24 @@ public class Warehouse_home_cnt{
                     }
                 }
             });
+            prodName.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("productView.fxml"));
+                    AnchorPane root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Scene scene = new Scene(root);
+                    productView_cnt cnt = loader.getController();
+                    cnt.setWarehouse_admin(warehouse_admin,chooseWare.getValue().toString(),prodName.getText());
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                }
+            });
             HBox hb = new HBox();
             hb.getChildren().addAll(prodName,qty,chk);
             vbprod.getChildren().add(hb);

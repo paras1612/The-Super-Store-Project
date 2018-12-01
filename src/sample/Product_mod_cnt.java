@@ -8,33 +8,30 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import mainClasses.Database;
+import mainClasses.Product;
 import mainClasses.Store_Admin;
 import mainClasses.Warehouse_Admin;
 
 import java.io.IOException;
 
+import static sample.Main.serialize;
+
 public class Product_mod_cnt{
     //private Database database = deserialize();
     private Store_Admin store_admin;
     private Warehouse_Admin warehouse_admin;
-    @FXML
-    private ComboBox ProdCat;
-    @FXML
-    private TextField nameTxt;
-    @FXML
-    private TextField priceTxt;
-    @FXML
-    private TextField qtyTxt;
-    @FXML
-    private TextField dTxt;
-    @FXML
-    private TextField kTxt;
-    @FXML
-    private TextField hTxt;
-    @FXML
-    private ComboBox category;
+    @FXML private ComboBox ProdCat;
+    @FXML private TextField nameTxt;
+    @FXML private TextField priceTxt;
+    @FXML private TextField qtyTxt;
+    @FXML private TextField dTxt;
+    @FXML private TextField kTxt;
+    @FXML private TextField hTxt;
+    @FXML private ComboBox category;
     @FXML private AnchorPane pane;
     @FXML private ComboBox prodList = new ComboBox();
+    @FXML private ComboBox updateProd = new ComboBox();
     //@FXML private ComboBox catList = new ComboBox();
     public ComboBox getCategory() {
         return category;
@@ -50,10 +47,16 @@ public class Product_mod_cnt{
             for (String name : warehouse_admin.getAssigned_ware().getCategoryHashMap().keySet()) {
                 category.getItems().add(name);
             }
+            for(Product product : warehouse_admin.getAssigned_ware().getInventory().keySet()){
+                updateProd.getItems().add(product.getName());
+            }
         }
         else if(store_admin!=null){
             for (String name : store_admin.getAssignedStore().getCategoriesList().keySet()) {
                 category.getItems().add(name);
+            }
+            for (Product product: store_admin.getAssignedStore().getInventory().keySet()){
+                updateProd.getItems().add(product);
             }
         }
     }
@@ -172,6 +175,7 @@ public class Product_mod_cnt{
                 cnt.dTxt.setDisable(true);
                 cnt.hTxt.setDisable(true);
                 cnt.kTxt.setDisable(true);
+                updateProd.setDisable(true);
             }
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
@@ -211,6 +215,17 @@ public class Product_mod_cnt{
                 System.out.println("serialized");
                 //Add Category
             } else if (!priceTxt.isDisable()) {
+                if(category.isDisable()){
+                    if(warehouse_admin.getAssigned_ware().getProductHashMap().containsKey(nameTxt.getText())){
+                        Product temp = warehouse_admin.getAssigned_ware().getProductHashMap().get(nameTxt.getText());
+                        temp.setPrice(Double.parseDouble(priceTxt.getText()));
+                        temp.setQuantity(Integer.parseInt(qtyTxt.getText()));
+                        temp.setfCostQuater(Double.parseDouble(dTxt.getText()));
+                        temp.setcCostQuater(Double.parseDouble(hTxt.getText()));
+                        temp.setItemDemand(Double.parseDouble(kTxt.getText()));
+                        serialize();
+                    }
+                }
                 if(warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString())){
                 }
                 System.out.println("serialized");
@@ -254,5 +269,16 @@ public class Product_mod_cnt{
 
     public TextField getkTxt() {
         return kTxt;
+    }
+
+    public void updateProduct(ActionEvent actionEvent) {
+        nameTxt.setText(updateProd.getValue().toString());
+        nameTxt.setEditable(false);
+        category.setDisable(true);
+        priceTxt.setDisable(false);
+        qtyTxt.setDisable(false);
+        hTxt.setDisable(false);
+        kTxt.setDisable(false);
+        dTxt.setDisable(false);
     }
 }

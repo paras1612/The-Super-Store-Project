@@ -17,6 +17,7 @@
       <TextField fx:id="hTxt" layoutX="326.0" layoutY="251.0" prefHeight="26.0" prefWidth="46.0" promptText="H" />
       <Button fx:id="setBtn" layoutX="223.0" layoutY="285.0" mnemonicParsing="false" onAction="#set" prefHeight="26.0" prefWidth="149.0" text="Set" />
       <ComboBox fx:id="ProdCat" layoutX="41.0" layoutY="110.0" onAction="#changeType" prefWidth="150.0" promptText="Choose Type" />
+      <ComboBox fx:id="updateProd" layoutX="41.0" layoutY="145.0" onAction="#updateProduct" prefWidth="150.0" promptText="Update Product" />
 
    </children>
 </AnchorPane>

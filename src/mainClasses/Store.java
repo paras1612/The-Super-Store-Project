@@ -36,7 +36,7 @@ public class Store implements Serializable {
         return cart;
     }
 
-    public boolean addProduct(Store_Admin store_admin, String product, String parent){
+    public boolean addProduct(String product, String parent){
         Warehouse linkware= linkedWarehouse;
         Product curr=linkware.getProductHashMap().get(product);
         Product one = new Product(curr.getName(),curr.getPrice(),0,curr.getfCostQuater(),curr.getcCostQuater(),curr.getItemDemand());
@@ -48,8 +48,7 @@ public class Store implements Serializable {
         }
         Database.getDatabase().getStoreHashMap().get(this.uid).getCategoriesList().get(parent).getProduct_list().add(one);
         if(linkware.getProductHashMap().get(product).getQuantity()>curr.getEOQ()){
-            System.out.println(Database.getDatabase().getStore_AdminHashMap().get(store_admin.uid));
-            Database.getDatabase().getStore_AdminHashMap().get(store_admin.uid).getAssignedStore().getInventory().put(one,(int)curr.getEOQ());
+            Inventory.put(one,(int)curr.getEOQ());
             Database.getDatabase().getWarehouseHashMap().get(linkware.getUid()).getProductHashMap().get(curr.getUid()).setQuantity(curr.getQuantity()-(int)curr.getEOQ());
             Database.getDatabase().getWarehouseHashMap().get(linkedWarehouse.getUid()).getInventory().put(curr,curr.getQuantity()-(int)curr.getEOQ());
         }
@@ -154,7 +153,12 @@ public class Store implements Serializable {
     }
 
     void orderAuto(){
-
+        System.out.println("Auto Ordered");
+        for(Product product: Inventory.keySet()){
+            if(Inventory.get(product)<product.getEOQ()){
+                addProduct(product.getUid(), product.getParent().getUid());
+            }
+        }
     }
 
 

@@ -100,6 +100,12 @@ public class CategoryView_cnt {
                     }
                 }
             });
+            prodName.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+                }
+            });
             HBox hb = new HBox();
             hb.getChildren().addAll(prodName,qty,chk);
             vbprod.getChildren().add(hb);
