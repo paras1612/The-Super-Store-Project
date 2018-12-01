@@ -12,7 +12,7 @@
       <ComboBox fx:id="role" layoutX="225.0" layoutY="159.0" prefWidth="150.0" promptText="Store/Warehouse" />
       <TextField fx:id="pass" layoutX="225.0" layoutY="126.0" promptText="Password" />
       <Button fx:id="addBtn" layoutX="225.0" layoutY="194.0" mnemonicParsing="false" onAction="#addAdmin" prefHeight="26.0" prefWidth="149.0" text="Add" />
-      <ComboBox layoutX="224.0" layoutY="266.0" prefWidth="150.0" promptText="Choose Admin" />
-      <Button fx:id="delBtn" layoutX="224.0" layoutY="300.0" mnemonicParsing="false" onAction="#adminRemove" prefHeight="26.0" prefWidth="150.0" text="Delete" />
+      <ComboBox fx:id="deleteAdmin" layoutX="224.0" layoutY="266.0" prefWidth="150.0" promptText="Choose Admin" />
+      <Button fx:id="delBtn" layoutX="224.0" layoutY="300.0" mnemonicParsing="false" onAction="#deleteAdmin" prefHeight="26.0" prefWidth="150.0" text="Delete" />
    </children>
 </AnchorPane>

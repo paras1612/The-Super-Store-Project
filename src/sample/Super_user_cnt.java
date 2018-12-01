@@ -263,6 +263,7 @@ public class Super_user_cnt{
         System.out.println(user);
         cnt.setUser(user);
         cnt.setRole(cnt.getRole());
+        cnt.setDeleteAdmin(cnt.getDeleteAdmin());
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

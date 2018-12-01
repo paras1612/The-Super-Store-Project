@@ -56,6 +56,10 @@ public class Warehouse implements Serializable {
 
     }
 
+    public void setCart(Cart cart){
+        this.cart=cart;
+    }
+
     public HashMap<String, Categories> getCategoryHashMap() {
         return CategoryHashMap;
     }
@@ -85,6 +89,7 @@ public class Warehouse implements Serializable {
     }
 
     public void deleteProduct(String product) {
+        HashMap<String,Categories> c = CategoryHashMap;
         Inventory.remove(product);
         for(String cat :CategoryHashMap.keySet()){
             for(Product product1: CategoryHashMap.get(cat).getProduct_list()){

@@ -14,6 +14,6 @@
       <Button fx:id="addToCart_btn" layoutX="17.0" layoutY="95.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="26.0" prefWidth="194.0" text="Add Products" />
       <Button fx:id="DeletefromCart_btn" layoutX="16.0" layoutY="130.0" mnemonicParsing="false" onAction="#deleteprod" prefHeight="26.0" prefWidth="194.0" text="Delete Products" />
       <Button fx:id="checkout_btn" layoutX="612.0" layoutY="481.0" mnemonicParsing="false" onAction="#checkout" prefHeight="26.0" prefWidth="174.0" text="Checkout" />
-      <Button layoutX="17.0" layoutY="163.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Delete all Products" />
+      <Button fx:id="deleteAllBtn" layoutX="17.0" layoutY="163.0" mnemonicParsing="false" onAction="#deleteAll" prefHeight="26.0" prefWidth="194.0" text="Delete all Products" />
    </children>
 </AnchorPane>

@@ -4,11 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import mainClasses.Categories;
 import mainClasses.Product;
@@ -18,17 +20,25 @@ import mainClasses.Warehouse;
 import java.io.IOException;
 import java.util.HashMap;
 
+import static sample.Main.serialize;
+
 public class Store_home_cnt{
     @FXML private ComboBox prod_cat;
     @FXML private ComboBox sort_menu;
     @FXML private ComboBox delchoose;
     @FXML private ScrollPane catPane;
     @FXML private ScrollPane prodPane;
+    @FXML private Label wareNameLabel;
+    private VBox vbprod;
+    private HBox hb;
+    private CheckBox chk;
+    private TextField qty;
 
     private Store_Admin store_admin;
     private HashMap<String, Integer> selected = new HashMap<>();
     public void setStore_admin(Store_Admin store_admin) {
         this.store_admin = store_admin;
+        wareNameLabel.setText(store_admin.getAssignedStore().getLinkedWarehouse().getUid());
         prod_cat.getItems().addAll("Product","Category");
         sort_menu.getItems().addAll("Name");
         setDelchoose(delchoose);
@@ -158,6 +168,7 @@ public class Store_home_cnt{
         store_admin.getAssignedStore().deleteProduct(delchoose.getValue().toString());
         delchoose.getItems().remove(delchoose.getValue().toString());
         System.out.println("Product Deleted");
+        serialize();
     }
 
     public void search(ActionEvent e){
@@ -166,30 +177,33 @@ public class Store_home_cnt{
 
     public void setData(String catChosen){
         VBox vbcat = new VBox();
-    Warehouse assign = store_admin.getAssignedStore().getLinkedWarehouse();
+        Warehouse assign = store_admin.getAssignedStore().getLinkedWarehouse();
         for(Categories cat: assign.getCategoryHashMap().get(catChosen).getSubCategories()){
-        Button catbut = new Button(cat.getUid());
-        catbut.setPrefWidth(catPane.getPrefWidth());
-        catbut.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                setData(catbut.getText());
-            }
-        });
-        HBox hbcat= new HBox();
-        hbcat.getChildren().add(catbut);
-        vbcat.getChildren().add(hbcat);
-    }
-        catPane.setContent(vbcat);
-
-    VBox vbprod= new VBox();
+            Button catbut = new Button(cat.getUid());
+            catbut.setPrefWidth(catPane.getPrefWidth());
+            catbut.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    setData(catbut.getText());
+                }
+            });
+            HBox hbcat= new HBox();
+            hbcat.getChildren().add(catbut);
+            vbcat.getChildren().add(hbcat);
+        }
+            catPane.setContent(vbcat);
+        vbprod= new VBox();
         for(Product product: store_admin.getAssignedStore().getLinkedWarehouse().getCategoryHashMap().get(catChosen).getProduct_list()){
         Button prodName = new Button(product.getName());
-        prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
-        TextField qty = new TextField("1");
+        Label prodQty = new Label();
+        prodQty.setText(String.valueOf(product.getQuantity()));
+        prodQty.setPrefWidth(prodPane.getPrefWidth()*0.15);
+        prodQty.setTextAlignment(TextAlignment.CENTER);
+        prodName.setPrefWidth(prodPane.getPrefWidth()*0.60);
+        qty = new TextField("1");
         qty.setPrefWidth(prodPane.getPrefWidth()*0.20);
         qty.setPromptText("Enter Quantity");
-        CheckBox chk = new CheckBox();
+        chk = new CheckBox();
         chk.setPrefSize(prodPane.getPrefWidth()*0.05,prodPane.getPrefWidth()*0.05);
         //chk.setText(product.getName());
         chk.setOnAction(new EventHandler<ActionEvent>() {
@@ -203,8 +217,8 @@ public class Store_home_cnt{
                 }
             }
         });
-        HBox hb = new HBox();
-        hb.getChildren().addAll(prodName,qty,chk);
+        hb = new HBox();
+        hb.getChildren().addAll(prodName,prodQty,qty,chk);
         vbprod.getChildren().add(hb);
     }
         prodPane.setContent(vbprod);

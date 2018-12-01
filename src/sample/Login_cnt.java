@@ -108,6 +108,7 @@ public class Login_cnt extends Main{
             Scene scene = new Scene(root);
             Store_home_cnt cnt = loader.getController();
             cnt.setStore_admin(curr);
+            System.out.println("fml");
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();

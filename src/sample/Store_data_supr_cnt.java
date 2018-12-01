@@ -119,14 +119,16 @@ public class Store_data_supr_cnt {
         System.out.println(user);
         user.createStore(StoreName.getText());
         System.out.println("Store added");
-        storeList.getItems().add(StoreName.getText());
-        delStoreList.getItems().remove(StoreName.getText());
+        storeList.getItems().clear();
+        delStoreList.getItems().clear();
+        setStoreList();
     }
 
     public void removeStore(ActionEvent e){
         System.out.println("Store removed");
         user.removeStore(delStoreList.getValue().toString());
-        storeList.getItems().remove(delStoreList.getValue().toString());
-        delStoreList.getItems().remove(delStoreList.getValue().toString());
+        storeList.getItems().clear();
+        delStoreList.getItems().clear();
+        setStoreList();
     }
 }

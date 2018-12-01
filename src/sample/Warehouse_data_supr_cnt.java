@@ -105,15 +105,18 @@ public class Warehouse_data_supr_cnt {
 
     public void removeWarehouse(ActionEvent e){
         user.removeWarehouse(delwarehouseList.getValue().toString());
-        warehouseList.getItems().remove(delwarehouseList.getValue().toString());
+        delwarehouseList.getItems().clear();
+        warehouseList.getItems().clear();
+        setWarehouseList();
     }
 
 
     public void addWarehouse(ActionEvent e){
         user.createWarehouse(warehouseName.getText());
         System.out.println("warehouse created");
-        warehouseList.getItems().add(warehouseName.getText());
-        delwarehouseList.getItems().add(warehouseName.getText());
+        delwarehouseList.getItems().clear();
+        warehouseList.getItems().clear();
+        setWarehouseList();
     }
 
     public void linkStore(ActionEvent e){

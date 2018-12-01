@@ -15,6 +15,8 @@ import mainClasses.*;
 import java.io.IOException;
 import java.util.HashMap;
 
+import static sample.Main.serialize;
+
 public class Cart_cnt {
     @FXML
     private ScrollPane dataPane;
@@ -22,6 +24,7 @@ public class Cart_cnt {
     private Warehouse_Admin warehouse_admin;
     private Store_Admin store_admin;
     private HashMap<String, Integer> selected= new HashMap<>();
+    @FXML private Button deleteAllBtn;
 
     void setClient(Client client1){
         client=client1;
@@ -224,6 +227,20 @@ public class Cart_cnt {
         }
         setDisplayData();
         System.out.println("Add To Cart pressed");
+    }
+
+    public void deleteAll(ActionEvent e){
+        if(client!=null){
+            client.setCart(new Cart());
+        }
+        else if(store_admin!=null){
+            store_admin.getAssignedStore().setCart(new Cart());
+        }
+        else if(warehouse_admin!=null){
+            warehouse_admin.getAssigned_ware().setCart(new Cart());
+        }
+        serialize();
+
     }
 }
 

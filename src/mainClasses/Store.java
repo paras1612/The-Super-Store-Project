@@ -35,6 +35,9 @@ public class Store implements Serializable {
     public Cart getCart() {
         return cart;
     }
+    public void setCart(Cart cart){
+        this.cart=cart;
+    }
 
     public boolean addProduct(String product, String parent){
         Warehouse linkware= linkedWarehouse;
