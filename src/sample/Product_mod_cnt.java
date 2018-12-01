@@ -227,6 +227,7 @@ public class Product_mod_cnt{
                     }
                 }
                 else if(warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString())){
+                    updateProd.getItems().add(nameTxt.getText());
                 }
                 System.out.println("serialized");
                 //Add Product

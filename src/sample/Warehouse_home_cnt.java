@@ -10,12 +10,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import mainClasses.Categories;
 import mainClasses.Database;
 import mainClasses.Product;
 import mainClasses.Warehouse_Admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Warehouse_home_cnt{
@@ -25,11 +27,13 @@ public class Warehouse_home_cnt{
     @FXML private ScrollPane catPane;
     @FXML private ScrollPane prodPane;
     @FXML private ComboBox delchoose;
+    @FXML private TextField search_fld;
+    private ArrayList<String> prodList = new ArrayList<>();
+    private ArrayList<String> catList = new ArrayList<>();
 
     public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
         this.warehouse_admin = warehouse_admin;
         setChooseWare();
-        updateAllWare();
         setDelchoose();
     }
 
@@ -147,6 +151,10 @@ public class Warehouse_home_cnt{
     }
 
     public void search(ActionEvent e){
+        Pair<ArrayList<String>, ArrayList<String>> temp = Database.getDatabase().search(search_fld.getText(), chooseWare.getValue().toString(), "Main", new ArrayList<String>(), new ArrayList<String>());
+        prodList=temp.getKey();
+        catList = temp.getValue();
+        sort_cat(catList, prodList);
         System.out.println("Search pressed");
     }
 
@@ -172,9 +180,10 @@ public class Warehouse_home_cnt{
         setDatafn(chooseWare.getValue().toString(),"Main");
     }
     public void setDatafn(String warehouse, String catChosen){
-        updateAllWare();
+        catList = new ArrayList<>();
         VBox vbcat = new VBox();
         for(Categories cat: Database.getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getSubCategories()){
+            catList.add(cat.getUid());
             Button catbut = new Button(cat.getUid());
             catbut.setPrefWidth(catPane.getPrefWidth());
             catbut.setOnAction(new EventHandler<ActionEvent>() {
@@ -190,7 +199,9 @@ public class Warehouse_home_cnt{
         catPane.setContent(vbcat);
 
         VBox vbprod= new VBox();
+        prodList= new ArrayList<>();
         for(Product product: Database.getDatabase().getWarehouseHashMap().get(warehouse).getCategoryHashMap().get(catChosen).getProduct_list()){
+            prodList.add(product.getUid());
             Button prodName = new Button(product.getName());
             prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
             TextField qty = new TextField("1");
@@ -242,7 +253,68 @@ public class Warehouse_home_cnt{
         System.out.println("Add To Cart pressed");
     }
 
-    public void updateAllWare(){
-
+    public void sort(ActionEvent actionEvent) {
+        sort_cat(catList, prodList);
     }
+
+    private void sort_cat(ArrayList<String> cat, ArrayList<String> prod) {
+        cat.sort(String::compareTo);
+        VBox vb = new VBox();
+        for(String category: cat){
+            Button catbut= new Button(category);
+            catbut.setPrefWidth(catPane.getPrefWidth());
+            catbut.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Category View.fxml"));
+
+                    try {
+                        AnchorPane root = loader.load();
+                        Scene scene = new Scene(root);
+                        CategoryView_cnt cnt = loader.getController();
+                        System.out.println(cnt);
+                        if(warehouse_admin!=null) {
+                            cnt.setWarehouse_admin(warehouse_admin);
+                        }
+                        cnt.setData(chooseWare.getValue().toString(),catbut.getText());
+                        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().add(catbut);
+            vb.getChildren().add(hb);
+        }
+        catPane.setContent(vb);
+        vb = new VBox();
+        prod.sort(String::compareTo);
+        for( String product: prod){
+            Button prodName = new Button(product);
+            TextField qty = new TextField("1");
+            qty.setPromptText("Enter Quantity");
+            CheckBox chk = new CheckBox();
+            chk.setText(product);
+            chk.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(chk.isSelected()){
+                        selected.put(chk.getText(),Integer.parseInt(qty.getText()));
+                    }
+                    else {
+                        selected.remove(product);
+                    }
+                }
+            });
+            HBox hb = new HBox();
+            hb.getChildren().addAll(prodName,qty,chk);
+            vb.getChildren().add(hb);
+        }
+        prodPane.setContent(vb);
+    }
+
 }
