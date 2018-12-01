@@ -147,6 +147,9 @@ public class Warehouse_home_cnt{
 
     public void deleteProduct(ActionEvent e){
         warehouse_admin.getAssigned_ware().deleteProduct(delchoose.getValue().toString());
+        delchoose.getItems().clear();
+        setDelchoose();
+        setDatafn(warehouse_admin.getAssigned_ware().getUid(),"Main" );
         System.out.println("Product Deleted");
     }
 

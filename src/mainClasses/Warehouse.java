@@ -89,15 +89,23 @@ public class Warehouse implements Serializable {
     }
 
     public void deleteProduct(String product) {
+        String cat1 = "";
+        Product product2=new Product();
         HashMap<String,Categories> c = CategoryHashMap;
-        Inventory.remove(product);
         for(String cat :CategoryHashMap.keySet()){
+
             for(Product product1: CategoryHashMap.get(cat).getProduct_list()){
                 if(product1.getUid().equals(product)){
-                    CategoryHashMap.get(cat).getProduct_list().remove(product1);
+                    product2=product1;
+                    cat1=cat;
+                    break;
                 }
             }
         }
+        ProductHashMap.remove(product2.getUid());
+        Inventory.remove(product2);
+        CategoryHashMap.get(cat1).getProduct_list().remove(product2);
+        serialize();
     }
 
     public boolean addProduct(Warehouse_Admin warehouse_admin, String name, double price, int quant, double fcost, double ccost, double idem, String parent) {

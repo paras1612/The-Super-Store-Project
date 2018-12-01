@@ -240,6 +240,7 @@ public class Cart_cnt {
             warehouse_admin.getAssigned_ware().setCart(new Cart());
         }
         serialize();
+        setDisplayData();
 
     }
 }
