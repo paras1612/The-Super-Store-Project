@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import mainClasses.*;
@@ -20,7 +22,7 @@ public class productView_cnt {
     @FXML private TextField quantAvail;
     @FXML private TextField quant;
     @FXML private TextArea description;
-
+    @FXML private ImageView image;
     private Client client;
     private Warehouse_Admin warehouse_admin;
     private Store_Admin store_admin;
@@ -31,22 +33,32 @@ public class productView_cnt {
         this.user = user;
     }
 
-    public void setWarehouse_admin(Warehouse_Admin warehouse_admin, String warehouse, String product) {
+    public void setImage() throws IOException {
+        imageSearch search = new imageSearch();
+        String url = search.imgsearch(name.getText());
+        System.out.println(url);
+        //image = new ImageView(new Image(url));
+        image.setImage(new Image(url));
+
+    }
+
+    public void setWarehouse_admin(Warehouse_Admin warehouse_admin, String warehouse, String product) throws IOException {
         this.warehouse_admin = warehouse_admin;
         Product temp = Database.getDatabase().getWarehouseHashMap().get(warehouse).getProductHashMap().get(product);
         setData(temp, warehouse);
     }
 
-    private void setData(Product temp, String warehouse) {
+    private void setData(Product temp, String warehouse) throws IOException {
         name.setText(temp.getName());
         price.setText(Double.toString(temp.getPrice()));
         quantAvail.setText(Integer.toString(Database.getDatabase().getWarehouseHashMap().get(warehouse).getInventory().get(temp)));
         price.setEditable(false);
         quantAvail.setEditable(false);
+        setImage();
         //description.setText(temp.getDescription());
     }
 
-    public void setStore_admin(Store_Admin store_admin, String warehouse, String product) {
+    public void setStore_admin(Store_Admin store_admin, String warehouse, String product) throws IOException {
         this.store_admin = store_admin;
         Product temp = Database.getDatabase().getWarehouseHashMap().get(warehouse).getProductHashMap().get(product);
         setData(temp, warehouse);

@@ -299,7 +299,11 @@ public class Store_home_cnt{
                     }
                     Scene scene = new Scene(root);
                     productView_cnt cnt = loader.getController();
-                    cnt.setStore_admin(store_admin,store_admin.getAssignedStore().getLinkedWarehouse().getUid(),prodName.getText());
+                    try {
+                        cnt.setStore_admin(store_admin,store_admin.getAssignedStore().getLinkedWarehouse().getUid(),prodName.getText());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     primaryStage.setScene(scene);
                     primaryStage.show();
                 }
