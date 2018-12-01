@@ -48,6 +48,7 @@ public class Home_cnt{
     public Client getClient() {
         return client;
     }
+
     public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -64,7 +65,7 @@ public class Home_cnt{
             profile.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+                    ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
                     Stage primaryStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
                     try {
@@ -148,7 +149,7 @@ public class Home_cnt{
             profile.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+                    ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
                     Stage primaryStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
                     try {
@@ -205,6 +206,7 @@ public class Home_cnt{
                     try {
                         AnchorPane root = loader.load();
                         if(client!=null){
+                            ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
                             Button profile = new Button(client.getUid());
                             profile.setLayoutX(17.0);
                             profile.setLayoutY(349.0);
@@ -213,7 +215,7 @@ public class Home_cnt{
                             profile.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent event) {
-                                    ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+                                    ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
                                     Stage primaryStage = new Stage();
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
                                     try {
@@ -298,6 +300,7 @@ public class Home_cnt{
                     try {
                         AnchorPane root = loader.load();
                         if(client!=null){
+                            ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
                             Button profile = new Button(client.getUid());
                             profile.setLayoutX(17.0);
                             profile.setLayoutY(349.0);

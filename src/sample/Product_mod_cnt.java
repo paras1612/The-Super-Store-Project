@@ -226,7 +226,7 @@ public class Product_mod_cnt{
                         serialize();
                     }
                 }
-                if(warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString())){
+                else if(warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString())){
                 }
                 System.out.println("serialized");
                 //Add Product
@@ -242,7 +242,7 @@ public class Product_mod_cnt{
                 System.out.println("serialized");
                 //Add Category
             } else if (!nameTxt.isVisible()) {
-                if(store_admin.getAssignedStore().addProduct(store_admin, prodList.getValue().toString(), category.getValue().toString())){
+                if(store_admin.getAssignedStore().addProduct(prodList.getValue().toString(), category.getValue().toString())){
                 }
                 System.out.println("serialized");
                 //Add Product

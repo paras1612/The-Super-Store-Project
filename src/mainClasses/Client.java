@@ -93,7 +93,7 @@ public class Client implements Serializable {
         for (Product product : cart.getCartList().keySet()) {
             Store prod_store = cart.getStoreprod().get(product);
             Product store_prod = new Product();
-            for (Product store_pord1 : Database.getDatabase().getStoreHashMap().get(prod_store).getInventory().keySet()) {
+            for (Product store_pord1 : Database.getDatabase().getStoreHashMap().get(prod_store.getUid()).getInventory().keySet()) {
                 if (store_pord1.getUid().equals(product.getUid())) {
                     store_prod = store_pord1;
                 }
@@ -116,6 +116,7 @@ public class Client implements Serializable {
                 for (Product product : cart.getCartList().keySet()) {
                     Store prod_store = cart.getStoreprod().get(product);
                     prod_store.getProductSold().put(product, cart.getCartList().get(product));
+                    prod_store.setMessage(prod_store.getMessage()+"Product Name: "+product.getName() +"\n" + "Quantity: "+cart.getCartList().get(product));
                 }
                 cart = new Cart();
             }

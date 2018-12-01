@@ -54,7 +54,7 @@ public class Login_cnt extends Main{
             profile.setOnAction(new EventHandler<>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
+                    ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
                     Stage primaryStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
                     try {
