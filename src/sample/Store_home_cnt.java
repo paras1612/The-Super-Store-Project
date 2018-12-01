@@ -237,7 +237,7 @@ public class Store_home_cnt{
     }
 
     public void search(ActionEvent e){
-        Pair<ArrayList<String>, ArrayList<String>> temp = Database.getDatabase().search(search_fld.getText(), store_admin.getAssignedStore().getUid(), "Main", new ArrayList<String>(), new ArrayList<String>());
+        Pair<ArrayList<String>, ArrayList<String>> temp = Database.getDatabase().searchWare(search_fld.getText(), store_admin.getAssignedStore().getLinkedWarehouse().getUid(), "Main", new ArrayList<String>(), new ArrayList<String>());
         prodList=temp.getKey();
         catList = temp.getValue();
         sort_cat(catList, prodList);

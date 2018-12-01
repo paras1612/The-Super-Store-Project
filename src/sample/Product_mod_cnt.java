@@ -231,7 +231,7 @@ public class Product_mod_cnt{
                 }
                 System.out.println("serialized");
                 //Add Product
-                updateProd.getItems().add(nameTxt.getText());
+
             }
             System.out.println("Warehouse Set pressed");
         }
