@@ -15,12 +15,9 @@ import mainClasses.Super_usr;
 import java.io.IOException;
 
 public class addAdmin_cnt{
-    @FXML
-    private ComboBox role;
-    @FXML
-    private TextField name;
-    @FXML
-    private TextField pass;
+    @FXML private ComboBox role;
+    @FXML private TextField name;
+    @FXML private TextField pass;
     private Super_usr user;
 
     public void setUser(Super_usr user) {

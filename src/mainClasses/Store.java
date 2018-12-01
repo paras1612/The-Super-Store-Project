@@ -61,12 +61,13 @@ public class Store implements Serializable {
     }
     public boolean addCategory(Store_Admin admin, String name, String parent){
         Categories init= new Categories(name);
+        if(categoriesList.containsKey(name)){
+            System.out.println("cat exists");
+            return false;
+        }
         init.setParent(Database.getDatabase().getStoreHashMap().get(this.uid).getCategoriesList().get(parent));
         Database.getDatabase().getStoreHashMap().get(this.uid).getCategoriesList().get(parent).getSubCategories().add(init);
         Database.getDatabase().getStoreHashMap().get(this.uid).getCategoriesList().put(name,init);
-        if(categoriesList.containsKey(name)){
-            return false;
-        }
         categoriesList.put(name, init);
         serialize();
         return true;
@@ -158,14 +159,19 @@ public class Store implements Serializable {
 
 
     public void deleteProduct(String product) {
-        Inventory.remove(product);
+        String cat1 = "";
+        Product product2=new Product();
         for(String cat :categoriesList.keySet()){
+            cat1=cat;
             for(Product product1: categoriesList.get(cat).getProduct_list()){
                 if(product1.getUid().equals(product)){
-                    categoriesList.get(cat).getProduct_list().remove(product1);
+                    Inventory.remove(product1);
+                    product2=product1;
                 }
             }
         }
+        categoriesList.get(cat1).getProduct_list().remove(product2);
+        serialize();
     }
 
     public void deleteProdCart(String name) {

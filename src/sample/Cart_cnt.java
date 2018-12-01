@@ -110,7 +110,6 @@ public class Cart_cnt {
             Scene scene = new Scene(root);
             Home_cnt cnt = loader.getController();
             cnt.setClient(client);
-            cnt.setChooseStore(cnt.getChooseStore());
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();

@@ -29,8 +29,8 @@ public class Client implements Serializable {
     public void add_product(String store, String name, int quant) {
         Product temp = Database.getDatabase().getStoreHashMap().get(store).getLinkedWarehouse().getProductHashMap().get(name);
         Product prod = new Product(temp.getName(), temp.getPrice(), quant, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
-        Database.getDatabase().getClientHashMap().get(this.name).getCart().getCartList().put(prod, quant);
-        Database.getDatabase().getClientHashMap().get(this.name).getCart().getStoreprod().put(prod, Database.getDatabase().getStoreHashMap().get(store));
+        cart.getCartList().put(prod, quant);
+        cart.getStoreprod().put(prod, Database.getDatabase().getStoreHashMap().get(store));
         serialize();
     }
 

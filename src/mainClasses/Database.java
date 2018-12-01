@@ -1,5 +1,7 @@
 package mainClasses;
 
+import javafx.util.Pair;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,7 +109,7 @@ public class Database implements Serializable {
     }
 
 
-    public void search(String name, String Store, String cat, ArrayList<String> product_result, ArrayList<String> cat_result){
+    public Pair<ArrayList<String>, ArrayList<String>> search(String name, String Store, String cat, ArrayList<String> product_result, ArrayList<String> cat_result){
         for (Product product : StoreHashMap.get(Store).getCategoriesList().get(cat).getProduct_list()) {
             if (product.getUid().contains(name)) {
                 product_result.add(product.getUid());
@@ -118,6 +120,7 @@ public class Database implements Serializable {
                 cat_result.add(categories.getUid());
             }
         }
+        return new Pair<>(product_result, cat_result);
     }
 
     public void searchWare(String name, String ware, String cat, ArrayList<String> product_result, ArrayList<String> cat_result){

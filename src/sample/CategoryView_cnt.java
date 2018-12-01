@@ -79,6 +79,7 @@ public class CategoryView_cnt {
 
         VBox vbprod = new VBox();
         prodPane.setFitToWidth(true);
+        System.out.println(Database.getDatabase().getStoreHashMap().get(store).getCategoriesList().get(catChosen).getProduct_list());
         for(Product product: Database.getDatabase().getStoreHashMap().get(store).getCategoriesList().get(catChosen).getProduct_list()){
             Button prodName = new Button(product.getName());
             prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
@@ -105,7 +106,7 @@ public class CategoryView_cnt {
         }
         prodPane.setContent(vbprod);
     }
-    public void Home(ActionEvent e) throws IOException {
+    /*public void Home(ActionEvent e) throws IOException {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
@@ -148,7 +149,7 @@ public class CategoryView_cnt {
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
+    }*/
     public void Login(ActionEvent e) throws IOException {
         System.out.println("Login");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -234,8 +235,21 @@ public class CategoryView_cnt {
     }
 
     public void addToCart(ActionEvent e){
-        for(String name: selected.keySet()) {
-            client.add_product(store, name, selected.get(name));
+        if(user!=null){
+
+        }
+        else {
+            for (String name : selected.keySet()) {
+                if(client!=null) {
+                    client.add_product(store, name, selected.get(name));
+                }
+                else if(warehouse_admin!=null){
+                    warehouse_admin.getAssigned_ware().add_product(warehouse_admin.getAssigned_ware().getUid(), name, selected.get(name));
+                }
+                else if(store_admin!=null){
+                    store_admin.getAssignedStore().add_product(store_admin.getAssignedStore().getUid(), name, selected.get(name));
+                }
+            }
         }System.out.println("Add To Cart pressed");
     }
 }
