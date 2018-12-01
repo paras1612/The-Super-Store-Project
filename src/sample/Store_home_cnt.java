@@ -53,8 +53,8 @@ public class Store_home_cnt{
 
     public void setDelchoose(ComboBox delChoose) {
         if(store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap()!=null) {
-            for (String name : store_admin.getAssignedStore().getLinkedWarehouse().getProductHashMap().keySet()) {
-                this.delchoose.getItems().add(name);
+            for (Product name : store_admin.getAssignedStore().getInventory().keySet()) {
+                this.delchoose.getItems().add(name.getUid());
             }
         }
     }

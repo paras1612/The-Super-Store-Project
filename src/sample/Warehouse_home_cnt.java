@@ -149,12 +149,13 @@ public class Warehouse_home_cnt{
         warehouse_admin.getAssigned_ware().deleteProduct(delchoose.getValue().toString());
         delchoose.getItems().clear();
         setDelchoose();
-        setDatafn(warehouse_admin.getAssigned_ware().getUid(),"Main" );
+        setDatafn(warehouse_admin.getAssigned_ware().getUid(), "Main");
         System.out.println("Product Deleted");
     }
 
     public void search(ActionEvent e){
-        Pair<ArrayList<String>, ArrayList<String>> temp = Database.getDatabase().search(search_fld.getText(), chooseWare.getValue().toString(), "Main", new ArrayList<String>(), new ArrayList<String>());
+        System.out.println(chooseWare.getValue().toString());
+        Pair<ArrayList<String>, ArrayList<String>> temp = Database.getDatabase().searchWare(search_fld.getText(), chooseWare.getValue().toString(), "Main", new ArrayList<String>(), new ArrayList<String>());
         prodList=temp.getKey();
         catList = temp.getValue();
         sort_cat(catList, prodList);

@@ -109,32 +109,51 @@ public class Database implements Serializable {
     }
 
 
-    public Pair<ArrayList<String>, ArrayList<String>> search(String name, String Store, String cat, ArrayList<String> product_result, ArrayList<String> cat_result){
-        for (Product product : StoreHashMap.get(Store).getCategoriesList().get(cat).getProduct_list()) {
-            if (product.getUid().contains(name)) {
-                product_result.add(product.getUid());
+    public Pair<ArrayList<String>, ArrayList<String>> search(String name, String Store, String cat1, ArrayList<String> product_result, ArrayList<String> cat_result) {
+        for (String cat : StoreHashMap.get(Store).getCategoriesList().keySet()) {
+            for (Product product : StoreHashMap.get(Store).getCategoriesList().get(cat).getProduct_list()) {
+                if (product.getUid().contains(name)) {
+                    product_result.add(product.getUid());
+                }
             }
-        }
-        for(Categories categories: StoreHashMap.get(Store).getCategoriesList().get(cat).getSubCategories()){
-            if(categories.getUid().contains(name)){
-                cat_result.add(categories.getUid());
+            for (Categories categories : StoreHashMap.get(Store).getCategoriesList().get(cat).getSubCategories()) {
+                if (categories.getUid().contains(name)) {
+                    cat_result.add(categories.getUid());
+                }
             }
         }
         return new Pair<>(product_result, cat_result);
     }
 
-    public void searchWare(String name, String ware, String cat, ArrayList<String> product_result, ArrayList<String> cat_result){
-        for (Product product : WarehouseHashMap.get(ware).getCategoryHashMap().get(cat).getProduct_list()) {
-            if (product.getUid().contains(name)) {
-                product_result.add(product.getUid());
+
+    public Pair<ArrayList<String>, ArrayList<String>> searchWare(String name, String ware, String cat1, ArrayList<String> product_result, ArrayList<String> cat_result){
+        for(String cat: WarehouseHashMap.get(ware).getCategoryHashMap().keySet()) {
+            for (Product product : WarehouseHashMap.get(ware).getCategoryHashMap().get(cat).getProduct_list()) {
+                if (product.getUid().contains(name)) {
+                    product_result.add(product.getUid());
+                }
+            }
+            for (Categories categories : WarehouseHashMap.get(ware).getCategoryHashMap().get(cat).getSubCategories()) {
+                if (categories.getUid().contains(name)) {
+                    cat_result.add(categories.getUid());
+                }
             }
         }
-        for (Categories categories : WarehouseHashMap.get(ware).getCategoryHashMap().get(cat).getSubCategories()) {
-            if (categories.getUid().contains(name)) {
-                cat_result.add(categories.getUid());
-            }
-        }
+        return new Pair<>(product_result, cat_result);
     }
+
+//    public void searchWare(String name, String ware, String cat, ArrayList<String> product_result, ArrayList<String> cat_result){
+//        for (Product product : WarehouseHashMap.get(ware).getCategoryHashMap().get(cat).getProduct_list()) {
+//            if (product.getUid().contains(name)) {
+//                product_result.add(product.getUid());
+//            }
+//        }
+//        for (Categories categories : WarehouseHashMap.get(ware).getCategoryHashMap().get(cat).getSubCategories()) {
+//            if (categories.getUid().contains(name)) {
+//                cat_result.add(categories.getUid());
+//            }
+//        }
+//    }
 
 
     public ArrayList<String> sort(ArrayList<String> list){

@@ -56,7 +56,7 @@ public class Product_mod_cnt{
                 category.getItems().add(name);
             }
             for (Product product: store_admin.getAssignedStore().getInventory().keySet()){
-                updateProd.getItems().add(product);
+                updateProd.getItems().add(product.getUid());
             }
         }
     }

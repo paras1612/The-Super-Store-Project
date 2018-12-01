@@ -12,7 +12,7 @@
       <Button fx:id="home_btn" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <TextField fx:id="search_fld" layoutX="233.0" layoutY="73.0" prefHeight="26.0" prefWidth="469.0" promptText="Search Product or Categories" />
       <Button fx:id="search_btn" layoutX="703.0" layoutY="73.0" mnemonicParsing="false" onAction="#search" prefHeight="26.0" prefWidth="81.0" text="Search" />
-      <ComboBox fx:id="sort_menu" layoutX="15.0" layoutY="105.0" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
+      <ComboBox fx:id="sort_menu" layoutX="15.0" layoutY="105.0" onAction="#sort" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
       <ScrollPane fx:id="catPane" layoutX="233.0" layoutY="105.0" prefHeight="195.0" prefWidth="552.0" />
       <Button fx:id="cart_btn" layoutX="15.0" layoutY="412.0" mnemonicParsing="false" onAction="#Cart_btn" prefHeight="26.0" prefWidth="194.0" text="Cart" />
       <Button fx:id="help_btn" layoutX="15.0" layoutY="445.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
