@@ -2,6 +2,7 @@ package mainClasses;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.SortedMap;
 
 import static sample.Main.deserialize;
 import static sample.Main.serialize;
@@ -49,8 +50,30 @@ public class Warehouse implements Serializable {
     void GenerateAlert(){
 
     }
-    void order(Cart cart){
-
+    void orderAuto(){
+        Cart tempCart = this.cart;
+        Cart temp2 = new Cart();
+        for(Product product: Inventory.keySet()){
+            if(Inventory.get(product)<product.getEOQ()){
+                double price = Double.POSITIVE_INFINITY;
+                Warehouse finalware = null;
+                for(String warehouse: Database.getDatabase().getWarehouseHashMap().keySet()){
+                    Warehouse temp = Database.getDatabase().getWarehouseHashMap().get(warehouse);
+                    Product wareprod= temp.getProductHashMap().get(product.getUid());
+                    if(temp.getInventory().get(wareprod)>product.getEOQ()){
+                        //order can be placed
+                        if(temp.getProductHashMap().get(product).getPrice()<price){
+                            price=temp.getProductHashMap().get(product).getPrice();
+                            finalware = temp;
+                        }
+                    }
+                }
+                temp2.getCartList().put(product, (int)product.getEOQ());
+                temp2.getWareprod().put(product, finalware);
+                checkout();
+            }
+        }
+        cart= tempCart;
     }
     void send_confirm(){
 
@@ -85,6 +108,7 @@ public class Warehouse implements Serializable {
     }
 
     public void setMessage(String message) {
+        orderAuto();
         Message = message;
     }
 

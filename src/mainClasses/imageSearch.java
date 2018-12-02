@@ -17,11 +17,11 @@ public class imageSearch {
         while ((line = reader.readLine()) != null) {
             resp = (line.split("\""));
 
-            System.out.println(line);
+          //  System.out.println(line);
         }
         for (int i = 0; i < resp.length; i++) {
             if (resp[i].contains("images?q")) {
-                System.out.println(resp[i]);
+                //System.out.println(resp[i]);
                 if (i > 4) {
                     reader.close();
                     return resp[i];

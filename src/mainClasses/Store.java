@@ -117,8 +117,9 @@ public class Store implements Serializable {
                     Database.getDatabase().getStoreHashMap().get(uid).getInventory().put(product, Database.getDatabase().getStoreHashMap().get(uid).getCart().getCartList().get(product));
                     Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().put(ware_prod, Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().get(ware_prod) - Database.getDatabase().getStoreHashMap().get(uid).getCart().getCartList().get(product));
                 }
-                Database.getDatabase().getStoreHashMap().get(uid).cart = new Cart();
+                prod_ware.setMessage(prod_ware.getMessage()+"Product Name: "+product.getName() + "\t" + "Quantity: "+ cart.getCartList().get(product)+"\n");
             }
+            Database.getDatabase().getStoreHashMap().get(uid).cart = new Cart();
         }
         serialize();
     }
@@ -144,6 +145,7 @@ public class Store implements Serializable {
     }
 
     public void setMessage(String message) {
+        orderAuto();
         Message = message;
     }
 
@@ -169,9 +171,9 @@ public class Store implements Serializable {
         String cat1 = "";
         Product product2=new Product();
         for(String cat :categoriesList.keySet()){
-            cat1=cat;
             for(Product product1: categoriesList.get(cat).getProduct_list()){
                 if(product1.getUid().equals(product)){
+                    cat1=cat;
                     Inventory.remove(product1);
                     product2=product1;
                 }
