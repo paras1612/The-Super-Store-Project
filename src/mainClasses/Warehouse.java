@@ -1,5 +1,8 @@
 package mainClasses;
 
+import Exceptions.duplicateCategoryException;
+import Exceptions.productNotFoundException;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.SortedMap;
@@ -24,13 +27,14 @@ public class Warehouse implements Serializable {
         this.uid = uid;
         serialize();
     }
-    public boolean addCategory(Warehouse_Admin admin, String name, String parent){
+    public boolean addCategory(Warehouse_Admin admin, String name, String parent)throws duplicateCategoryException{
         System.out.println(uid);
         System.out.println(Database.getDatabase().getWarehouseHashMap().get(uid));
         Categories init=new Categories(name);
         init.setParent(CategoryHashMap.get(parent));
         if(CategoryHashMap.containsKey(name)){
-            return false;
+            throw new duplicateCategoryException("");
+//            return false;
         }
         Database.getDatabase().getWarehouseHashMap().get(uid).CategoryHashMap.get(parent).getSubCategories().add(init);
         Database.getDatabase().getWarehouseHashMap().get(uid).CategoryHashMap.put(name, init);
@@ -112,7 +116,7 @@ public class Warehouse implements Serializable {
         Message = message;
     }
 
-    public void deleteProduct(String product) {
+    public void deleteProduct(String product) throws productNotFoundException {
         String cat1 = "";
         Product product2=new Product();
         HashMap<String,Categories> c = CategoryHashMap;
@@ -126,19 +130,23 @@ public class Warehouse implements Serializable {
                 }
             }
         }
+        if(cat1.equals("")){
+            throw new productNotFoundException("Not found");
+        }
         ProductHashMap.remove(product2.getUid());
         Inventory.remove(product2);
         CategoryHashMap.get(cat1).getProduct_list().remove(product2);
         serialize();
     }
 
-    public boolean addProduct(Warehouse_Admin warehouse_admin, String name, double price, int quant, double fcost, double ccost, double idem, String parent) {
+    public boolean addProduct(Warehouse_Admin warehouse_admin, String name, double price, int quant, double fcost, double ccost, double idem, String parent) throws productNotFoundException {
         System.out.println(uid);
         System.out.println(Database.getDatabase().getWarehouseHashMap().get(uid));
         Product init = new Product(name, price, quant, fcost, ccost, idem);
         init.setParent(CategoryHashMap.get(parent));
         if (getProductHashMap().containsKey(name)) {
-            return false;
+            throw new productNotFoundException("");
+//            return false;
         }
         Database.getDatabase().getWarehouseHashMap().get(uid).CategoryHashMap.get(parent).getProduct_list().add(init);
         Database.getDatabase().getWarehouseHashMap().get(uid).ProductHashMap.put(name, init);
