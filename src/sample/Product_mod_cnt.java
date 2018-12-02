@@ -1,5 +1,8 @@
 package sample;
 
+import Exceptions.duplicateCategoryException;
+import Exceptions.insufficientQty;
+import Exceptions.productNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -208,8 +211,12 @@ public class Product_mod_cnt{
     {
         if(warehouse_admin!=null) {
             if (priceTxt.isDisable()) {
-                if(warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString())){
-                    category.getItems().add(nameTxt.getText());
+                try {
+                    if(warehouse_admin.getAssigned_ware().addCategory(warehouse_admin, nameTxt.getText(), category.getValue().toString())){
+                        category.getItems().add(nameTxt.getText());
+                    }
+                } catch (duplicateCategoryException e1) {
+                    System.out.println("Duplicate Category");
                 }
 
                 System.out.println("serialized");
@@ -218,33 +225,52 @@ public class Product_mod_cnt{
                 if(category.isDisable()){
                     if(warehouse_admin.getAssigned_ware().getProductHashMap().containsKey(nameTxt.getText())){
                         Product temp = warehouse_admin.getAssigned_ware().getProductHashMap().get(nameTxt.getText());
+                        warehouse_admin.getAssigned_ware().getInventory().put(temp, Integer.parseInt(qtyTxt.getText()));
                         temp.setPrice(Double.parseDouble(priceTxt.getText()));
                         temp.setQuantity(Integer.parseInt(qtyTxt.getText()));
                         temp.setfCostQuater(Double.parseDouble(dTxt.getText()));
                         temp.setcCostQuater(Double.parseDouble(hTxt.getText()));
                         temp.setItemDemand(Double.parseDouble(kTxt.getText()));
+                        System.out.println(warehouse_admin);
                         serialize();
                     }
                 }
-                else if(warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString())){
-                    updateProd.getItems().add(nameTxt.getText());
+                else {
+                    try {
+                        if(warehouse_admin.getAssigned_ware().addProduct(warehouse_admin, nameTxt.getText(), Double.parseDouble(priceTxt.getText()), Integer.parseInt(qtyTxt.getText()), Double.parseDouble(dTxt.getText()), Double.parseDouble(hTxt.getText()), Double.parseDouble(kTxt.getText()), category.getValue().toString())){
+                            updateProd.getItems().add(nameTxt.getText());
+                        }
+                    } catch (productNotFoundException e1) {
+                        System.out.println("Duplicate Product");
+                    }
                 }
                 System.out.println("serialized");
                 //Add Product
 
+            }
+            else if(nameTxt.isDisable()){
+                if(warehouse_admin.getAssigned_ware().removeCategory(category.getValue().toString()));
             }
             System.out.println("Warehouse Set pressed");
         }
         else if(store_admin!=null){
 
             if (nameTxt.isVisible()) {
-                if(store_admin.getAssignedStore().addCategory(store_admin, nameTxt.getText(), category.getValue().toString())) {
-                    category.getItems().add(nameTxt.getText());
+                try {
+                    if(store_admin.getAssignedStore().addCategory(store_admin, nameTxt.getText(), category.getValue().toString())) {
+                        category.getItems().add(nameTxt.getText());
+                    }
+                } catch (duplicateCategoryException e1) {
+                    System.out.println("Duplicate Category");
                 }
                 System.out.println("serialized");
                 //Add Category
             } else if (!nameTxt.isVisible()) {
-                if(store_admin.getAssignedStore().addProduct(prodList.getValue().toString(), category.getValue().toString())){
+                try {
+                    if(store_admin.getAssignedStore().addProduct(prodList.getValue().toString(), category.getValue().toString())){
+                    }
+                } catch (Exceptions.insufficientQty insufficientQty) {
+                    insufficientQty.printStackTrace();
                 }
                 System.out.println("serialized");
                 //Add Product
@@ -282,5 +308,15 @@ public class Product_mod_cnt{
         hTxt.setDisable(false);
         kTxt.setDisable(false);
         dTxt.setDisable(false);
+    }
+
+    public void delScreen(ActionEvent actionEvent) {
+        nameTxt.setDisable(true);
+        category.setDisable(false);
+        priceTxt.setDisable(true);
+        qtyTxt.setDisable(true);
+        hTxt.setDisable(true);
+        kTxt.setDisable(true);
+        dTxt.setDisable(true);
     }
 }

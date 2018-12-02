@@ -1,5 +1,6 @@
 package sample;
 
+import Exceptions.productNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -144,7 +145,7 @@ public class Warehouse_home_cnt{
         System.out.println("Orders pressed");
     }
 
-    public void deleteProduct(ActionEvent e){
+    public void deleteProduct(ActionEvent e) throws productNotFoundException {
         warehouse_admin.getAssigned_ware().deleteProduct(delchoose.getValue().toString());
         delchoose.getItems().clear();
         setDelchoose();
@@ -212,7 +213,7 @@ public class Warehouse_home_cnt{
             qty.setPromptText("Enter Quantity");
             CheckBox chk = new CheckBox();
             chk.setPrefSize(prodPane.getPrefWidth()*0.05,prodPane.getPrefWidth()*0.05);
-            //chk.setText(product.getName());
+            chk.setText(product.getName());
             chk.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {

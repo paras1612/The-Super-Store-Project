@@ -29,7 +29,7 @@
             <TextField fx:id="quantAvail" layoutX="362.0" layoutY="108.0" />
             <TextField fx:id="quant" layoutX="362.0" layoutY="158.0" prefHeight="26.0" prefWidth="49.0" />
             <Label layoutX="309.0" layoutY="162.0" text="Quantiy:" />
-            <Button fx:id="addToCart" layoutX="314.0" layoutY="207.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Add to Cart" />
+            <Button fx:id="addToCart" layoutX="314.0" layoutY="207.0" mnemonicParsing="false" prefHeight="26.0" onAction="#addToCart" prefWidth="194.0" text="Add to Cart" />
          </children>
       </AnchorPane>
       <ComboBox layoutX="17.0" layoutY="64.0" prefHeight="25.0" prefWidth="217.0" promptText="Products/Categories" />

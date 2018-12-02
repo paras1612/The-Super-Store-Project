@@ -28,14 +28,25 @@ public class Client implements Serializable {
 
     public void add_product(String store, String name, int quant) {
         Product temp = Database.getDatabase().getStoreHashMap().get(store).getLinkedWarehouse().getProductHashMap().get(name);
-        Product prod = new Product(temp.getName(), temp.getPrice(), quant, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
-        cart.getCartList().put(prod, quant);
-        cart.getStoreprod().put(prod, Database.getDatabase().getStoreHashMap().get(store));
+        int flag=0;
+        for(Product product: cart.getCartList().keySet()){
+            if(product.getName().equals(name)){
+                if(product==temp){
+                    cart.getCartList().put(product, cart.getCartList().get(product)+quant);
+                    flag++;
+                }
+            }
+        }
+        if(flag==0){
+            Product prod = new Product(temp.getName(), temp.getPrice(), quant, temp.getfCostQuater(), temp.getcCostQuater(), temp.getItemDemand());
+            cart.getCartList().put(prod, quant);
+            cart.getStoreprod().put(prod, Database.getDatabase().getStoreHashMap().get(store));
+        }
         serialize();
     }
 
     public void add_funds(double fund) {
-        Database.getDatabase().getClientHashMap().get(this.name).wallet += fund;
+        Database.getDatabase().getClientHashMap().get(this.uid).wallet += fund;
         serialize();
     }
 
@@ -108,19 +119,29 @@ public class Client implements Serializable {
             for(Product product: cart.getCartList().keySet()){
                 amount_req+=cart.getCartList().get(product)*product.getPrice();
             }
-            if(amount_req<wallet){
+            if(amount_req>wallet){
                 System.out.println("Insufficient Funds");
             }
-            //Orders of Client can be made here
             else {
+                Database database = Database.getDatabase();
                 for (Product product : cart.getCartList().keySet()) {
                     Store prod_store = cart.getStoreprod().get(product);
+                    Product store_prod = new Product();
                     prod_store.getProductSold().put(product, cart.getCartList().get(product));
+                  //  prod_store.getInventory().put(product, prod_store.getInventory().get(product)-cart.getCartList().get(product));
+                    for (Product store_pord1 : Database.getDatabase().getStoreHashMap().get(prod_store.getUid()).getInventory().keySet()) {
+                        if (store_pord1.getUid().equals(product.getUid())) {
+                            store_prod = store_pord1;
+                        }
+                    }
+                    prod_store.getInventory().put(store_prod, prod_store.getInventory().get(store_prod)-cart.getCartList().get(product));
                     prod_store.setMessage(prod_store.getMessage()+"Product Name: "+product.getName() +"\n" + "Quantity: "+cart.getCartList().get(product));
                 }
+                wallet-=amount_req;
                 cart = new Cart();
             }
         }
+        Database database = Database.getDatabase();
         serialize();
     }
 }

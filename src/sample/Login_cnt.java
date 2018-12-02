@@ -27,8 +27,10 @@ public class Login_cnt extends Main{
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+        AnchorPane root = loader.load();
+        Home_cnt cnt = loader.getController();
+        cnt.setClient(new Client("Guest", "pass", "guest"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);

@@ -23,9 +23,9 @@ import java.util.HashMap;
 public class Home_cnt{
     private Client client;
     @FXML private TextField searchBar;
-    @FXML private ComboBox chooseStore;
+    @FXML private ComboBox chooseStore = new ComboBox();
     @FXML private ScrollPane dataPane;
-    @FXML private ComboBox sortBy;
+    @FXML private ComboBox sortBy = new ComboBox();
     private ArrayList<String> prodList = new ArrayList<>();
     private ArrayList<String> catList = new ArrayList<>();
     private HashMap<String, Integer> selected= new HashMap<>();

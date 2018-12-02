@@ -1,5 +1,6 @@
 package sample;
 
+import Exceptions.productNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -229,7 +230,7 @@ public class Store_home_cnt{
  //       store_admin.getAssignedStore().addProduct(store_admin,addchoose.getValue().toString());
         System.out.println("Product added");
     }
-    public void deleteProduct(ActionEvent e){
+    public void deleteProduct(ActionEvent e) throws productNotFoundException {
         store_admin.getAssignedStore().deleteProduct(delchoose.getValue().toString());
         delchoose.getItems().remove(delchoose.getValue().toString());
         System.out.println("Product Deleted");
@@ -252,7 +253,8 @@ public class Store_home_cnt{
             catbut.setPrefWidth(catPane.getPrefWidth());
             catbut.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(ActionEvent event) {
+                public void handle(ActionEvent event)
+                {
                     setData(catbut.getText());
                 }
             });
@@ -260,32 +262,28 @@ public class Store_home_cnt{
             hbcat.getChildren().add(catbut);
             vbcat.getChildren().add(hbcat);
         }
-            catPane.setContent(vbcat);
+        catPane.setContent(vbcat);
         vbprod= new VBox();
         for(Product product: store_admin.getAssignedStore().getLinkedWarehouse().getCategoryHashMap().get(catChosen).getProduct_list()){
-        Button prodName = new Button(product.getName());
-        Label prodQty = new Label();
-        prodQty.setText(String.valueOf(product.getQuantity()));
-        prodQty.setPrefWidth(prodPane.getPrefWidth()*0.15);
-        prodQty.setTextAlignment(TextAlignment.CENTER);
-        prodName.setPrefWidth(prodPane.getPrefWidth()*0.60);
-        qty = new TextField("1");
-        qty.setPrefWidth(prodPane.getPrefWidth()*0.20);
-        qty.setPromptText("Enter Quantity");
-        chk = new CheckBox();
-        chk.setPrefSize(prodPane.getPrefWidth()*0.05,prodPane.getPrefWidth()*0.05);
-        //chk.setText(product.getName());
-        chk.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(chk.isSelected()){
-                    selected.put(prodName.getText(),Integer.parseInt(qty.getText()));
+            Button prodName = new Button(product.getName());
+            prodName.setPrefWidth(prodPane.getPrefWidth()*0.75);
+            TextField qty = new TextField("1");
+            qty.setPrefWidth(prodPane.getPrefWidth()*0.20);
+            qty.setPromptText("Enter Quantity");
+            CheckBox chk = new CheckBox();
+            chk.setPrefSize(prodPane.getPrefWidth()*0.05,prodPane.getPrefWidth()*0.05);
+            chk.setText(product.getName());
+            chk.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(chk.isSelected()){
+                        selected.put(prodName.getText(),Integer.parseInt(qty.getText()));
+                    }
+                    else {
+                        selected.remove(product.getName());
+                    }
                 }
-                else {
-                    selected.remove(product.getName());
-                }
-            }
-        });
+            });
             prodName.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -300,7 +298,7 @@ public class Store_home_cnt{
                     Scene scene = new Scene(root);
                     productView_cnt cnt = loader.getController();
                     try {
-                        cnt.setStore_admin(store_admin,store_admin.getAssignedStore().getLinkedWarehouse().getUid(),prodName.getText());
+                        cnt.setStore_admin(store_admin,store_admin.getAssignedStore().getUid(),prodName.getText());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -308,12 +306,12 @@ public class Store_home_cnt{
                     primaryStage.show();
                 }
             });
-        hb = new HBox();
-        hb.getChildren().addAll(prodName,prodQty,qty,chk);
-        vbprod.getChildren().add(hb);
-    }
+            HBox hb = new HBox();
+            hb.getChildren().addAll(prodName,qty,chk);
+            vbprod.getChildren().add(hb);
+        }
         prodPane.setContent(vbprod);
-}
+    }
     public void addtoCart(ActionEvent e){
         for(String name: selected.keySet()) {
             store_admin.getAssignedStore().add_product(store_admin.getAssignedStore().getLinkedWarehouse().getUid(), name, selected.get(name));

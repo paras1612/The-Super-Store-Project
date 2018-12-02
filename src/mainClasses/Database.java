@@ -83,7 +83,7 @@ public class Database implements Serializable {
 
     public boolean createClient(String name, String password, String email) throws duplicateClientException {
     //    System.out.println("Entered");
-        if(auth.getclientAuth().containsKey(email)){
+        if((auth.getSuperUserAdminAuth().containsKey(name) || auth.getstoreAdminAuth().containsKey(name) || auth.getwarehouseAdmintAuth().containsKey(name) || auth.getclientAuth().containsKey(name))){
             System.out.println("Email already registered");
         }
         else {

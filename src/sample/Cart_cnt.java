@@ -1,11 +1,15 @@
 package sample;
 
+import Exceptions.insufficientQty;
+import Exceptions.productNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -173,7 +177,21 @@ public class Cart_cnt {
         for(Product product : cart.getCartList().keySet()){
             Button prodName = new Button(product.getName());
             TextField qty = new TextField(cart.getCartList().get(product).toString());
-            qty.setPromptText("Enter Quantity");
+            qty.setPromptText(product.getName());
+            qty.setOnKeyTyped(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    if(client!=null){
+                        client.getCart().getCartList().put(product, Integer.parseInt(qty.getText()));
+                    }
+                    else if(store_admin!=null){
+                        store_admin.getAssignedStore().getCart().getCartList().put(product, Integer.parseInt(qty.getText()));
+                    }
+                    else if(warehouse_admin!=null){
+                        warehouse_admin.getAssigned_ware().getCart().getCartList().put(product, Integer.parseInt(qty.getText()));
+                    }
+                }
+            });
             Label price = new Label(Double.toString(product.getPrice()));
             CheckBox chk = new CheckBox();
             chk.setText(product.getName());
@@ -195,7 +213,7 @@ public class Cart_cnt {
             dataPane.setContent(vb);
     }
 
-    public void checkout(ActionEvent e){
+    public void checkout(ActionEvent e) throws insufficientQty {
         if(warehouse_admin!=null){
             warehouse_admin.getAssigned_ware().checkout();
         }
@@ -209,7 +227,7 @@ public class Cart_cnt {
     }
 
 
-    public void deleteprod(ActionEvent actionEvent) {
+    public void deleteprod(ActionEvent actionEvent) throws productNotFoundException {
         if(warehouse_admin!=null) {
             for (String name : selected.keySet()) {
                 warehouse_admin.getAssigned_ware().delProdCart(warehouse_admin.getAssigned_ware().getUid(), name, selected.get(name));

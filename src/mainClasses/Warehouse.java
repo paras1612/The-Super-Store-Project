@@ -203,25 +203,39 @@ public class Warehouse implements Serializable {
                 Warehouse prod_ware= Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getWareprod().get(product);
                 Product ware_prod = Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getProductHashMap().get(product.getUid());
                 prod_ware.getProductSold().put(ware_prod, cart.getCartList().get(product));
-                if(Database.getDatabase().getWarehouseHashMap().get(uid).getProductHashMap().containsKey(product.getUid())){
-                    Product prod_ware1 = Database.getDatabase().getWarehouseHashMap().get(uid).getProductHashMap().get(product.getUid());
-                    Database.getDatabase().getWarehouseHashMap().get(uid).CategoryHashMap.get("Main").getProduct_list().add(ware_prod);
+                if(ProductHashMap.containsKey(product.getUid())){
+                    Product prod_ware1 = ProductHashMap.get(product.getUid());
+                    CategoryHashMap.get("Main").getProduct_list().add(ware_prod);
                     //Inventory.put(prod_ware1, Database.getDatabase().getWarehouseHashMap().get(uid).getInventory().get(prod_ware1)+Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().get(product));
-                    Database.getDatabase().getWarehouseHashMap().get(uid).getInventory().put(prod_ware1, Database.getDatabase().getWarehouseHashMap().get(uid).getInventory().get(prod_ware1)+Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().get(product));
+                    Inventory.put(prod_ware1, Inventory.get(prod_ware1)+cart.getCartList().get(product));
                     Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().put(ware_prod, Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().get(ware_prod) - Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().get(product));
                 }
                 else {
                     Product init = product;
-                    init.setParent(Database.getDatabase().getWarehouseHashMap().get(uid).getCategoryHashMap().get("Main"));
-                    Database.getDatabase().getWarehouseHashMap().get(uid).CategoryHashMap.get("Main").getProduct_list().add(init);
-                    Database.getDatabase().getWarehouseHashMap().get(uid).getProductHashMap().put(product.getUid(), product);
+                    init.setParent(CategoryHashMap.get("Main"));
+                    CategoryHashMap.get("Main").getProduct_list().add(init);
+                    ProductHashMap.put(product.getUid(), product);
                     //Inventory.put(product, Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().get(product));
-                    Database.getDatabase().getWarehouseHashMap().get(uid).getInventory().put(product, Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().get(product));
-                    Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().put(ware_prod, Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().get(ware_prod) - Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().get(product));
+                    Inventory.put(product, Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().get(product));
+                    Database.getDatabase().getWarehouseHashMap().get(prod_ware).getInventory().put(ware_prod, Database.getDatabase().getWarehouseHashMap().get(prod_ware.getUid()).getInventory().get(ware_prod) - Database.getDatabase().getWarehouseHashMap().get(uid).getCart().getCartList().get(product));
                 }
-                Database.getDatabase().getWarehouseHashMap().get(uid).cart = new Cart();
+                prod_ware.setMessage(prod_ware.getMessage()+"Product Name: "+product.getName() + "\t" + "Quantity: "+ cart.getCartList().get(product)+"\n");
             }
+            cart = new Cart();
         }
         serialize();
+    }
+
+    public boolean removeCategory(String category) {
+        for(String cat: CategoryHashMap.keySet()){
+            if(CategoryHashMap.get(cat).getSubCategories().contains(CategoryHashMap.get(category))){
+                CategoryHashMap.get(cat).getSubCategories().remove(category);
+            }
+        }
+        for(Product product: CategoryHashMap.get(category).getProduct_list()){
+            ProductHashMap.remove(product.getUid());
+        }
+        CategoryHashMap.remove(category);
+        return true;
     }
 }

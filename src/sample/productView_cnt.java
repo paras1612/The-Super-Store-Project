@@ -24,6 +24,8 @@ public class productView_cnt {
     @FXML private TextArea description;
     @FXML private ImageView image;
     private Client client;
+    private String prod_Store;
+    private String prod_ware;
     private Warehouse_Admin warehouse_admin;
     private Store_Admin store_admin;
     private Super_usr user;
@@ -44,14 +46,24 @@ public class productView_cnt {
 
     public void setWarehouse_admin(Warehouse_Admin warehouse_admin, String warehouse, String product) throws IOException {
         this.warehouse_admin = warehouse_admin;
+        this.product= product;
+        this.prod_ware= warehouse;
         Product temp = Database.getDatabase().getWarehouseHashMap().get(warehouse).getProductHashMap().get(product);
         setData(temp, warehouse);
     }
 
     private void setData(Product temp, String warehouse) throws IOException {
+        if(client!=null){
+            quantAvail.setText(Integer.toString(Database.getDatabase().getStoreHashMap().get(warehouse).getInventory().get(temp)));
+        }
+        if(warehouse_admin!=null) {
+            quantAvail.setText(Integer.toString(Database.getDatabase().getWarehouseHashMap().get(warehouse).getInventory().get(temp)));
+        }
+        else if(store_admin!=null){
+            quantAvail.setText(Integer.toString(Database.getDatabase().getWarehouseHashMap().get(warehouse).getInventory().get(temp)));
+        }
         name.setText(temp.getName());
         price.setText(Double.toString(temp.getPrice()));
-        quantAvail.setText(Integer.toString(Database.getDatabase().getWarehouseHashMap().get(warehouse).getInventory().get(temp)));
         price.setEditable(false);
         quantAvail.setEditable(false);
         setImage();
@@ -60,12 +72,23 @@ public class productView_cnt {
 
     public void setStore_admin(Store_Admin store_admin, String warehouse, String product) throws IOException {
         this.store_admin = store_admin;
+        this.product = product;
+        this.prod_Store = warehouse;
         Product temp = Database.getDatabase().getWarehouseHashMap().get(warehouse).getProductHashMap().get(product);
         setData(temp, warehouse);
     }
 
-    void setClient(Client client1){
+    void setClient(Client client1, String store, String product) throws IOException {
         client=client1;
+        Product temp = new Product();
+        for(Product product1: Database.getDatabase().getStoreHashMap().get(store).getInventory().keySet()){
+            if(product1.getName().equals(product)){
+                temp=product1;
+                break;
+            }
+        }
+        setData(temp, store);
+
     }
 
     public Client getClient() {
@@ -76,13 +99,38 @@ public class productView_cnt {
         System.out.println("Home");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+        AnchorPane root = loader.load();
+        if(client!=null){
+            loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            root = loader.load();
+            Home_cnt cnt = loader.getController();
+            cnt.setClient(client);
+        }
+        else if(store_admin!=null){
+            loader = new FXMLLoader(getClass().getResource("Store_home.fxml"));
+            root = loader.load();
+            Store_home_cnt cnt = loader.getController();
+            cnt.setStore_admin(store_admin);
+        }
+        else if(warehouse_admin!=null){
+            loader = new FXMLLoader(getClass().getResource("Warehouse_home.fxml"));
+            root = loader.load();
+            Warehouse_home_cnt cnt = loader.getController();
+            cnt.setWarehouse_admin(warehouse_admin);
+        }
+        else if (user!=null){
+            loader = new FXMLLoader(getClass().getResource("Super_user.fxml"));
+            root = loader.load();
+            Super_user_cnt cnt = loader.getController();
+            cnt.setUser(user);
+        }
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
     public void Login(ActionEvent e) throws IOException {
         System.out.println("Login");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
@@ -98,8 +146,8 @@ public class productView_cnt {
         System.out.println("Help");
         ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("help.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("help.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
@@ -110,8 +158,8 @@ public class productView_cnt {
         System.out.println("About");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("about.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("about.fxml"));
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
@@ -131,5 +179,17 @@ public class productView_cnt {
 
     public void searchBtn(ActionEvent e){
         System.out.println("Search button pressed");
+    }
+
+    public void addToCart(ActionEvent actionEvent) {
+        if(client!=null) {
+            client.add_product(prod_Store ,product, Integer.parseInt(quant.getText()));
+        }
+        else if(warehouse_admin!=null){
+            warehouse_admin.getAssigned_ware().add_product(prod_ware, product, Integer.parseInt(quant.getText()));
+        }
+        else if(store_admin!=null){
+            store_admin.getAssignedStore().add_product(prod_ware, product, Integer.parseInt(quant.getText()));
+        }
     }
 }

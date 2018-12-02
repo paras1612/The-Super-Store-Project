@@ -178,7 +178,8 @@ public class Profile_cnt{
     }
 
     public void addToWallet(ActionEvent e){
-        Database.getDatabase().getClientHashMap().get(client.getName()).add_funds(Double.parseDouble(fund.getText()));
+        System.out.println(client);
+        Database.getDatabase().getClientHashMap().get(client.getUid()).add_funds(Double.parseDouble(fund.getText()));
         System.out.println("Added to Wallet");
     }
 }

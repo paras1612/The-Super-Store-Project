@@ -1,5 +1,6 @@
 package sample;
 
+import Exceptions.duplicateClientException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +46,7 @@ public class Sign_up_cnt extends Main {
         primaryStage.show();
 
     }
-    public void SignUp(ActionEvent e) throws IOException {
+    public void SignUp(ActionEvent e) throws IOException, duplicateClientException {
         System.out.println("SignUp");
         String name = sign_up_name.getText();
         String email = user_fld.getText();
