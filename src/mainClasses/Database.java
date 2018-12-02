@@ -1,10 +1,14 @@
 package mainClasses;
 
+import Exceptions.duplicateClientException;
+import Exceptions.duplicateStoreAdminException;
+import Exceptions.duplicateWarehouseAdminException;
 import javafx.util.Pair;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 
 import static sample.Main.deserialize;
 
@@ -33,7 +37,7 @@ public class Database implements Serializable {
         Database.database = database;
     }
 
-    public boolean createSuperuser(String name, String password, String email){
+    public boolean createSuperuser(String name, String password, String email)  {
         if(auth.getSuperUserAdminAuth().containsKey(email) || auth.getstoreAdminAuth().containsKey(name) || auth.getwarehouseAdmintAuth().containsKey(name) || auth.getclientAuth().containsKey(email)){
             System.out.println("Email already registered");
         }
@@ -48,9 +52,9 @@ public class Database implements Serializable {
         return false;
     }
 
-    public boolean createStoreAdmin(String name, String password, String store){
+    public boolean createStoreAdmin(String name, String password, String store) throws duplicateStoreAdminException {
         if((auth.getSuperUserAdminAuth().containsKey(name) || auth.getstoreAdminAuth().containsKey(name) || auth.getwarehouseAdmintAuth().containsKey(name) || auth.getclientAuth().containsKey(name)) && getStore_AdminHashMap().get(name).getAssignedStore()!=null){
-            System.out.println("Email already registered");
+//            System.out.println("Email already registered");s
         }
         else {
             //      System.out.println("here");
@@ -62,7 +66,7 @@ public class Database implements Serializable {
         }
         return false;
     }
-    public boolean createWarehouseAdmin(String name, String password, String warehouse){
+    public boolean createWarehouseAdmin(String name, String password, String warehouse) throws duplicateWarehouseAdminException {
         if((auth.getSuperUserAdminAuth().containsKey(name) || auth.getstoreAdminAuth().containsKey(name) || auth.getwarehouseAdmintAuth().containsKey(name) || auth.getclientAuth().containsKey(name)) && getWarehouse_AdminHashMap().get(name).getAssigned_ware()!=null){
             System.out.println("Email already registered");
         }
@@ -77,7 +81,7 @@ public class Database implements Serializable {
         return false;
     }
 
-    public boolean createClient(String name, String password, String email){
+    public boolean createClient(String name, String password, String email) throws duplicateClientException {
     //    System.out.println("Entered");
         if(auth.getclientAuth().containsKey(email)){
             System.out.println("Email already registered");
