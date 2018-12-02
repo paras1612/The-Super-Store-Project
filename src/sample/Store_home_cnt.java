@@ -120,7 +120,9 @@ public class Store_home_cnt{
         }
         catPane.setContent(vb);
         vb = new VBox();
+        System.out.println(prod);
         prod.sort(String::compareTo);
+        System.out.println(prod);
         for( String product: prod){
             Button prodName = new Button(product);
             TextField qty = new TextField("1");
@@ -137,10 +139,31 @@ public class Store_home_cnt{
                         selected.remove(product);
                     }
                 }
+            });prodName.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("productView.fxml"));
+                    AnchorPane root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Scene scene = new Scene(root);
+                    productView_cnt cnt = loader.getController();
+                    try {
+                        cnt.setStore_admin(store_admin,store_admin.getAssignedStore().getLinkedWarehouse().getUid(),prodName.getText());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                }
             });
             HBox hb = new HBox();
             hb.getChildren().addAll(prodName,qty,chk);
-            vb.getChildren().add(hb);
+            vbprod.getChildren().add(hb);
         }
         prodPane.setContent(vb);
     }

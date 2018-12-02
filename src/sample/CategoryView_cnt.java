@@ -103,7 +103,23 @@ public class CategoryView_cnt {
             prodName.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("productView.fxml"));
+                    AnchorPane root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Scene scene = new Scene(root);
+                    productView_cnt cnt = loader.getController();
+                    try {
+                        cnt.setClient(client,store,prodName.getText());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
                 }
             });
             HBox hb = new HBox();

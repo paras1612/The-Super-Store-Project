@@ -85,7 +85,6 @@ public class Warehouse_home_cnt{
         primaryStage.show();
     }
     public void Login(ActionEvent e) throws IOException {
-
         System.out.println("Login");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
