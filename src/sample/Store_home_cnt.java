@@ -39,13 +39,23 @@ public class Store_home_cnt{
 
     private Store_Admin store_admin;
     private HashMap<String, Integer> selected = new HashMap<>();
-    public void setStore_admin(Store_Admin store_admin) {
+    public void setStore_admin(Store_Admin store_admin) throws IOException {
         this.store_admin = store_admin;
         wareNameLabel.setText(store_admin.getAssignedStore().getLinkedWarehouse().getUid());
         prod_cat.getItems().addAll("Product","Category");
         sort_menu.getItems().addAll("Name");
         setDelchoose();
         setData("Main");
+        System.out.println("Message");
+        //((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Message_cnt cnt =loader.getController();
+        cnt.text.setText(store_admin.getAssignedStore().getMessage());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public Store_Admin getStore_admin() {

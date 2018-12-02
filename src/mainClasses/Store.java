@@ -61,6 +61,7 @@ public class Store implements Serializable {
         }
         else {
             System.out.println("Product quantity not available");
+            setMessage(getMessage()+"Some Product not available in Warehouse: Order cancelled" );
         }
         serialize();
         return true;

@@ -32,10 +32,21 @@ public class Warehouse_home_cnt{
     private ArrayList<String> prodList = new ArrayList<>();
     private ArrayList<String> catList = new ArrayList<>();
 
-    public void setWarehouse_admin(Warehouse_Admin warehouse_admin) {
+    public void setWarehouse_admin(Warehouse_Admin warehouse_admin) throws IOException {
         this.warehouse_admin = warehouse_admin;
         setChooseWare();
         setDelchoose();
+        System.out.println("Message");
+        //((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Message_cnt cnt =loader.getController();
+        cnt.text.setText(warehouse_admin.getAssigned_ware().getMessage());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
     }
 
     public Warehouse_Admin getWarehouse_admin() {
@@ -80,17 +91,7 @@ public class Warehouse_home_cnt{
         primaryStage.setScene(scene);
         primaryStage.show();System.out.println("Login");
     }
-    public void SignUp(ActionEvent e) throws IOException {
-        System.out.println("SignUp");
-        ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
-        Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("sign_up.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("sign_up.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+
     public void help(ActionEvent e) throws IOException {
         System.out.println("Help");
         ((javafx.scene.Node) e.getSource()).getScene().getWindow().hide();

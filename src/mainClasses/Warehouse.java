@@ -72,9 +72,14 @@ public class Warehouse implements Serializable {
                         }
                     }
                 }
-                temp2.getCartList().put(product, (int)product.getEOQ());
-                temp2.getWareprod().put(product, finalware);
-                checkout();
+                if(finalware!=null) {
+                    temp2.getCartList().put(product, (int) product.getEOQ());
+                    temp2.getWareprod().put(product, finalware);
+                    checkout();
+                }
+                else {
+                    setMessage(getMessage()+"Product not available in any warehouse");
+                }
             }
         }
         cart= tempCart;
