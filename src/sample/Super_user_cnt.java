@@ -98,6 +98,7 @@ public class Super_user_cnt{
             }
             for(Product product: Database.getDatabase().getStoreHashMap().get(chooseStoreWare.getValue().toString()).getInventory().keySet()){
                 Button prodName = new Button(product.getName());
+                prodName.setPrefWidth(dataPane.getPrefWidth()*0.5);
                 TextField qty = new TextField("1");
                 qty.setPromptText("Enter Quantity");
                 qty.setEditable(false);
