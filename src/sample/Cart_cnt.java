@@ -240,7 +240,7 @@ public class Cart_cnt {
         }
         if(client!=null){
             for (String name: selected.keySet()){
-                System.out.println("NOT IMPLEMENTED");
+                client.deleteProdCat(name);
             }
         }
         setDisplayData();

@@ -6,13 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="Super_usr_pane" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Super_user_cnt">
+<AnchorPane onMouseClicked="#updateData" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Super_user_cnt">
    <children>
       <Button fx:id="home_btn" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <TextField fx:id="search_fld" layoutX="233.0" layoutY="73.0" prefHeight="26.0" prefWidth="469.0" promptText="Search anything" />
       <Button fx:id="search_btn" layoutX="703.0" layoutY="73.0" mnemonicParsing="false" onAction="#search" prefHeight="26.0" prefWidth="81.0" text="Search" />
       <ComboBox fx:id="sort_menu" layoutX="15.0" layoutY="105.0" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
-      <ScrollPane fx:id="dataPane" layoutX="233.0" layoutY="105.0" prefHeight="406.0" prefWidth="552.0" />
+      <ScrollPane layoutX="233.0" layoutY="105.0" prefHeight="406.0" prefWidth="552.0" />
       <Button fx:id="help_btn" layoutX="15.0" layoutY="419.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button fx:id="logOut_btn" layoutX="15.0" layoutY="383.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="194.0" text="Log out" />
       <Button fx:id="message_btn" layoutX="15.0" layoutY="174.0" mnemonicParsing="false" onAction="#message" prefHeight="26.0" prefWidth="194.0" text="Messages" />

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class Warehouse_home_cnt{
     private Warehouse_Admin warehouse_admin;
     private HashMap<String, Integer> selected = new HashMap<>();
@@ -36,6 +37,9 @@ public class Warehouse_home_cnt{
         this.warehouse_admin = warehouse_admin;
         setChooseWare();
         setDelchoose();
+    }
+
+    public void setPop() throws IOException {
         System.out.println("Message");
         //((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
@@ -46,7 +50,6 @@ public class Warehouse_home_cnt{
         cnt.text.setText(warehouse_admin.getAssigned_ware().getMessage());
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
     public Warehouse_Admin getWarehouse_admin() {
@@ -54,11 +57,13 @@ public class Warehouse_home_cnt{
     }
 
     public void setChooseWare() {
+        this.chooseWare.getItems().clear();
         for(String warehouse :Database.getDatabase().getWarehouseHashMap().keySet()){
             this.chooseWare.getItems().add(warehouse);
         }
     }
     public void setDelchoose() {
+        this.delchoose.getItems().clear();
         if(warehouse_admin.getAssigned_ware().getProductHashMap()!=null) {
             for (String name : warehouse_admin.getAssigned_ware().getProductHashMap().keySet()) {
                 this.delchoose.getItems().add(name);

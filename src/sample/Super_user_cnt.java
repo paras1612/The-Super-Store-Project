@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 import mainClasses.*;
 
 import java.io.IOException;
+
+import static sample.Main.deserialize;
 
 public class Super_user_cnt{
     @FXML private ScrollPane dataPane;
@@ -267,5 +270,9 @@ public class Super_user_cnt{
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    public void updateData(MouseEvent mouseEvent) throws IOException {
+        deserialize();
+        this.setUser(user);
     }
 }

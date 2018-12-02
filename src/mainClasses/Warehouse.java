@@ -1,5 +1,6 @@
 package mainClasses;
 
+import Exceptions.categoryNotFoundException;
 import Exceptions.duplicateCategoryException;
 import Exceptions.productNotFoundException;
 
@@ -231,16 +232,29 @@ public class Warehouse implements Serializable {
         serialize();
     }
 
-    public boolean removeCategory(String category) {
-        for(String cat: CategoryHashMap.keySet()){
-            if(CategoryHashMap.get(cat).getSubCategories().contains(CategoryHashMap.get(category))){
-                CategoryHashMap.get(cat).getSubCategories().remove(category);
+    public boolean removeCategory(String category) throws categoryNotFoundException {
+        try {
+
+            for (String cat : CategoryHashMap.keySet()) {
+                if (CategoryHashMap.get(cat).getSubCategories().contains(CategoryHashMap.get(category))) {
+                    CategoryHashMap.get(cat).getSubCategories().remove(category);
+
+                }
             }
+            for (Categories categories : CategoryHashMap.get(category).getSubCategories()) {
+                CategoryHashMap.remove(categories);
+            }
+            for (Product product : CategoryHashMap.get(category).getProduct_list()) {
+                ProductHashMap.remove(product.getUid());
+                Inventory.remove(product);
+            }
+            CategoryHashMap.remove(category);
+            serialize();
+            return true;
         }
-        for(Product product: CategoryHashMap.get(category).getProduct_list()){
-            ProductHashMap.remove(product.getUid());
+        catch (NullPointerException e){
+            throw  new categoryNotFoundException("Category not found");
         }
-        CategoryHashMap.remove(category);
-        return true;
     }
+
 }

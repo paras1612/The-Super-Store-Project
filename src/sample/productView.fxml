@@ -14,7 +14,6 @@
       <TextField layoutX="234.0" layoutY="63.0" prefHeight="26.0" prefWidth="469.0" promptText="Search Product or Categories" />
       <Button fx:id="searchBtn" layoutX="704.0" layoutY="63.0" mnemonicParsing="false" onAction="#searchBtn" prefHeight="26.0" prefWidth="81.0" text="Search" />
       <Button fx:id="home_btn" layoutX="16.0" layoutY="15.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
-      <Button fx:id="login_btn" layoutX="17.0" layoutY="349.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="194.0" text="Login" />
       <Button fx:id="cart_btn" layoutX="17.0" layoutY="383.0" mnemonicParsing="false" onAction="#Cart_btn" prefHeight="26.0" prefWidth="194.0" text="Cart" />
       <Button fx:id="help_btn" layoutX="17.0" layoutY="416.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button fx:id="about" layoutX="17.0" layoutY="451.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
@@ -27,9 +26,6 @@
             <Text layoutX="317.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" wrappingWidth="29.6171875" />
             <Label layoutX="252.0" layoutY="112.0" text="Available Quantity:" />
             <TextField fx:id="quantAvail" layoutX="362.0" layoutY="108.0" />
-            <TextField fx:id="quant" layoutX="362.0" layoutY="158.0" prefHeight="26.0" prefWidth="49.0" />
-            <Label layoutX="309.0" layoutY="162.0" text="Quantiy:" />
-            <Button fx:id="addToCart" layoutX="314.0" layoutY="207.0" mnemonicParsing="false" prefHeight="26.0" onAction="#addToCart" prefWidth="194.0" text="Add to Cart" />
          </children>
       </AnchorPane>
       <ComboBox layoutX="17.0" layoutY="64.0" prefHeight="25.0" prefWidth="217.0" promptText="Products/Categories" />

@@ -1,5 +1,6 @@
 package sample;
 
+import Exceptions.categoryNotFoundException;
 import Exceptions.duplicateCategoryException;
 import Exceptions.insufficientQty;
 import Exceptions.productNotFoundException;
@@ -35,6 +36,7 @@ public class Product_mod_cnt{
     @FXML private AnchorPane pane;
     @FXML private ComboBox prodList = new ComboBox();
     @FXML private ComboBox updateProd = new ComboBox();
+    @FXML private ComboBox delCat = new ComboBox();
     //@FXML private ComboBox catList = new ComboBox();
     public ComboBox getCategory() {
         return category;
@@ -45,10 +47,14 @@ public class Product_mod_cnt{
     }
 
     public void setCategory() {
+        category.getItems().clear();
+        delCat.getItems().clear();
+        updateProd.getItems().clear();
         if(warehouse_admin!=null) {
             System.out.println(warehouse_admin.getAssigned_ware().getCategoryHashMap().toString());
             for (String name : warehouse_admin.getAssigned_ware().getCategoryHashMap().keySet()) {
                 category.getItems().add(name);
+                delCat.getItems().add(name);
             }
             for(Product product : warehouse_admin.getAssigned_ware().getInventory().keySet()){
                 updateProd.getItems().add(product.getName());
@@ -57,6 +63,7 @@ public class Product_mod_cnt{
         else if(store_admin!=null){
             for (String name : store_admin.getAssignedStore().getCategoriesList().keySet()) {
                 category.getItems().add(name);
+                delCat.getItems().add(name);
             }
             for (Product product: store_admin.getAssignedStore().getInventory().keySet()){
                 updateProd.getItems().add(product.getUid());
@@ -207,8 +214,7 @@ public class Product_mod_cnt{
             primaryStage.show();
         }
     }
-    public void set(ActionEvent e)
-    {
+    public void set(ActionEvent e) throws categoryNotFoundException {
         if(warehouse_admin!=null) {
             if (priceTxt.isDisable()) {
                 try {
@@ -310,13 +316,13 @@ public class Product_mod_cnt{
         dTxt.setDisable(false);
     }
 
-    public void delScreen(ActionEvent actionEvent) {
-        nameTxt.setDisable(true);
-        category.setDisable(false);
-        priceTxt.setDisable(true);
-        qtyTxt.setDisable(true);
-        hTxt.setDisable(true);
-        kTxt.setDisable(true);
-        dTxt.setDisable(true);
+    public void delcat(ActionEvent actionEvent) throws categoryNotFoundException {
+        if(warehouse_admin!=null) {
+            warehouse_admin.getAssigned_ware().removeCategory(delCat.getValue().toString());
+        }
+        else if(store_admin!=null) {
+            store_admin.getAssignedStore().removeCategory(delCat.getValue().toString());
+        }
+        setCategory();
     }
 }

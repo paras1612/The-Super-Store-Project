@@ -88,32 +88,35 @@ public class Login_cnt extends Main{
             System.out.println(Database.getDatabase().getWarehouse_AdminHashMap().toString());
             System.out.println(curr);
             System.out.println(curr.getAssigned_ware().getCategoryHashMap());
-            ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+            //((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Warehouse_home.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             Warehouse_home_cnt cnt = loader.getController();
             cnt.setWarehouse_admin(curr);
+            cnt.setPop();
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
+            primaryStage.toBack();
         }
         else if(Database.getDatabase().login(user_fld.getText(),pass_fld.getText())==3){
             Store_Admin curr = Database.getDatabase().getStore_AdminHashMap().get(user_fld.getText());
             System.out.println(Database.getDatabase().getStore_AdminHashMap().toString());
             System.out.println(curr);
-            ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
+            //((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Store_home.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             Store_home_cnt cnt = loader.getController();
             cnt.setStore_admin(curr);
-            System.out.println("fml");
+            cnt.setPop();
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
+            primaryStage.toBack();
         }
         else if(Database.getDatabase().login(user_fld.getText(),pass_fld.getText())==4){
             Super_usr curr = Database.getDatabase().getSuper_userHashMap().get(user_fld.getText());

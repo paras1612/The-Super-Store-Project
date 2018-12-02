@@ -60,7 +60,7 @@ public class productView_cnt {
             quantAvail.setText(Integer.toString(Database.getDatabase().getWarehouseHashMap().get(warehouse).getInventory().get(temp)));
         }
         else if(store_admin!=null){
-            quantAvail.setText(Integer.toString(Database.getDatabase().getWarehouseHashMap().get(warehouse).getInventory().get(temp)));
+            quantAvail.setText(Integer.toString(Database.getDatabase().getStoreHashMap().get(warehouse).getInventory().get(temp)));
         }
         name.setText(temp.getName());
         price.setText(Double.toString(temp.getPrice()));
@@ -74,7 +74,12 @@ public class productView_cnt {
         this.store_admin = store_admin;
         this.product = product;
         this.prod_Store = warehouse;
-        Product temp = Database.getDatabase().getWarehouseHashMap().get(warehouse).getProductHashMap().get(product);
+        Product temp = new Product();
+        for(Product temp1:  Database.getDatabase().getStoreHashMap().get(warehouse).getInventory().keySet()){
+            if(temp1.getName().equals(product)){
+                temp=temp1;
+            }
+        }
         setData(temp, warehouse);
     }
 
@@ -169,9 +174,19 @@ public class productView_cnt {
         System.out.println("Cart");
         ((javafx.scene.Node)e.getSource()).getScene().getWindow().hide();
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane root = loader.load(getClass().getResource("Cart.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
+        AnchorPane root = loader.load();
+        Cart_cnt cnt= loader.getController();
         Scene scene = new Scene(root);
+        if(client!=null){
+            cnt.setClient(client);
+        }
+        else if(store_admin!=null){
+            cnt.setStore_admin(store_admin);
+        }
+        else if(warehouse_admin!=null){
+            cnt.setWarehouse_admin(warehouse_admin);
+        }
         //scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

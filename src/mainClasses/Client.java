@@ -30,11 +30,9 @@ public class Client implements Serializable {
         Product temp = Database.getDatabase().getStoreHashMap().get(store).getLinkedWarehouse().getProductHashMap().get(name);
         int flag=0;
         for(Product product: cart.getCartList().keySet()){
-            if(product.getName().equals(name)){
-                if(product==temp){
-                    cart.getCartList().put(product, cart.getCartList().get(product)+quant);
-                    flag++;
-                }
+            if(product.getName().equals(name) && cart.getStoreprod().get(product).getUid().equals(store)){
+                cart.getCartList().put(product, cart.getCartList().get(product)+quant);
+                flag++;
             }
         }
         if(flag==0){
@@ -143,5 +141,14 @@ public class Client implements Serializable {
         }
         Database database = Database.getDatabase();
         serialize();
+    }
+
+    public void deleteProdCat(String name) {
+        for(Product product: cart.getCartList().keySet()){
+            if(product.getName().equals(name)){
+                cart.getCartList().remove(product);
+                cart.getStoreprod().remove(product);
+            }
+        }
     }
 }

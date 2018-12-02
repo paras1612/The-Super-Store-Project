@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Store_home_cnt">
+<AnchorPane fx:id="panelol" onMouseClicked="#updateData" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Store_home_cnt">
    <children>
       <Button fx:id="home_btn" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#Home" prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <TextField fx:id="search_fld" layoutX="233.0" layoutY="73.0" prefHeight="26.0" prefWidth="469.0" promptText="Search Product or Categories" />
@@ -30,5 +30,6 @@
       <Button fx:id="addtoCart" layoutX="16.0" layoutY="374.0" mnemonicParsing="false" onAction="#addtoCart" prefHeight="26.0" prefWidth="194.0" text="Add to Cart" />
       <ComboBox fx:id="prod_cat" layoutX="14.0" layoutY="74.0" prefHeight="26.0" prefWidth="218.0" promptText="Product/Category" />
       <Label fx:id="wareNameLabel" alignment="CENTER" layoutX="233.0" layoutY="105.0" prefHeight="26.0" prefWidth="552.0" />
+      <ComboBox fx:id="inventory" layoutX="15.0" layoutY="140.0" onAction="#changeData" prefHeight="26.0" prefWidth="194.0" promptText="Inventory" />
    </children>
 </AnchorPane>

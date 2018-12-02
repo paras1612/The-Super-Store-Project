@@ -18,7 +18,7 @@
       <Button fx:id="setBtn" layoutX="223.0" layoutY="285.0" mnemonicParsing="false" onAction="#set" prefHeight="26.0" prefWidth="149.0" text="Set" />
       <ComboBox fx:id="ProdCat" layoutX="41.0" layoutY="110.0" onAction="#changeType" prefWidth="150.0" promptText="Choose Type" />
       <ComboBox fx:id="updateProd" layoutX="41.0" layoutY="145.0" onAction="#updateProduct" prefWidth="150.0" promptText="Update Product" />
-      <Button fx:id="delCatbutton" layoutX="41.0" layoutY="214.0" mnemonicParsing="false" onAction="#delScreen" prefHeight="26.0" prefWidth="150.0" text="Delete Category" />
+      <ComboBox fx:id="delCat" layoutX="41.0" layoutY="215.0" onAction="#delcat" prefWidth="150.0" promptText="Delete Category" />
 
    </children>
 </AnchorPane>

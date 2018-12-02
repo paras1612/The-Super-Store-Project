@@ -258,4 +258,56 @@ public class CategoryView_cnt {
             }
         }System.out.println("Add To Cart pressed");
     }
+
+    public void cartBtn(ActionEvent actionEvent) throws IOException {
+        System.out.println("CartButton");
+        ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Cart.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        System.out.println(loader.getController().toString());
+        Cart_cnt cnt = loader.getController();
+        //System.out.println(client);
+        if(client!=null) {
+            javafx.scene.control.Button profile = new Button(client.getName());
+            profile.setLayoutX(17.0);
+            profile.setLayoutY(349.0);
+            profile.setPrefHeight(26.0);
+            profile.setPrefWidth(194.0);
+            profile.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
+                    try {
+                        AnchorPane root = loader.load();
+                        Scene scene = new Scene(root);
+                        Profile_cnt cnt = loader.getController();
+                        System.out.println(cnt);
+                        System.out.println(client);
+                        cnt.setClient(client);
+                        System.out.println(cnt.getClient().getName());
+                        scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            root.getChildren().set(1, profile);
+            cnt.setClient(client);
+        }
+        else if(warehouse_admin!=null){
+            cnt.setWarehouse_admin(warehouse_admin);
+        }
+        else if(store_admin!=null){
+            cnt.setStore_admin(store_admin);
+        }
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        ((javafx.scene.Node)actionEvent.getSource()).getScene().getWindow().hide();
+    }
 }

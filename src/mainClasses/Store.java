@@ -1,5 +1,6 @@
 package mainClasses;
 
+import Exceptions.categoryNotFoundException;
 import Exceptions.duplicateCategoryException;
 import Exceptions.insufficientQty;
 import Exceptions.productNotFoundException;
@@ -233,5 +234,28 @@ public class Store implements Serializable {
 
     public void search(String name, String cat){
 
+    }
+
+    public boolean removeCategory(String category) throws categoryNotFoundException {
+        try {
+            for (String cat : categoriesList.keySet()) {
+                if (categoriesList.get(cat).getSubCategories().contains(categoriesList.get(category))) {
+                    categoriesList.get(cat).getSubCategories().remove(category);
+
+                }
+            }
+            for (Categories categories : categoriesList.get(category).getSubCategories()) {
+                categoriesList.remove(categories);
+            }
+            for (Product product : categoriesList.get(category).getProduct_list()) {
+                Inventory.remove(product);
+            }
+            categoriesList.remove(category);
+            serialize();
+            return true;
+        }
+        catch (NullPointerException e){
+            throw new categoryNotFoundException("Category not found");
+        }
     }
 }

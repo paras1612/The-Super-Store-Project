@@ -13,7 +13,7 @@
       <Button fx:id="home_btn" layoutX="16.0" layoutY="15.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="771.0" text="The Super Store" />
       <ComboBox layoutX="17.0" layoutY="95.0" prefHeight="26.0" prefWidth="194.0" promptText="Sort by" />
       <Button fx:id="login_btn" layoutX="17.0" layoutY="349.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="194.0" text="Login" />
-      <Button fx:id="cart_btn" layoutX="17.0" layoutY="383.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" text="Cart" />
+      <Button fx:id="cart_btn" layoutX="17.0" layoutY="383.0" mnemonicParsing="false" onAction="#cartBtn" prefHeight="26.0" prefWidth="194.0" text="Cart" />
       <Button fx:id="help_btn" layoutX="17.0" layoutY="416.0" mnemonicParsing="false" onAction="#help" prefHeight="26.0" prefWidth="194.0" text="Help" />
       <Button layoutX="17.0" layoutY="451.0" mnemonicParsing="false" onAction="#about" prefHeight="26.0" prefWidth="194.0" text="About" />
       <Button fx:id="addToCart_Btn" layoutX="16.0" layoutY="313.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="26.0" prefWidth="194.0" text="Add to Cart" />
