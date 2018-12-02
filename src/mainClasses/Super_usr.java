@@ -1,5 +1,8 @@
 package mainClasses;
 
+import Exceptions.duplicateStoreAdminException;
+import Exceptions.duplicateWarehouseAdminException;
+
 import java.io.Serializable;
 
 import static sample.Main.deserialize;
@@ -28,11 +31,19 @@ public class Super_usr implements Serializable {
         serialize();
     }
     public void createWarehouseAdmin(String name, String pass,  String warehouse){
-        Database.getDatabase().createWarehouseAdmin(name,pass,warehouse);
+        try {
+            Database.getDatabase().createWarehouseAdmin(name,pass,warehouse);
+        } catch (duplicateWarehouseAdminException e) {
+            e.printStackTrace();
+        }
         serialize();
     }
     public void createStoreAdmin(String name, String pass,  String store){
-        Database.getDatabase().createStoreAdmin(name,pass,store);
+        try {
+            Database.getDatabase().createStoreAdmin(name,pass,store);
+        } catch (duplicateStoreAdminException e) {
+            e.printStackTrace();
+        }
         System.out.println("Serialized");
         serialize();
     }

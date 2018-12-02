@@ -1,5 +1,9 @@
 package mainClasses;
 
+import Exceptions.duplicateCategoryException;
+import Exceptions.insufficientQty;
+import Exceptions.productNotFoundException;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import static sample.Main.serialize;
@@ -39,7 +43,7 @@ public class Store implements Serializable {
         this.cart=cart;
     }
 
-    public boolean addProduct(String product, String parent){
+    public boolean addProduct(String product, String parent) throws insufficientQty {
         Warehouse linkware= linkedWarehouse;
         Product curr=linkware.getProductHashMap().get(product);
         Product one = new Product(curr.getName(),curr.getPrice(),0,curr.getfCostQuater(),curr.getcCostQuater(),curr.getItemDemand());
@@ -61,7 +65,7 @@ public class Store implements Serializable {
         serialize();
         return true;
     }
-    public boolean addCategory(Store_Admin admin, String name, String parent){
+    public boolean addCategory(Store_Admin admin, String name, String parent) throws duplicateCategoryException {
         Categories init= new Categories(name);
         if(categoriesList.containsKey(name)){
             System.out.println("cat exists");
@@ -88,7 +92,7 @@ public class Store implements Serializable {
 
     }
 
-    public void checkout() {
+    public void checkout() throws insufficientQty {
         int flag=0;
         for(Product product: Database.getDatabase().getStoreHashMap().get(uid).getCart().getCartList().keySet()){
             Product product_ware= linkedWarehouse.getProductHashMap().get(product.getUid());
@@ -154,24 +158,28 @@ public class Store implements Serializable {
     void Order(Cart cart){
 
     }
-
+//Automatically surrounded with try catch
     void orderAuto(){
         System.out.println("Auto Ordered");
         for(Product product: Inventory.keySet()){
             if(Inventory.get(product)<product.getEOQ()){
-                addProduct(product.getUid(), product.getParent().getUid());
+                try {
+                    addProduct(product.getUid(), product.getParent().getUid());
+                } catch (Exceptions.insufficientQty insufficientQty) {
+                    insufficientQty.printStackTrace();
+                }
             }
         }
     }
 
 
-    public void deleteProduct(String product) {
+    public void deleteProduct(String product) throws productNotFoundException {
         String cat1 = "";
         Product product2=new Product();
         for(String cat :categoriesList.keySet()){
-            cat1=cat;
             for(Product product1: categoriesList.get(cat).getProduct_list()){
                 if(product1.getUid().equals(product)){
+                    cat1=cat;
                     Inventory.remove(product1);
                     product2=product1;
                 }
@@ -181,7 +189,7 @@ public class Store implements Serializable {
         serialize();
     }
 
-    public void deleteProdCart(String name) {
+    public void deleteProdCart(String name) throws productNotFoundException {
         Product temp = null;
         for(Product product : cart.getCartList().keySet()) {
             if(product.getUid().equals(name)) {
@@ -195,8 +203,14 @@ public class Store implements Serializable {
                 temp = temp1;
             }
         }
-        cart.getCartList().remove(temp);
-        cart.getWareprod().remove(temp);
+        if(temp!=null) {
+            cart.getCartList().remove(temp);
+            cart.getWareprod().remove(temp);
+        }
+        else{
+            
+            throw new productNotFoundException("Not found");
+        }
         serialize();
     }
 

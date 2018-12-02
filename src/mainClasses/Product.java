@@ -38,7 +38,7 @@ public class Product implements Serializable {
 
 
 
-    double calcEOQ(double fCostQuater, double cCostQuater, double itemDemand){
+    double calcEOQ(double fCostQuater, double cCostQuater, double itemDemand) throws IllegalArgumentException{
         return Math.sqrt((2*fCostQuater*itemDemand)/cCostQuater);
     }
 
